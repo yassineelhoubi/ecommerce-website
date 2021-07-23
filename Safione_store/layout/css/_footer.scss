@@ -1,0 +1,146 @@
+.ftr {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	// margin: 0 20rem;
+
+	.nwltr-container {
+		background: $dark;
+
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		padding: 4rem 2rem;
+		gap: 2rem;
+		border-radius: 7px;
+		width: 70rem;
+		box-shadow: 0 2.5rem 25px rgba(0, 0, 0, .12);
+
+		h4 {
+			font-size: 2rem;
+			color: $light !important;
+		}
+
+		.input {
+			background: $light;
+			padding: .5rem;
+			position: relative;
+			border-radius: 7px;
+			width: 30rem;
+			display: flex;
+			justify-content: space-between;
+
+			input {
+				font-size: 1rem;
+
+				border: none;
+
+				&:focus {
+					outline: none;
+				}
+			}
+
+			button {
+				font-size: 1rem;
+				padding: 1rem 1.5rem;
+				border-radius: 10px;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.ftr-links {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 70rem;
+		align-items: center;
+		padding: 4rem 2rem;
+		padding-bottom: 2rem;
+
+		ul {
+			display: flex;
+			flex-direction: row;
+			gap: 2rem;
+			list-style: none;
+			align-items: center;
+
+			li a {
+				text-decoration: none;
+				font-weight: 300;
+				font-size: 1.1rem;
+			}
+		}
+	}
+
+	span {
+		width: 70rem;
+		height: 2px;
+		background: rgba($color: #000000, $alpha: .2);
+		border-radius: 50%;
+		margin-bottom: 2rem;
+	}
+
+	.ftr-fprint {
+		display: flex;
+		width: 70rem;
+		justify-content: space-between;
+		padding-right: 2rem;
+		padding-left: 2rem;
+
+
+		div {
+			display: flex;
+			gap: 1rem;
+		}
+	}
+}
+a{
+	color: $textcolor !important;
+	text-decoration: none;
+}
+
+@media (max-width: 1000px) {
+	.ftr {
+		span{
+			width: 90vw;
+		}
+		.nwltr-container {
+			flex-direction: column;
+			width: 90vw;
+
+			.input {
+				width: 80vw;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+				input {
+					width: 100%;
+					text-align: center;
+					padding: 1rem;
+					padding-bottom: 1.5rem;
+				}
+
+				button {
+					width: 100%;
+				}
+			}
+		}
+
+		.ftr-links {
+			padding-top: 1rem;
+			flex-direction: column;
+			gap: 2rem;
+			width: 80vw;
+		}
+
+		.ftr-fprint {
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+			width: 80vw;
+		}
+	}
+}

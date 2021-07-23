@@ -1,0 +1,9 @@
+@import'./variables';
+@import 'sidebar';
+
+*{
+    box-sizing: border-box;
+    color: $textcolor;
+    font-family: poppins;
+    font-weight: bold;
+}

@@ -1,0 +1,32 @@
+#panier{   
+    #div-head{
+        height: 70px;
+        width: 100% !important;
+        background-color: $mygreenlight ;
+    }
+    .img-product{
+        width: 98%;
+        object-fit: contain;
+    }
+    .btn-img{
+        width: 25px;
+        
+    }
+    #line{
+        width: 16rem;
+        height: 3px;
+        background: $mygreen;
+        margin-bottom: 2rem;
+    }
+    .input-address{
+        input {
+            border: none;
+            font-weight: 100;
+     
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+}

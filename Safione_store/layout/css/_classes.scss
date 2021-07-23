@@ -1,0 +1,46 @@
+.mybtn{
+    background: $light;
+    cursor: pointer;
+    color: $myblue;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        color: $light;
+        background: $myblue;
+        transition: all 150ms ease-in;
+    }
+}
+.mybtn-icon{
+    background: $light;
+    cursor: pointer;
+    color: $myblue;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        color: $light;
+        background: $mygreenlight;
+        transition: all 150ms ease-in;
+    }
+}
+.primary-border{
+    border: 2px solid $myblue;
+}
+.secondary-border{
+    border: 1px solid $myblue;
+}
+.primary-raduis{
+    border-radius: 10px;
+}
+.secondary-raduis{
+    border-radius: 5px;
+}
+.size-btn{
+    width: 12rem;
+    height: 2rem;
+}
+.size-btn-card{
+    width: 6rem;
+    height: 2rem;
+}

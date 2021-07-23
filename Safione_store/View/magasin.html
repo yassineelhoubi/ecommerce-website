@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../layout/css/style.css" />
+  </head>
+  <body class="app">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="ms-4 navbar-brand" href="#"
+          ><img
+            src="../layout/img/logo/logo_black.png"
+            width="100px"
+            alt="logo"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item me-4">
+              <a class="nav-link active" aria-current="page" href="#"
+                >ACCUEIL</a
+              >
+            </li>
+            <li class="nav-item me-4">
+              <a class="nav-link" href="#">MAGASIN</a>
+            </li>
+            <li class="nav-item me-4">
+              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"
+                >CONTACT</a
+              >
+            </li>
+            <li class="nav-item dropdown me-4">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                COMPTE
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item me-4 ms-3">
+              <a
+                class="nav-link p-0"
+                href="#"
+                tabindex="-1"
+                aria-disabled="true"
+                ><img
+                  src="../layout/img/icon/sac-de-courses_1.png"
+                  width="30px"
+                  alt="cart"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- end navbar -->
+<div id="magasin">
+    <!-- selelct and search -->
+    <div class="container mt-5 ">
+      <div class="row">
+        <div class="col-lg-4 col-7 mt-2">
+          <select class="form-select secondary-border secondary-raduis">
+            <option selected>Selecte catégories</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-5 mt-2">
+          <select class="form-select secondary-border secondary-raduis">
+            <option selected>Prix</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-lg-5 col-12 mt-2">
+          <div
+            class="
+              input-search
+              secondary-border secondary-raduis
+              d-flex
+              justify-content-between
+            "
+          >
+            <input class="m-1" type="text" style="width: 100%;" placeholder="Rechercher" />
+            <button class="mybtn secondary-border secondary-raduis">
+              chercher
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- selelct and search -->
+
+    <!-- products -->
+
+    <div class="container mt-5 mb-5">
+      <div
+        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4  "
+      >
+        <!-- card -->
+        <div class="col">
+          <div class="card border border-dark product">
+            <img
+              src="../layout/img/product/8001499044010-768x511.jpg"
+              class="card-img-top border border-bottom"
+              alt=""
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold mt-2">
+                BOITE DE PROVISION CARREE TRANSPARENTE
+              </h5>
+              <div class="d-flex justify-content-between mt-5">
+                <button
+                  class="mybtn size-btn-card secondary-raduis secondary-border"
+                >
+                  Ajouter
+                </button>
+                <h5 class="pt-1">10.00DH</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--card  -->
+        <div class="col">
+          <div class="card border border-dark  product">
+            <img
+              src="../layout/img/product/8001499044010-768x511.jpg"
+              class="card-img-top border border-bottom"
+              alt=""
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold mt-2">
+                BOITE DE PROVISION CARREE TRANSPARENTE
+              </h5>
+              <div class="d-flex justify-content-between mt-5">
+                <button
+                  class="mybtn size-btn-card secondary-raduis secondary-border"
+                >
+                  Ajouter
+                </button>
+                <h5 class="pt-1">10.00DH</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--card  -->
+        <div class="col">
+          <div class="card border border-dark  product">
+            <img
+              src="../layout/img/product/929591-768x512.jpg"
+              class="card-img-top border border-bottom"
+              alt=""
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold mt-2">
+                BOITE DE MEDICAMENTS ROUGE 20X13X7 CM
+              </h5>
+              <div class="d-flex justify-content-between mt-5">
+                <button
+                  class="mybtn size-btn-card secondary-raduis secondary-border"
+                >
+                  Ajouter
+                </button>
+                <h5 class="pt-1">10.00DH</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--card  -->
+        <div class="col">
+          <div class="card border border-dark  product">
+            <img
+              src="../layout/img/product/8001499044010-768x511.jpg"
+              class="card-img-top border border-bottom"
+              alt=""
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold mt-2">
+                BOITE DE PROVISION CARREE TRANSPARENTE
+              </h5>
+              <div class="d-flex justify-content-between mt-5">
+                <button
+                  class="mybtn size-btn-card secondary-raduis secondary-border"
+                >
+                  Ajouter
+                </button>
+                <h5 class="pt-1">10.00DH</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- card -->
+      </div>
+    </div>
+    <!-- end product -->
+    <div class="container mb-5 pagination d-flex justify-content-center">
+      <div class="row d-flex ">
+        <button class="mybtn secondary-border">&laquo;</button>
+        <button class="mybtn secondary-border">1</button>
+        <button class="mybtn secondary-border">2</button>
+        <button class="mybtn secondary-border">3</button>
+        <button class="mybtn secondary-border">&raquo;</button>
+      </div>
+    </div>
+    <!-- pagination -->
+<!--     <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item mybtn"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav> -->
+    <!--end pagination -->
+
+    <!-- Footer -->
+  </div>
+
+    <footer class="ftr">
+      <div class="nwltr-container">
+        <h4>Contactez nous</h4>
+        <div class="input">
+          <input type="text" placeholder="Enter your email" />
+          <button class="mybtn primary-border">Contact</button>
+        </div>
+      </div>
+
+      <div class="ftr-links">
+        <ul>
+          <li><a href="#">ACCUEIL</a></li>
+          <li><a href="#">MAGASIN</a></li>
+          <li><a href="#">CONTACT</a></li>
+        </ul>
+
+        <ul>
+          <li>
+            <a href="#">
+              <img
+                src="../layout/img/icon/icons8-facebook-30.png"
+                width="30"
+                height="30"
+                alt=""
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img
+                src="../layout/img/icon/icons8-instagram-24.png"
+                width="30"
+                height="30"
+                alt=""
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img
+                src="../layout/img/icon/icons8-whatsapp-24.png"
+                width="30"
+                height="30"
+                alt=""
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <span></span>
+      <div class="ftr-fprint">
+        <p>© 2021 SafiOne. All rights reserved.</p>
+        <div>
+          <a href="#">Terms of Service</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </footer>
+    <!-- end footer -->
+
+    <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

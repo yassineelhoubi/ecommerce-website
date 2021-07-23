@@ -1,0 +1,20 @@
+
+    .sidebar{
+        width: 280px;
+        height: 100vh;
+        background-color: #415161 !important;
+        a{
+            font-weight: 400;
+        }
+        .logo{
+            width: 100px;
+        }
+    }
+    .main{
+        width: calc(100% - 280px);
+    }
+    .active{
+        background-color: #6D7986 !important;
+        border-radius: 0% !important;
+        color: #fff !important;
+    }
