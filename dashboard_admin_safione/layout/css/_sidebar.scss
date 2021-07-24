@@ -1,8 +1,9 @@
 
     .sidebar{
+        position: fixed;
         width: 280px;
         height: 100vh;
-        background-color: #415161 !important;
+        background-color: $textcolor!important;
         a{
             font-weight: 400;
         }

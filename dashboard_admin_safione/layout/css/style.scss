@@ -1,5 +1,9 @@
 @import'./variables';
-@import 'sidebar';
+@import './classes';
+@import './sidebar';
+@import './analyse';
+@import './commandes';
+@import './commandes';
 
 *{
     box-sizing: border-box;
