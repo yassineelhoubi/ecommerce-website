@@ -2,6 +2,8 @@
 @import './classes';
 @import './sidebar';
 @import './analyse';
+@import './nouveauProduit';
+
 
 
 *{
@@ -12,4 +14,9 @@
 }
 .card-header{
     background-color: $mygreenlight ;
+}
+.form-control{
+    &:focus{
+        box-shadow:none;
+    }   
 }
