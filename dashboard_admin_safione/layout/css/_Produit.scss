@@ -1,25 +1,33 @@
-#nouveauProduit{
-    .row-img{
+#Produit {
+    .col-byme {
+        width: 87.53%;
+    }
 
-        .spanfile{
+    .row-img {
+
+        .spanfile {
             margin-top: 5px;
             font-weight: 400;
+            margin-left: 5px;
         }
-        .input-grp-img{
+        .img-card-with{
+            width: 46.5%;
+        }
+        .input-grp-img {
             width: 35px;
+
             input[type="file"] {
                 display: none;
             }
-            .img-btn-touch{
+
+            .img-btn-touch {
                 margin-top: 1px;
                 margin-bottom: 1px;
             }
         }
 
     }
-    .ajouter-btn{
-        margin-right: 60px;
-    }
+
 
 
 }
