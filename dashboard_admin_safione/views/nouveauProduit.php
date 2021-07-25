@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../layout/css/style.css">
 
     <title>Dashboard admin</title>
+
 </head>
 
 <body>
@@ -18,52 +19,9 @@
 
 
     <!-- Sidebar -->
-    <div class="d-flex flex-column flex-shrink-0  text-white  sidebar float-start">
-        <div class="p-3 pb-0">
-          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <img class="img-fluid logo" src="../layout/img/logo/logo_white.png" alt="">
-            <span class="fs-4 text-white ms-1">Dashboard</span>
-          </a>
-        </div>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link active fs-4" aria-current="page">
-              <img src="../layout/img/icons/en-cours-d'analyse.png" alt="" class=" me-2" width="30" height="30">
-              Analyse
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link text-white fs-4">
-              <img src="../layout/img/icons/commandes.png" alt="" class=" me-2" width="30" height="30">
-              Commandes
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link text-white fs-4">
-              <img src="../layout/img/icons/box.png" alt="" class=" me-2" width="30" height="30">
-              Produits
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link text-white fs-4">
-              <img src="../layout/img/icons/categories.png" alt="" class=" me-2" width="30" height="30">
-              Categories
-            </a>
-          </li>
-        </ul >
-        <hr class="mb-0">
-        <div>
-          <ul class="nav flex-column pb-2 ">
-            <li>
-              <a href="#" class="nav-link text-white  fs-4">
-                <img src="../layout/img/icons/exit.png" alt="" class=" me-2" width="30" height="30">
-                Logout
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <?php
+  include '../includes/templates/sidebar.php'
+  ?>
     <!-- end sidebar -->
 
 
@@ -72,15 +30,14 @@
         <div id="Produit">
             <!-- header -->
             <div class="w-100 card-header mb-5">
-                <h4 class="text-center">Modifier le Produit Sélectionné</h4>
+                <h4 class="text-center">Ajouter un Nouveau Produit</h4>
             </div>
             <!-- end header -->
             <!-- body -->
-            <div class="container  p-5 pt-3">
+            <div class="container mt-5 p-5">
                 <div class="row">
-                    <!-- nom & prix categorie & qte  -->
+                    <!-- nom & prix -->
                     <div class="col-6">
-                        <!-- nom -->
                         <div class="row ps-2 mb-4">
                             <label for="nom" class="col-3 col-form-label">Nom</label>
                             <div class="col-9">
@@ -88,7 +45,16 @@
                                     class="w-100 form-control secondary-raduis secondary-border">
                             </div>
                         </div>
-                        <!-- categotie -->
+                        <div class="row ps-2 mb-4">
+                            <label for="prix" class="col-3 col-form-label">Prix</label>
+                            <div class="col-9">
+                                <input name="prix" placeholder="Prix" type="text"
+                                    class="form-control secondary-raduis secondary-border">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- categorie & qte -->
+                    <div class="col-6">
                         <div class="row ps-2 mb-4">
                             <label for="Nom" class="col-3 col-form-label">categorie </label>
                             <div class="col-9">
@@ -99,7 +65,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!-- Qte -->
                         <div class="row ps-2 mb-4">
                             <label for="qte" class="col-3 col-form-label">Quantité</label>
                             <div class="col-9">
@@ -107,32 +72,16 @@
                                     class="form-control secondary-raduis secondary-border">
                             </div>
                         </div>
-                        <!-- prix -->
-                        <div class="row ps-2 mb-4">
-                            <label for="prix" class="col-3 col-form-label">Prix</label>
-                            <div class="col-9">
-                                <input name="prix" placeholder="Prix" type="text"
-                                    class="form-control secondary-raduis secondary-border">
-                            </div>
-                        </div>
                     </div>
                     <!-- add img -->
-                    <div class="col-6 row-img">
-                        <div class="row ps-2 pe-2 mb-4 justify-content-between">
-                            <div class="col-3 col-form-label ms-lg-5">
+                    <div class="col-12">
+                        <div class="row ps-2 mb-4 justify-content-between">
+                            <label for="" class="col-1 col-form-label ">Images</label>
 
-                                <label for="img" class="ms-5">Image</label>
-                            </div>
-                            <div class="col-6 me-1 img-card-with secondary-raduis secondary-border text-center">
-                                <img class="img-fluid" width="243" src="../layout/img/product/8001499044010-768x511.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="row ps-2  mb-4 justify-content-end ">
-
-                            <div class="col-6 ">
+                            <div class="  col-10 col-byme row-img  ">
                                 <div class="secondary-border secondary-raduis d-flex justify-content-between">
                                     <span id="spanfile" class="spanfile">choisire une images</span>
-    
+
                                     <label class="input-grp-img">
                                         <input id="inputfile" type="file" />
                                         <div class="mybtn-icon secondary-raduis secondary-border h-100 text-center ">
@@ -140,12 +89,11 @@
                                                 src="../layout/img/icons/touchscreen.png" alt=""></div>
                                     </label>
                                 </div>
-                            </div>
-                            
-                        </div>
-       
-                    </div>
 
+                            </div>
+                        </div>
+
+                    </div>
                     <!-- description -->
                     <div class="col-12">
                         <div class="row ps-2 mb-4 justify-content-between">
@@ -162,7 +110,7 @@
                     <div class="col-12 ">
 
                         <button
-                            class="mybtn float-end size-btn secondary-border secondary-raduis col-auto ajouter-btn ">Modifier</button>
+                            class="mybtn float-end size-btn secondary-border secondary-raduis col-auto ajouter-btn ">Ajouter</button>
 
                     </div>
                 </div>
@@ -170,21 +118,19 @@
 
 
 
-
-
-                <!-- end body -->
-            </div>
+            <!-- end body -->
         </div>
-        <!-- end main -->
+    </div>
+    <!-- end main -->
 
-        <script src="../layout/js/produit.js"></script>
-
-
-
+    <script src="../layout/js/Produit.js"></script>
 
 
 
-        <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+    <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
