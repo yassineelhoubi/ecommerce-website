@@ -1,0 +1,10 @@
+#login_reg{
+    .login-card{
+        background-color: #f8fffd;
+    }
+    @media (max-width: 990px) {
+        .for-hidden{
+            display: none;
+        }
+    }
+}
