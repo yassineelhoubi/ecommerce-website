@@ -24,5 +24,10 @@ input{
         outline: none;
     }
 }
+.form-control{
+    &:focus{
+        box-shadow:none;
+    }   
+}
 
 
