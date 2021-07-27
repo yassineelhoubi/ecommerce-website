@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../../resources/includes/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../resources/css/style.css" />
+</head>
+<!-- cdn jquery -->
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <!-- include header & footer -->
+<script src="../../resources/js/includeTemp.js"></script>
+  
+<body  >
+  <!-- header -->
+<div id="sidebar"></div>
+  <!--  -->
+
+
+  <!-- main -->
+  <div class="main float-end">
+    <div id="categories">
+      <!-- header -->
+      <div class="w-100 card-header mb-5">
+        <h4 class="text-center">Liste des Categories</h4>
+      </div>
+      <!-- end header -->
+      <!-- body -->
+      <div class="container text-center"><button class="mybtn size-btn primary-border primary-raduis " data-bs-toggle="modal"
+        data-bs-target="#newCategorieModal">Ajouter
+          categorie</button> </div>
+      <div class="container  ps-5 pe-5 mt-5">
+        <div class="container  ps-5 pe-5 ">
+
+          <table class="table table-bordered secondary-border  text-center">
+            <thead>
+              <tr>
+                <th class="col-12 ">Nom de catégorie</th>
+                <th>Modifier</th>
+                <th>supprimer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Alimentaire</td>
+                <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border" data-bs-toggle="modal"
+                    data-bs-target="#updateModal">
+                    <img class="btn-img img-fluid" src="../../resources/img/icons/modifier-le-fichier.png" alt=""></button>
+                </td>
+                <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"><img
+                      class="btn-img img-fluid" src="../../resources/img/icons/supprimer.png" alt=""></button></td>
+              </tr>
+              <tr>
+                <td>Alimentaire</td>
+                <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border" data-bs-toggle="modal"
+                    data-bs-target="#updateModal">
+                    <img class="btn-img img-fluid" src="../../resources/img/icons/modifier-le-fichier.png" alt=""></button>
+                </td>
+                <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"><img
+                      class="btn-img img-fluid" src="../../resources/img/icons/supprimer.png" alt=""></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <!--new categorie Modal -->
+      <div class="modal fade" id="newCategorieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ajouter une Catégorie</h5>
+              <button type="button" class="mybtn-icon secondary-raduis secondary-border" data-bs-dismiss="modal"
+                aria-label="Close"><img src="../../resources/img/icons/cancel.png" style="width: 20px;" alt=""></button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <label class="mb-2" for="">
+                  <h5>Nom de catégorie : </h5>
+                </label>
+                <input class="secondary-border secondary-raduis w-100" type="text" placeholder="Nom de catégorie...">
+              </div>
+            </div>
+            <div class="modal-footer">
+
+              <button type="button" class="mybtn size-btn secondary-raduis secondary-border">Ajouter</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- end new categorie Modal -->
+
+
+      <!--update Modal -->
+      <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modifier la catégorie</h5>
+              <button type="button" class="mybtn-icon secondary-raduis secondary-border" data-bs-dismiss="modal"
+                aria-label="Close"><img src="../../resources/img/icons/cancel.png" style="width: 20px;" alt=""></button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <label class="mb-2" for="">
+                  <h5>Nom de catégorie : </h5>
+                </label>
+                <input class="secondary-border  secondary-raduis w-100" type="text" value="Alimentaire">
+              </div>
+            </div>
+            <div class="modal-footer">
+
+              <button type="button" class="mybtn size-btn secondary-raduis secondary-border">Modifier</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- end update Modal -->
+      <!-- end body -->
+    </div>
+  </div>
+  <!-- end main -->
+
+
+
+
+
+
+
+  <script src="../../resources/includes/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
