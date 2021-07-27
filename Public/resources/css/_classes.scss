@@ -1,3 +1,10 @@
+*{
+    box-sizing: border-box;
+    color: $textcolor;
+    font-family: poppins;
+    font-weight: bold;
+}
+
 .mybtn{
     background: $light;
     cursor: pointer;
@@ -50,3 +57,27 @@
     width: 6rem;
     height: 2rem;
 }
+/* font size */
+
+
+/* ui user */
+input{
+    &:focus {
+        outline: none;
+    }
+}
+.form-control{
+    &:focus{
+        box-shadow:none;
+    }   
+}
+/* ui adm */
+.card-header{
+    background-color: $mygreenlight ;
+}
+.form-control{
+    &:focus{
+        box-shadow:none;
+    }   
+}
+

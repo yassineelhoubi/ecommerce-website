@@ -20,31 +20,5 @@
 @import './adm_Produit';
 
 
-*{
-    box-sizing: border-box;
-    color: $textcolor;
-    font-family: poppins;
-    font-weight: bold;
-}
-/* ui user */
-input{
-    &:focus {
-        outline: none;
-    }
-}
-.form-control{
-    &:focus{
-        box-shadow:none;
-    }   
-}
-/* ui adm */
-.card-header{
-    background-color: $mygreenlight ;
-}
-.form-control{
-    &:focus{
-        box-shadow:none;
-    }   
-}
 
 

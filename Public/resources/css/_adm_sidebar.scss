@@ -1,21 +1,22 @@
-
+#sidebar{
     .sidebar{
         position: fixed;
-        width: 280px;
+        width: 250px;
         height: 100vh;
         background-color: $textcolor!important;
         a{
             font-weight: 400;
         }
         .logo{
-            width: 100px;
+            width: 70px;
         }
     }
+}
     .main{
-        width: calc(100% - 280px);
+        width: calc(100% - 250px);
     }
     .active{
         background-color: #6D7986 !important;
         border-radius: 0% !important;
         color: #fff !important;
-    }
+    }   
