@@ -11,12 +11,13 @@
             width: 70px;
         }
     }
-}
-    .main{
-        width: calc(100% - 250px);
-    }
     .active{
         background-color: #6D7986 !important;
         border-radius: 0% !important;
         color: #fff !important;
-    }   
+    } 
+}
+    .main{
+        width: calc(100% - 250px);
+    }
+  
