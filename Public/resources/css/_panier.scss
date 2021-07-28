@@ -4,12 +4,16 @@
         width: 100% !important;
         background-color: $mygreenlight ;
     }
-    .img-product{
-        width: 98%;
-        object-fit: contain;
+    .container-img-product{
+        height: 150px;
+        .img-product{
+            max-width: 98%;
+            max-height: 98%;
+            object-fit: contain;
+        }
     }
     .btn-img{
-        width: 25px;
+        width: 15px;
         
     }
     #line{

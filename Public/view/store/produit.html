@@ -37,7 +37,12 @@
           <h4 class=" mt-lg-0  mt-4">00.00 MAD</h4>
           <div class="row mt-lg-0  mt-4">
             <h4 class="col-4">Quantity</h4>
-            <input class=" secondary-border secondary-raduis col-4  " type="number" min="1" value="1">
+            <div class="col-3 secondary-border secondary-raduis d-flex p-0 ">
+              <button id="subtract" class="col-3 mybtn secondary-border secondary-raduis">-</button>
+              <input type="number" class="col-6 border-0 text-center" readonly id="input-counter" value="1" min="1">
+              <button id="add" class="col-3 mybtn  secondary-border secondary-raduis">+</button>
+            </div>
+            
           </div>
           <button class="mybtn size-btn primary-border secondary-raduis mt-lg-0  mt-4">Ajouter au panier</button>
         </div>
@@ -45,7 +50,7 @@
       <div class="row me-0  col-12 m-0 mt-4">
         <h4>Description</h4>
         <div  class=" primary-raduis secondary-border" id="description-aria-product">
-        <p>Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ipsum, consequatur illo reiciendis beatae excepturi numquam omnis pariatur dolores magnam magni tenetur odio ad suscipit quasi voluptatem saepe cum obcaecati. sit amet consectetur Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod nulla fuga quis aut saepe nostrum recusandae porro ipsam aspernatur possimus sunt, distinctio sequi labore cum dolore reiciendis beatae animi tempore? adipisicing elit. Aliquid fugiat reprehenderit tempore odio, sint nam iure repellat fugit autem. Facilis iure magnam quibusdam recusandae dolor quis repudiandae sed vitae animi.</p>
+        <p class="fw-normal">Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ipsum, consequatur illo reiciendis beatae excepturi numquam omnis pariatur dolores magnam magni tenetur odio ad suscipit quasi voluptatem saepe cum obcaecati. sit amet sed vitae animi.</p>
         </div>
 
       </div>
@@ -61,7 +66,7 @@
 <div id="footer"></div>
   <!-- end footer -->
 
-
+<script src="../../resources/js/store.js"></script>
 </body>
 
 </html>

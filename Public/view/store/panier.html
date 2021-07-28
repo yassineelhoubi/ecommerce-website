@@ -10,16 +10,14 @@
   <link rel="stylesheet" href="../../resources/css/style.css" />
 </head>
 <!-- cdn jquery -->
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
-  <!-- include header & footer -->
+<!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
-  
-<body  >
+
+<body>
   <!-- header -->
-<div id="header"></div>
+  <div id="header"></div>
   <!--  -->
   <!-- panier -->
   <div id="panier">
@@ -37,44 +35,68 @@
       <!-- product -->
       <div class="container col-lg-7  ">
         <!-- 1 -->
-        <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3"> 
+        <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3">
           <div class="row ">
-            <div class="col-lg-4  col-10 m-auto">
-              <div class="container d-flex align-items-center justify-content-center secondary-border primary-raduis h-100 p-0">
-                <img class="img-product  primary-raduis" src="../../resources/img/product/8001499044010-768x511.jpg" alt="">
+            <div class="col-lg-4 col-md-4  col-12 m-auto">
+              <div
+                class="container container-img-product d-flex align-items-center justify-content-center secondary-border primary-raduis  p-0">
+                <img class="img-product img-fluid  primary-raduis" src="../../resources/img/product/8001499044010-768x511.jpg"
+                  alt="">
               </div>
             </div>
-            <div class="col-lg-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">
-              <h6>CARAFE AVEC COUVERCLE ORANGE 1 LITRE</h6>
-              <h6>Quantity : <span>1</span></h6>
+            <div class="col-lg-7 col-md-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">
+              <h5>CARAFE AVEC COUVERCLE ORANGE 1 LITRE</h5 >
               <h6>prix : <span>00:00</span> MAD</h6>
-              <div class="row ms-1 ">
-                <button class="mybtn-icon col-2 p-1 primary-border secondary-raduis  me-2">
-                  <img class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png" alt="">
-                </button>
-                <button class="mybtn-icon col-2 p-1 primary-border secondary-raduis"><img class="btn-img img-fluid"
+              <div class="container p-0">
+                <div class="row justify-content-between mb-1">
+                  <div class="col-6">
+                    <h6>Quantity : </h6>
+                  </div>
+                  <div class="col-3 secondary-border  secondary-raduis d-flex p-0">
+                    <button id="subtract" class="col-3 mybtn secondary-border secondary-raduis">-</button>
+                    <input type="number" class="col-6 border-0 text-center" readonly id="input-counter" value="1"
+                      min="1">
+                    <button id="add" class="col-3 mybtn  secondary-border secondary-raduis">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row ms-1 justify-content-end ">
+
+                <button class="mybtn-icon col-2 p-0 secondary-border secondary-raduis"><img class="btn-img img-fluid"
                     src="../../resources/img/icons/supprimer.png" alt=""></button>
               </div>
             </div>
           </div>
         </div>
         <!-- 2 -->
-        <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3"> 
+        <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3">
           <div class="row ">
-            <div class="col-lg-4  col-10 m-auto">
-              <div class="container d-flex align-items-center justify-content-center secondary-border primary-raduis h-100 p-0">
-                <img class="img-product  primary-raduis" src="../../resources/img/product/929591-768x512.jpg" alt="">
+            <div class="col-lg-4 col-md-4  col-12 m-auto">
+              <div
+                class="container container-img-product d-flex align-items-center justify-content-center secondary-border primary-raduis  p-0">
+                <img class="img-product img-fluid  primary-raduis" src="../../resources/img/product/927065-768x768.png"
+                  alt="">
               </div>
             </div>
-            <div class="col-lg-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">
-              <h6>CARAFE AVEC COUVERCLE ORANGE 1 LITRE</h6>
-              <h6>Quantity : <span>1</span></h6>
+            <div class="col-lg-7 col-md-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">
+              <h5>CARAFE AVEC COUVERCLE ORANGE 1 LITRE</h5 >
               <h6>prix : <span>00:00</span> MAD</h6>
-              <div class="row ms-1 ">
-                <button class="mybtn-icon col-2 p-1 primary-border secondary-raduis  me-2">
-                  <img class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png" alt="">
-                </button>
-                <button class="mybtn-icon col-2 p-1 primary-border secondary-raduis"><img class="btn-img img-fluid"
+              <div class="container p-0">
+                <div class="row justify-content-between mb-1">
+                  <div class="col-6">
+                    <h6>Quantity : </h6>
+                  </div>
+                  <div class="col-3 secondary-border  secondary-raduis d-flex p-0">
+                    <button id="subtract" class="col-3 mybtn secondary-border secondary-raduis">-</button>
+                    <input type="number" class="col-6 border-0 text-center" readonly id="input-counter" value="1"
+                      min="1">
+                    <button id="add" class="col-3 mybtn  secondary-border secondary-raduis">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row ms-1 justify-content-end ">
+
+                <button class="mybtn-icon col-2 p-0 secondary-border secondary-raduis"><img class="btn-img img-fluid"
                     src="../../resources/img/icons/supprimer.png" alt=""></button>
               </div>
             </div>
@@ -83,40 +105,40 @@
         <!--  -->
       </div>
       <!-- end product -->
-      <div class="container col-lg-5  ">
+      <div class="container col-lg-4   ">
         <div class="container secondary-border primary-raduis m-0 ">
-          
-            <div class="row mt-3 mb-3">
-              <h4 class="text-center">Résumé des commandes</h4>
-            </div>
-            <div class="row mb-3">
-              <h5 class="col-8">Sous-total</h5>
-              <h5 class=" col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
-            </div>
-            <div class="row mb-3">
-              <h5 class="col-8">Livraison</h5>
-              <h5 class="col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
-            </div>
-            <div class="row text-center m-auto mb-2" id="line"></div>
-            <div class="row mb-3 mt-3">
-              <h5 class="col-8">Total</h5>
-              <h5 class="col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
-            </div>
-            <div class="row mb-3">
-              <div class="col-4">Address</div>
-              <div class="col-8">
-                <div class="secondary-raduis d-flex justify-content-between secondary-border w-100 input-address">
-                  <input class="w-100 primary-raduis" type="text" readonly value="xxxxxxxxxxxx">
-                  <button class="mybtn-icon secondary-border secondary-raduis">
-                    <img class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png" alt="">
-                  </button>
-                </div>
+
+          <div class="row mt-3 mb-3">
+            <h4 class="text-center fw-bold">Résumé des commandes</h4>
+          </div>
+          <div class="row mb-3">
+            <h5 class="col-8">Sous-total</h5>
+            <h5 class=" col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
+          </div>
+          <div class="row mb-3">
+            <h5 class="col-8">Livraison</h5>
+            <h5 class="col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
+          </div>
+          <div class="row text-center m-auto mb-2" id="line"></div>
+          <div class="row mb-3 mt-3">
+            <h5 class="col-8 fw-bolder">Total</h5>
+            <h5 class="col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
+          </div>
+          <div class="row mb-3">
+            <div class="col-4"><h5 class="pt-1">Address</h5></div>
+            <div class="col-8">
+              <div class="secondary-raduis d-flex justify-content-between secondary-border w-100 input-address">
+                <input class="w-100 primary-raduis" type="text" readonly value="xxxxxxxxxxxx">
+                <button class="mybtn-icon secondary-border secondary-raduis">
+                  <img class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png" alt="">
+                </button>
               </div>
             </div>
-            <div class="d-flex justify-content-center">
-              <button class="mybtn primary-border secondary-raduis mb-3">Validier La commande</button>
-            </div>
-          
+          </div>
+          <div class="d-flex justify-content-center">
+            <button class="mybtn primary-border secondary-raduis mb-3">Validier La commande</button>
+          </div>
+
         </div>
       </div>
 
@@ -130,7 +152,7 @@
   <div id="footer"></div>
   <!-- end footer -->
 
-
+  <script src="../../resources/js/store.js"></script>
 </body>
 
 </html>
