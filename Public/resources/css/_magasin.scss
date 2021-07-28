@@ -1,36 +1,44 @@
-#magasin{
+#magasin {
 
     .input-search {
         height: 40px;
-   /*  display: flex;
+        /*  display: flex;
    justify-content: space-between; */
 
-   
-    input {
-        border: none;
-        font-weight: 100;
-        &:focus {
-            outline: none;
-        }
-    }
-}
-select{
-    height: 40px;
-    
-}
-.product{    
-    img{
-        max-height:237;
-    }
-}
 
-.pagination{
-    .row{
-        button{
-            width: 2.5rem;
-            height: 2.5rem;
+        input {
+            border: none;
+            font-weight: 100;
+
+            &:focus {
+                outline: none;
+            }
         }
     }
-    
-}
+
+    select {
+        height: 40px;
+
+    }
+
+    .product {
+        .img-card {
+            
+
+            img {
+                height: 200px;
+                object-fit: contain;
+            }
+        }
+    }
+
+    .pagination {
+        .row {
+            button {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
+
+    }
 }
