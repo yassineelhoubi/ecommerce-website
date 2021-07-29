@@ -2,7 +2,7 @@
 
 class Database{
     private $host       =   'localhost';
-    private $dbname     =   'safione-ecommerce-website';
+    private $dbname     =   'ecommerce-website';
     private $username   =   'root';
     private $password   =   '';
     private $conn;

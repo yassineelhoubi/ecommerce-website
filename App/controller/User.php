@@ -17,11 +17,13 @@ class User {
          $user->email = $data->email;
          $user->password = $data->password;
  
-         $user->FName = $data->FName;
-         $user->LName = $data->LName;
-         $user->Adresse1 = $data->Adresse1;
-         $user->Adresse2 = $data->Adresse2;
+         $user->Fname = $data->Fname;
+         $user->Lname = $data->Lname;
+         $user->address1 = $data->address1;
+         $user->address2 = $data->address2;
          $user->nbrPhone = $data->nbrPhone;
+         $user->gender = $data->gender;
+
 
  
          $u_arr = array();
