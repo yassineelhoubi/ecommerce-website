@@ -1,47 +1,90 @@
-<?php
-
-class User {
+<?php class User {
 
 
-    public function sign_up(){
-         // instantiate Database
-         $database = new Database();
-         $db = $database->connect();
- 
-         // instantiate User object
-         $user = new Users($db);
- 
-         // get raw posted data
-         $data = json_decode(file_get_contents("php://input"));
- 
-         $user->email = $data->email;
-         $user->password = $data->password;
- 
-         $user->Fname = $data->Fname;
-         $user->Lname = $data->Lname;
-         $user->address1 = $data->address1;
-         $user->address2 = $data->address2;
-         $user->nbrPhone = $data->nbrPhone;
-         $user->gender = $data->gender;
+    public function sign_up() {
+        // instantiate Database
+        $database=new Database();
+        $db=$database->connect();
+
+        // instantiate User object
+        $user=new Users($db);
+
+        // get raw posted data
+        $data=json_decode(file_get_contents("php://input"));
+
+        $user->email=$data->email;
+        $user->password=password_hash($data->password, PASSWORD_DEFAULT);;
+        $user->nbrPhone=$data->nbrPhone;
+
+        $user->Fname=$data->Fname;
+        $user->Lname=$data->Lname;
+        $user->address1=$data->address1;
+        $user->address2=$data->address2;
+        $user->gender=$data->gender;
 
 
- 
-         $u_arr = array();
-         if ($user->create()) {
-         $u_arr = array(
-         'message' => 'user iserted',
-         'state' => true);
- 
-         echo json_encode($u_arr);
- 
-         } else {
- 
-         $u_arr = array('message' => 'user not iserted',
-             'state' => false);
- 
-         echo json_encode($u_arr);
- 
-             }
- 
+        $bol = true;
+        $rowCount = $user->checkemail();
+        if($rowCount >= 1){
+            $bol = false;
+        }
+        if($bol){
+            if ($user->create()) {
+            
+
+                echo json_encode(array('message'=> 'user iserted',
+                    'state'=> true));
+    
+            }
+    
+            else {
+    
+            
+                echo json_encode(array('message'=> 'user not iserted',
+                'state'=> false));
+    
+            }
+        }else{
+            echo json_encode(array('message'=> 'this email already exist',
+                'state'=> false));
+        }
+
+
+    }
+
+    public function login() {
+        // instantiate database
+        $database=new Database();
+        $db=$database->connect();
+
+        //Instantiate User object
+        $user=new Users($db);
+
+        // get raw posted data
+        $data=json_decode(file_get_contents("php://input"));
+
+        $user->email    =   $data->email;
+        $user->nbrPhone =   $data->nbrPhone;
+
+        $password       =   $data->password;
+
+        $row = $user->login();
+        $hachPassword = $row['password'];
+
+       
+
+        if($row == !0 && password_verify($password , $hachPassword)) {
+            echo json_encode(array('message'=> 'user login',
+                    'state'=> true));
+        }elseif($row ==!0){
+            echo json_encode(array('message'=>'password not valid'));
+        }
+        else{
+            echo json_encode(array('message'=>"doesn't user exist"));
+        }
+
+
+
+
     }
 }
