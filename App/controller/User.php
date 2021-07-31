@@ -14,8 +14,8 @@
 
         $user->email=$data->email;
         $user->password=password_hash($data->password, PASSWORD_DEFAULT);;
-        $user->nbrPhone=$data->nbrPhone;
 
+        $user->nbrPhone=$data->nbrPhone;
         $user->Fname=$data->Fname;
         $user->Lname=$data->Lname;
         $user->address1=$data->address1;
