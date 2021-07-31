@@ -64,12 +64,13 @@
         $data=json_decode(file_get_contents("php://input"));
 
         $user->email    =   $data->email;
-        $user->nbrPhone =   $data->nbrPhone;
-
         $password       =   $data->password;
 
-        $row = $user->login();
-        $hachPassword = $row['password'];
+        
+        if($row = $user->login()){
+
+            $hachPassword = $row['password'];
+        }
 
        
 
@@ -77,7 +78,7 @@
             echo json_encode(array('message'=> 'user login',
                     'state'=> true));
         }elseif($row ==!0){
-            echo json_encode(array('message'=>'password not valid'));
+            echo json_encode(array('message'=>'data not valid'));
         }
         else{
             echo json_encode(array('message'=>"doesn't user exist"));

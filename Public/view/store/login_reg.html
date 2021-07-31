@@ -10,16 +10,16 @@
   <link rel="stylesheet" href="../../resources/css/style.css" />
 </head>
 <!-- cdn jquery -->
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
-  <!-- include header & footer -->
+<!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
-  
-<body  >
+
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+
+<body>
   <!-- header -->
-<div id="header"></div>
+  <div id="header"></div>
   <!--  -->
   <!--  -->
   <div id="login_reg">
@@ -32,15 +32,17 @@
             <div class="for-hidden">
               <img src="../../resources/img/undraw_shopping_app_flsj.svg  " width="350px" alt="">
             </div>
-            </div>
+          </div>
           <div class="col-lg-5  col-12 text-center">
             <div class="container primary-border primary-raduis p-4 login-card">
-              <input type="text" class="form-control mb-3" placeholder="Adresse e-mail ou numéro de tél.">
-              <input type="text" class="form-control mb-3" placeholder="Mot de passe">
-              <button class=" w-100 size-btn mt-2 mb-3  mybtn secondary-raduis secondary-border">Se connecter</button>
+              <input id="email" type="text" class="form-control mb-3" placeholder="Adresse e-mail ou numéro de tél.">
+              <input id="password" type="password" class="form-control mb-3" placeholder="Mot de passe">
+              <button onclick="login()" class=" w-100 size-btn mt-2 mb-3  mybtn secondary-raduis secondary-border">Se
+                connecter</button>
               <h6>OU</h6>
               <hr>
-              <button class=" mybtn size-btn secondary-raduis secondary-border" data-bs-toggle="modal" data-bs-target="#exampleModal">Créer un compte</button>
+              <button class=" mybtn size-btn secondary-raduis secondary-border" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">Créer un compte</button>
             </div>
           </div>
         </div>
@@ -49,73 +51,124 @@
 
     </div>
 
-        <!-- Modal -->
-        <div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content primary-border" >
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Inscription</h5>
-                      <button type="button" class="mybtn-icon secondary-raduis secondary-border"
-                          data-bs-dismiss="modal" aria-label="Close"><img src="../../resources/img/icons/cancel.png"
-                              style="width: 20px;" alt=""></button>
-                  </div>
-                  <div class="modal-body">
-                      <form action="">
-                          <div class="row">
-                              <div class="col-6">
-                                  <label for="nom" class="mt-1"> Nom : </label>
-                                  <input name="nom" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                      placeholder="Votre nom">
-                                  <label for="genre" class="mt-1"> Genre : </label>
-                                  <select  name="genre" class="w-100 secondary-border secondary-raduis form-control ">
-                                      <option value="" disabled selected>Votre genre</option>
-                                      <option value="" >Homme</option>
-                                      <option value="" >Femme</option>
-                                  </select>
-                              </div>
-                              <div class="col-6">
-                                  <label for="prenom" class="mt-1"> Prenom : </label>
-                                  <input name="prenom" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                  placeholder="Votre prenom">
-                                  <label for="telephone" class="mt-1"> Telephone : </label>
-                                  <input name="telephone" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                  placeholder="Votre numéro de tél ">
-                              </div>
-
-                              <div class="col-12">
-                                  <label for="address 1" class="mt-1"> Address 1 : </label>
-                                  <input name="address 1" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                  placeholder="Votre adresse a domicile 1">
-                                  <label for="address 2" class="mt-1"> Address 2 : </label>
-                                  <input name="address 2" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                  placeholder="Votre adresse a domicile 2">
-                                  <label for="email" class="mt-1"> Email : </label>
-                                  <input name="email" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                  placeholder="Votre adresse e-mail">
-                                  <label for="pass" class="mt-1"> Mot de passe : </label>
-                                  <input name="pass" type="password" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                  placeholder="Votre mot de passe ">
-                              </div>
-
-                          </div>
-                      </form>
-                  </div>
-                  <div class="modal-footer">
-
-                      <button type="button" class="mybtn secondary-raduis secondary-border">Enregistrez</button>
-                  </div>
-              </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content primary-border">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Inscription</h5>
+            <button type="button" class="mybtn-icon secondary-raduis secondary-border" data-bs-dismiss="modal"
+              aria-label="Close"><img src="../../resources/img/icons/cancel.png" style="width: 20px;" alt=""></button>
           </div>
+          <div class="modal-body">
+            <form action="">
+              <div class="row">
+                <div class="col-6">
+                  <label for="nom" class="mt-1"> Nom : </label>
+                  <input id="Fname" name="nom" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                    placeholder="Votre nom">
+                  <label for="genre" class="mt-1"> Genre : </label>
+                  <select id="gender" name="genre" class="w-100 secondary-border secondary-raduis form-control ">
+                    <option value="" disabled selected>Votre genre</option>
+                    <option value="man">Homme</option>
+                    <option value="woman">Femme</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <label for="prenom" class="mt-1"> Prenom : </label>
+                  <input id="Lname" name="prenom" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                    placeholder="Votre prenom">
+                  <label for="telephone" class="mt-1"> Telephone : </label>
+                  <input id="nbrPhone" name="telephone" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                    placeholder="Votre numéro de tél ">
+                </div>
+
+                <div class="col-12">
+                  <label  for="address 1" class="mt-1"> Address 1 : </label>
+                  <input id="address1" name="address 1" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                    placeholder="Votre adresse a domicile 1">
+                  <label for="address 2" class="mt-1"> Address 2 : </label>
+                  <input id="address2" name="address 2" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                    placeholder="Votre adresse a domicile 2">
+                  <label for="email" class="mt-1"> Email : </label>
+                  <input id="email_reg" name="email" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                    placeholder="Votre adresse e-mail">
+                  <label for="pass" class="mt-1"> Mot de passe : </label>
+                  <input id="password_reg" name="pass" type="password" class="w-100 secondary-border secondary-raduis form-control"
+                    type="text" placeholder="Votre mot de passe ">
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+
+            <button onclick="register()" type="button"
+              class="mybtn secondary-raduis secondary-border">Enregistrez</button>
+          </div>
+        </div>
       </div>
-      <!-- end modal -->
+    </div>
+    <!-- end modal -->
 
 
   </div>
 
 
   <!-- Footer -->
-<div id="footer"></div>
+  <div id="footer"></div>
   <!-- end footer -->
+
+  <script>
+    /* document.getElementById('login_btn').addEventListener('click',login) */
+
+    async function login() {
+      var email = document.getElementById('email').value
+      var password = document.getElementById('password').value
+      obj = {
+        email: email,
+        password: password
+      }
+
+      const response = await axios.post('http://localhost/projet_fil_rouge/User/login', obj)
+        .then((res) => {
+          console.log(res.data);
+        });
+      return response
+    }
+
+
+
+    function register() {
+      var email_reg = document.getElementById('email_reg').value
+      var password_reg = document.getElementById('password_reg').value
+      var Fname = document.getElementById('Fname').value
+      var Lname = document.getElementById('Lname').value
+      var Lname = document.getElementById('Lname').value
+      var gender = document.getElementById('gender').value
+      var nbrPhone = document.getElementById('nbrPhone').value
+      var address1 = document.getElementById('address1').value
+      var address2 = document.getElementById('address2').value
+      
+      var obj = {
+        email: email_reg,
+        password: password_reg,
+        Fname: Fname,
+        Lname: Lname,
+        nbrPhone: nbrPhone,
+        gender: gender,
+        address1: address1,
+        address2: address2
+      }
+      
+      axios.post('http://localhost/projet_fil_rouge/User/sign_up', obj)
+        .then((res) => {
+          localStorage
+          console.log(res.data);
+        });
+    }
+  </script>
+
 
 
 </body>
