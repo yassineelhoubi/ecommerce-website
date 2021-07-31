@@ -59,14 +59,20 @@
 
         // push data into properties
         $this->category->idCategory = $data->idCategory;
+        $row = $this->category->get();
+        if($row){
+            echo json_encode(array('message'=>$row, 'status' =>true));
+        }else{
+            echo json_encode(array('message' =>'No categiry found','status'=>false));
+        }
 
 
     }
     
     public function getAll_catego(){
-        
-        if($row = $this->category->getAll()){
-            echo json_encode(array('message'=> $row,
+        $rows = $this->category->getAll();
+        if($rows){
+            echo json_encode(array('message'=> $rows,
             'state'=> true));
         }else{
             echo json_encode(array('message'=> 'no categories found',
@@ -74,6 +80,20 @@
         }
 
 
+    }
+    public function delete_catego(){
+        // getdata
+        $data=json_decode(file_get_contents("php://input"));
+
+        // push data into properties
+        $this->category->idCategory = $data->idCategory;
+
+        if($this->category->delete()){
+            echo json_encode(array('message'=> 'the category was deleted','status'=>true));
+        }else{
+            echo json_encode(array('message'=> 'the category was not deleted' , 'status'=>false));
+        }
+        
     }
 
 }

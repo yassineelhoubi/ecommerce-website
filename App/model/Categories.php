@@ -78,6 +78,52 @@
         }
 
     }
+    public function get(){
+        $sql = "SELECT * FROM categories WHERE idCategory = :idCategory";
+
+        // Clean data
+        $this->idCategory=htmlspecialchars(strip_tags($this->idCategory));
+
+        // Prepare query
+        $stmt=$this->conn->prepare($sql);
+
+        // Bind data
+        $stmt->bindParam(':idCategory', $this->idCategory);
+
+        if($stmt->execute()) {
+            $rowCount = $stmt->rowCount();
+            if($rowCount == 0){
+                return false;
+            }else{
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $row ;
+            }
+        }
+        else {
+            return false;
+        }
+
+    }
+    public function delete(){
+        $sql = "DELETE FROM categories WHERE idCategory = :idCategory";
+
+        // Clean data
+        $this->idCategory=htmlspecialchars(strip_tags($this->idCategory));
+
+        // Prepare query
+        $stmt=$this->conn->prepare($sql);
+
+        // Bind data
+        $stmt->bindParam(':idCategory', $this->idCategory);
+
+        if($stmt->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
 
 
 }
