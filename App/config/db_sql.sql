@@ -5,6 +5,7 @@ CREATE Table users (
     password VARCHAR (60),
     role VARCHAR (12)
 );
+
 Drop table customers;
 CREATE TABLE customers (
     idCustomer INT  PRIMARY KEY ,
@@ -15,4 +16,10 @@ CREATE TABLE customers (
     address1 VARCHAR (255),
     address2 VARCHAR (255),
     FOREIGN KEY (idCustomer) REFERENCES users(id)
-)
+);
+
+Drop Table categories;
+CREATE Table categories (
+    idCategory int PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR (55)
+);
