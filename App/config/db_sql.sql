@@ -23,3 +23,16 @@ CREATE Table categories (
     idCategory int PRIMARY KEY AUTO_INCREMENT,
     category_name VARCHAR (55)
 );
+
+DROP Table products;
+CREATE TABLE products(
+    idProduct INT PRIMARY KEY AUTO_INCREMENT,
+    idCategory int,
+    name VARCHAR(255),
+    quantity INT,
+    price INT(4),
+    descreption TEXT,
+    img VARCHAR(55),
+    FOREIGN KEY (idCategory) REFERENCES categories(idCategory)ON UPDATE CASCADE ON DELETE CASCADE
+
+);
