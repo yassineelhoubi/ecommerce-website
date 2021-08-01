@@ -10,16 +10,16 @@
   <link rel="stylesheet" href="../../resources/css/style.css" />
 </head>
 <!-- cdn jquery -->
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
-  <!-- include header & footer -->
+<!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
-  
-<body  >
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+
+<body onload="getAll_catego()">
   <!-- header -->
-<div id="sidebar"></div>
+  <div id="sidebar"></div>
   <!--  -->
 
 
@@ -32,8 +32,8 @@
       </div>
       <!-- end header -->
       <!-- body -->
-      <div class="container text-center"><button class="mybtn size-btn primary-border primary-raduis " data-bs-toggle="modal"
-        data-bs-target="#newCategorieModal">Ajouter
+      <div class="container text-center"><button class="mybtn size-btn primary-border primary-raduis "
+          data-bs-toggle="modal" data-bs-target="#newCategorieModal">Ajouter
           categorie</button> </div>
       <div class="container  ps-5 pe-5 mt-5">
         <div class="container  ps-5 pe-5 ">
@@ -46,34 +46,19 @@
                 <th>supprimer</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Alimentaire</td>
-                <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border" data-bs-toggle="modal"
-                    data-bs-target="#updateModal">
-                    <img class="btn-img img-fluid" src="../../resources/img/icons/modifier-le-fichier.png" alt=""></button>
-                </td>
-                <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"><img
-                      class="btn-img img-fluid" src="../../resources/img/icons/supprimer.png" alt=""></button></td>
-              </tr>
-              <tr>
-                <td>Alimentaire</td>
-                <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border" data-bs-toggle="modal"
-                    data-bs-target="#updateModal">
-                    <img class="btn-img img-fluid" src="../../resources/img/icons/modifier-le-fichier.png" alt=""></button>
-                </td>
-                <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"><img
-                      class="btn-img img-fluid" src="../../resources/img/icons/supprimer.png" alt=""></button></td>
-              </tr>
+            <tbody id="tbody">
+              <!-- getAll_catego function -->
             </tbody>
           </table>
+          
         </div>
       </div>
 
 
 
       <!--new categorie Modal -->
-      <div class="modal fade" id="newCategorieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+      <div class="modal fade" id="newCategorieModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="false">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -86,12 +71,12 @@
                 <label class="mb-2" for="">
                   <h5>Nom de catégorie : </h5>
                 </label>
-                <input class="secondary-border secondary-raduis w-100" type="text" placeholder="Nom de catégorie...">
+                <input id="catego_name_add" class="secondary-border secondary-raduis w-100" type="text" placeholder="Nom de catégorie...">
               </div>
             </div>
             <div class="modal-footer">
 
-              <button type="button" class="mybtn size-btn secondary-raduis secondary-border">Ajouter</button>
+              <button onclick="create_catego()"  class="mybtn size-btn secondary-raduis secondary-border">Ajouter</button>
             </div>
 
           </div>
@@ -114,12 +99,13 @@
                 <label class="mb-2" for="">
                   <h5>Nom de catégorie : </h5>
                 </label>
-                <input class="secondary-border  secondary-raduis w-100" type="text" value="Alimentaire">
+                <input type="hidden" value="" id="idCategory_update">
+                <input id="category_name_update" class="secondary-border  secondary-raduis w-100" type="text" value="">
               </div>
             </div>
             <div class="modal-footer">
 
-              <button type="button" class="mybtn size-btn secondary-raduis secondary-border">Modifier</button>
+              <button onclick="update_catego()" type="submit" class="mybtn size-btn secondary-raduis secondary-border">Modifier</button>
             </div>
 
           </div>
@@ -131,7 +117,89 @@
   </div>
   <!-- end main -->
 
+  <script>
 
+    async function create_catego(){
+      console.log('test')
+      obj = {
+        category_name : document.getElementById('catego_name_add').value
+      } 
+      await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', obj)
+        .then((res) => {
+          console.log(res.data);
+        });
+      
+      getAll_catego()
+     
+    }
+
+    function getAll_catego() {
+      output = "";
+      axios.get('http://localhost/projet_fil_rouge/Category/getAll_catego')
+        .then((res) => {
+          for (i in res.data.message) {
+            if(res.data.state == false){
+              output ='<tr>' +
+                '<td>Aucune catégorie insérée </td>'+
+                '<td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border" data-bs-toggle="modal"data-bs-target="#updateModal">'+
+                    '<img class="btn-img img-fluid" src="../../resources/img/icons/modifier-le-fichier.png"alt=""></button></td>'+
+                
+                '<td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border">'+
+                  '<img class="btn-img img-fluid" src="../../resources/img/icons/supprimer.png" alt=""></button></td>'+
+              '</tr>'
+            }else{
+              output += '<tr>' +
+                '<td>' + res.data.message[i].category_name  + '</td>'+
+              '<td>' +
+              '<button onclick="get_catego_toUpdate('+res.data.message[i].idCategory+')" class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border" data-bs-toggle="modal" data-bs-target="#updateModal">' +
+              '<img class="btn-img img-fluid" src="../../resources/img/icons/modifier-le-fichier.png" alt="">' +
+              '</button>' +
+              '</td>'+
+              '<td>' + '<button onclick="delete_catego('+res.data.message[i].idCategory+')" class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border">' +
+              '<img class="btn-img img-fluid" src="../../resources/img/icons/supprimer.png" alt="">' + '</button>' +
+              '</td>'
+              '</tr>'
+            }
+          }
+          document.getElementById('tbody').innerHTML = output
+
+        });
+    }
+
+    function get_catego_toUpdate(id){
+      obj={
+        idCategory: id
+      }
+      axios.post('http://localhost/projet_fil_rouge/Category/get_catego',obj)
+        .then((res) => {
+          document.getElementById('category_name_update').value = res.data.message.category_name
+          document.getElementById('idCategory_update').value = res.data.message.idCategory
+        });
+
+    }
+    async function update_catego(){
+      obj={
+        idCategory: document.getElementById('idCategory_update').value ,
+        category_name: document.getElementById('category_name_update').value
+      }
+      await axios.post('http://localhost/projet_fil_rouge/Category/update_catego',obj)
+        .then((res) => {
+          console.log(res.data)
+        });
+        getAll_catego()  
+    }
+    async function delete_catego(id){
+      obj={
+        idCategory: id
+      }
+        await axios.post('http://localhost/projet_fil_rouge/Category/delete_catego',obj)
+        .then((res) => {
+          console.log(res.data)
+        });
+        getAll_catego()
+
+    }
+  </script>
 
 
 
