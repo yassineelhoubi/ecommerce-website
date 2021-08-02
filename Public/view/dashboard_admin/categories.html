@@ -71,7 +71,7 @@
                 <label class="mb-2" for="">
                   <h5>Nom de catégorie : </h5>
                 </label>
-                <input id="catego_name_add" class="secondary-border secondary-raduis w-100" type="text" placeholder="Nom de catégorie...">
+                <input autocomplete="off" id="catego_name_add" class="secondary-border secondary-raduis w-100" type="text" placeholder="Nom de catégorie...">
               </div>
             </div>
             <div class="modal-footer">
@@ -100,7 +100,7 @@
                   <h5>Nom de catégorie : </h5>
                 </label>
                 <input type="hidden" value="" id="idCategory_update">
-                <input id="category_name_update" class="secondary-border  secondary-raduis w-100" type="text" value="">
+                <input autocomplete="off" id="category_name_update" class="secondary-border  secondary-raduis w-100" type="text" value="">
               </div>
             </div>
             <div class="modal-footer">
@@ -120,16 +120,16 @@
   <script>
 
     async function create_catego(){
-      console.log('test')
-      obj = {
-        category_name : document.getElementById('catego_name_add').value
-      } 
-      await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', obj)
+      
+      const headers = {'Content-Type': 'multipart/form-data'} ;
+    
+      await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', {category_name : "test"},{headers: headers})
         .then((res) => {
           console.log(res.data);
         });
       
       getAll_catego()
+      $('#newCategorieModal').modal('hide');
      
     }
 
@@ -187,9 +187,11 @@
           console.log(res.data)
         });
         getAll_catego()  
+        $('#updateModal').modal('hide');
     }
     async function delete_catego(id){
-      obj={
+      if(confirm("Voulez vous vraiment supprimer ce categorie ? \n ")){
+        obj={
         idCategory: id
       }
         await axios.post('http://localhost/projet_fil_rouge/Category/delete_catego',obj)
@@ -197,6 +199,11 @@
           console.log(res.data)
         });
         getAll_catego()
+    }
+    else{
+            alert("Le commentaire n'a pas été supprimé.")
+    }
+
 
     }
   </script>
