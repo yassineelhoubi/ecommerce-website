@@ -122,8 +122,10 @@
     async function create_catego(){
       
       const headers = {'Content-Type': 'multipart/form-data'} ;
-    
-      await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', {category_name : "test"},{headers: headers})
+    obj = {
+      category_name : document.getElementById('catego_name_add').value
+    }
+      await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', obj ,{headers: headers})
         .then((res) => {
           console.log(res.data);
         });
@@ -167,10 +169,8 @@
     }
 
     function get_catego_toUpdate(id){
-      obj={
-        idCategory: id
-      }
-      axios.post('http://localhost/projet_fil_rouge/Category/get_catego',obj)
+
+      axios.get('http://localhost/projet_fil_rouge/Category/get_catego/'+id)
         .then((res) => {
           document.getElementById('category_name_update').value = res.data.message.category_name
           document.getElementById('idCategory_update').value = res.data.message.idCategory
@@ -182,7 +182,7 @@
         idCategory: document.getElementById('idCategory_update').value ,
         category_name: document.getElementById('category_name_update').value
       }
-      await axios.post('http://localhost/projet_fil_rouge/Category/update_catego',obj)
+      await axios.put('http://localhost/projet_fil_rouge/Category/update_catego',obj)
         .then((res) => {
           console.log(res.data)
         });
@@ -190,18 +190,16 @@
         $('#updateModal').modal('hide');
     }
     async function delete_catego(id){
-      if(confirm("Voulez vous vraiment supprimer ce categorie ? \n ")){
-        obj={
-        idCategory: id
-      }
-        await axios.post('http://localhost/projet_fil_rouge/Category/delete_catego',obj)
+      if(confirm("Voulez vous vraiment supprimer cette categorie ? \n Attention Les produits de cette categorie sera supprimés aussi ! ")){
+
+        await axios.delete('http://localhost/projet_fil_rouge/Category/delete_catego/'+id)
         .then((res) => {
           console.log(res.data)
         });
         getAll_catego()
     }
     else{
-            alert("Le commentaire n'a pas été supprimé.")
+            alert("La categorie n'a pas été supprimé.")
     }
 
 

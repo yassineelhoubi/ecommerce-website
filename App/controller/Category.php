@@ -53,12 +53,9 @@
 
 
     }
-    public function get_catego(){
-        // getdata
-        $data=json_decode(file_get_contents("php://input"));
+    public function get_catego($idCategory){
 
-        // push data into properties
-        $this->category->idCategory = $data->idCategory;
+        $this->category->idCategory = $idCategory;
         $row = $this->category->get();
         if($row){
             echo json_encode(array('message'=>$row, 'status' =>true));
@@ -81,12 +78,11 @@
 
 
     }
-    public function delete_catego(){
-        // getdata
-        $data=json_decode(file_get_contents("php://input"));
+    public function delete_catego($idCategory){
+
 
         // push data into properties
-        $this->category->idCategory = $data->idCategory;
+        $this->category->idCategory = $idCategory;
 
         if($this->category->delete()){
             echo json_encode(array('message'=> 'the category was deleted','status'=>true));
