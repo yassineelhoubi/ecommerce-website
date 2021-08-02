@@ -16,6 +16,8 @@
   crossorigin="anonymous"></script>
   <!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
   
 <body  >
   <!-- header -->
@@ -39,7 +41,7 @@
                         <div class="row ps-2 mb-4">
                             <label for="nom" class="col-3 col-form-label">Nom</label>
                             <div class="col-9">
-                                <input name="nom" type="text" placeholder="Nom"
+                                <input  name="nom" type="text" placeholder="Nom"
                                     class="w-100 form-control secondary-raduis secondary-border">
                             </div>
                         </div>
@@ -107,7 +109,7 @@
                     <!-- btn ajouter -->
                     <div class="col-12 ">
 
-                        <button
+                        <button onclick="uploadImg()"
                             class="mybtn float-end size-btn secondary-border secondary-raduis col-auto ajouter-btn ">Ajouter</button>
 
                     </div>
@@ -120,7 +122,36 @@
         </div>
     </div>
     <!-- end main -->
-
+<script>
+    
+    function uploadImg(){
+        var formData = new FormData();
+        var imgFile = document.getElementById('inputfile').files[0];
+        /* console.log(formData) */
+        if(imgFile === undefined) {
+            return null;
+        }else{
+        var today = new Date();
+        var date = today.getFullYear()+''+(today.getMonth()+1)+''+today.getDate();
+        var time = today.getHours()+''+today.getMinutes()+''+ today.getSeconds()
+        var nameTemp = date.toString()+time.toString() ;
+        var ext = imgFile.name.split('.').pop();
+        var imgName = nameTemp+'.' + ext;
+        console.log('time : '+imgName , 'img' , imgFile);
+        formData.append('imgName', imgName);
+        formData.append('imgFile', imgFile);
+        // obj = {
+        //     formData : formData
+        // }
+        axios.post('http://localhost/projet_fil_rouge/product/upload_img', formData )
+        .then((res) => {
+          console.log(res.data);
+        });
+        return imgName ;
+        }
+   
+    }
+</script>
     <script src="../../resources/js/produit.js"></script>
     <script src="../../resources/includes/bootstrap/js/bootstrap.min.js"></script>
 </body>
