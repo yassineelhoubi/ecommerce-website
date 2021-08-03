@@ -17,7 +17,10 @@
 <!-- import axios -->
 <script src="/node_modules/axios/dist/axios.min.js"></script>
 
-<body >
+<script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+
+<body onload="getAll_catego_for_select()">
     <!-- header -->
     <div id="sidebar"></div>
     <!--  -->
@@ -32,91 +35,94 @@
             </div>
             <!-- end header -->
             <!-- body -->
-            <div class="container mt-5 p-5">
-                <div class="row">
-                    <!-- nom & prix -->
-                    <div class="col-6">
-                        <div class="row ps-2 mb-4">
-                            <label for="nom" class="col-3 col-form-label">Nom</label>
-                            <div class="col-9">
-                                <input name="nom" id="name" type="text" placeholder="Nom"
-                                    class="w-100 form-control secondary-raduis secondary-border">
-                            </div>
-                        </div>
-                        <div class="row ps-2 mb-4">
-                            <label for="prix" class="col-3 col-form-label">Prix</label>
-                            <div class="col-9">
-                                    <select  id="select_price"
-                                    class="w-100 form-control secondary-raduis secondary-border">
-                                    <option value=""  disabled selected>Prix</option>
-                                    <option value="10"  >10 DH</option>
-                                    <option value="20"  >20 DH</option>
-                                    <option value="30"  >30 DH</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- categorie & qte -->
-                    <div class="col-6">
-                        <div class="row ps-2 mb-4">
-                            <label for="Nom" class="col-3 col-form-label ">categorie </label>
-                            <div class="col-9">
-                                <select name="categorie" id="select_categories"
-                                    class="w-100 form-control secondary-raduis secondary-border">
-                                    <option value=""  disabled selected>Categorie</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row ps-2 mb-4">
-                            <label for="qte" class="col-3 col-form-label">Quantité</label>
-                            <div class="col-9">
-                                <input name="qte" placeholder="Quantité" id="quantity" type="number"
-                                    class="form-control secondary-raduis secondary-border">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- add img -->
-                    <div class="col-12">
-                        <div class="row ps-2 mb-4 justify-content-between">
-                            <label for="" class="col-1 col-form-label ">Images</label>
-
-                            <div class="  col-10 col-byme row-img  ">
-                                <div class="secondary-border secondary-raduis d-flex justify-content-between">
-                                    <span id="spanfile" class="spanfile">choisire une images</span>
-
-                                    <label class="input-grp-img">
-                                        <input id="inputfile" type="file" />
-                                        <div class="mybtn-icon secondary-raduis secondary-border h-100 text-center ">
-                                            <img width="30" class="img-btn-touch img-fluid "
-                                                src="../../resources/img/icons/touchscreen.png" alt=""></div>
-                                    </label>
+            <form action="" id="form_new_product">
+                <div class="container mt-5 p-5">
+                    <div class="row">
+                        <!-- nom & prix -->
+                        <div class="col-6">
+                            <div class="row ps-2 mb-4">
+                                <label for="nom" class="col-3 col-form-label">Nom</label>
+                                <div class="col-9">
+                                    <input name="nom" id="name" type="text" placeholder="Nom"
+                                        class="w-100 form-control secondary-raduis secondary-border">
                                 </div>
-
+                            </div>
+                            <div class="row ps-2 mb-4">
+                                <label for="prix" class="col-3 col-form-label">Prix</label>
+                                <div class="col-9">
+                                    <select id="select_price"
+                                        class="w-100 form-control secondary-raduis secondary-border">
+                                        <option value="" disabled selected>Prix</option>
+                                        <option value="10">10 DH</option>
+                                        <option value="20">20 DH</option>
+                                        <option value="30">30 DH</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-                    <!-- description -->
-                    <div class="col-12">
-                        <div class="row ps-2 mb-4 justify-content-between">
-                            <label for="desc" class="col-1 col-form-label">Description</label>
-                            <div class="col-10 col-byme">
-
-                                <textarea name="desc" id="description" placeholder="Description" cols="30" rows="10"
-                                    class="form-control secondary-raduis secondary-border"></textarea>
-
+                        <!-- categorie & qte -->
+                        <div class="col-6">
+                            <div class="row ps-2 mb-4">
+                                <label for="Nom" class="col-3 col-form-label ">categorie </label>
+                                <div class="col-9">
+                                    <select name="categorie" id="select_categories"
+                                        class="w-100 form-control secondary-raduis secondary-border">
+                                        <option value="" disabled selected>Categorie</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row ps-2 mb-4">
+                                <label for="qte" class="col-3 col-form-label">Quantité</label>
+                                <div class="col-9">
+                                    <input name="qte" placeholder="Quantité" id="quantity" type="number"
+                                        class="form-control secondary-raduis secondary-border">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- btn ajouter -->
-                    <div class="col-12 ">
+                        <!-- add img -->
+                        <div class="col-12">
+                            <div class="row ps-2 mb-4 justify-content-between">
+                                <label for="" class="col-1 col-form-label ">Images</label>
 
-                        <button onclick="create_product()"
-                            class="mybtn float-end size-btn secondary-border secondary-raduis col-auto ajouter-btn ">Ajouter</button>
+                                <div class="  col-10 col-byme row-img  ">
+                                    <div class="secondary-border secondary-raduis d-flex justify-content-between">
+                                        <span id="spanfile" class="spanfile">choisire une images</span>
 
+                                        <label class="input-grp-img">
+                                            <input id="inputfile" type="file" />
+                                            <div
+                                                class="mybtn-icon secondary-raduis secondary-border h-100 text-center ">
+                                                <img width="30" class="img-btn-touch img-fluid "
+                                                    src="../../resources/img/icons/touchscreen.png" alt=""></div>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- description -->
+                        <div class="col-12">
+                            <div class="row ps-2 mb-4 justify-content-between">
+                                <label for="desc" class="col-1 col-form-label">Description</label>
+                                <div class="col-10 col-byme">
+
+                                    <textarea name="desc" id="description" placeholder="Description" cols="30" rows="10"
+                                        class="form-control secondary-raduis secondary-border"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- btn ajouter -->
+                        <div class="col-12 ">
+
+                            <button onclick="create_product()"
+                                class="mybtn float-end size-btn secondary-border secondary-raduis col-auto ajouter-btn ">Ajouter</button>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
 
 
 
@@ -124,65 +130,9 @@
         </div>
     </div>
     <!-- end main -->
-    <script>
-        
-        window.addEventListener("load",getAll_catego_for_select  );
-        
-        function getAll_catego_for_select() {
-            output = "";
-            axios.get('http://localhost/projet_fil_rouge/Category/getAll_catego')
-                .then((res) => {
-                    for(i in res.data.message){
-                        output += '<option value="'+res.data.message[i].idCategory+'">'+res.data.message[i].category_name+'</option>'
-                    }
-                    document.getElementById('select_categories').innerHTML += output
-                    console.log(output);
-                });
-        }
+    <script src="../../resources/js/main.js">
 
-        function uploadImg() {
-            var formData = new FormData();
-            var imgFile = document.getElementById('inputfile').files[0];
-            /* console.log(formData) */
-            if (imgFile === undefined) {
-                return null;
-            } else {
-                var today = new Date();
-                var date = today.getFullYear() + '' + (today.getMonth() + 1) + '' + today.getDate();
-                var time = today.getHours() + '' + today.getMinutes() + '' + today.getSeconds()
-                var nameTemp = date.toString() + time.toString();
-                var ext = imgFile.name.split('.').pop();
-                var imgName = nameTemp + '.' + ext;
-                console.log('time : ' + imgName, 'img', imgFile);
-                formData.append('imgName', imgName);
-                formData.append('imgFile', imgFile);
 
-                axios.post('http://localhost/projet_fil_rouge/product/upload_img', formData)
-                    .then((res) => {
-                        console.log(res.data);
-                    });
-                return imgName;
-            }
-
-        }
-
-        function create_product() {
-            var imgName = uploadImg();
-            obj = {
-
-                idCategory: document.getElementById('select_categories').value,
-                name: document.getElementById('name').value,
-                quantity: document.getElementById('quantity').value,
-                price: document.getElementById('select_price').value,
-                description: document.getElementById('description').value,
-                img: imgName
-
-            }
-            axios.post('http://localhost/projet_fil_rouge/product/create_product', obj)
-                .then((res) => {
-                    console.log(res.data);
-                });
-        }
     </script>
     <script src="../../resources/js/produit.js"></script>
     <script src="../../resources/includes/bootstrap/js/bootstrap.min.js"></script>
