@@ -58,9 +58,9 @@
         $this->category->idCategory = $idCategory;
         $row = $this->category->get();
         if($row){
-            echo json_encode(array('message'=>$row, 'status' =>true));
+            echo json_encode(array('message'=>$row, 'state' =>true));
         }else{
-            echo json_encode(array('message' =>'No categiry found','status'=>false));
+            echo json_encode(array('message' =>'No categiry found','state'=>false));
         }
 
 

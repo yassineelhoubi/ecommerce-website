@@ -16,8 +16,10 @@
   crossorigin="anonymous"></script>
   <!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
   
-<body  >
+<body onload="get_id_product()" >
   <!-- header -->
 <div id="sidebar"></div>
   <!--  -->
@@ -40,7 +42,7 @@
                         <div class="row ps-2 mb-4">
                             <label for="nom" class="col-3 col-form-label">Nom</label>
                             <div class="col-9">
-                                <input name="nom" type="text" placeholder="Nom"
+                                <input id="name" name="nom" type="text" placeholder="Nom"
                                     class="w-100 form-control secondary-raduis secondary-border">
                             </div>
                         </div>
@@ -48,10 +50,9 @@
                         <div class="row ps-2 mb-4">
                             <label for="Nom" class="col-3 col-form-label">categorie </label>
                             <div class="col-9">
-                                <select name="categorie" id=""
+                                <select name="categorie" id="select_categories"
                                     class="w-100 form-control secondary-raduis secondary-border">
                                     <option value="" disabled selected>Categorie</option>
-                                    <option value="">yassine</option>
                                 </select>
                             </div>
                         </div>
@@ -59,7 +60,7 @@
                         <div class="row ps-2 mb-4">
                             <label for="qte" class="col-3 col-form-label">Quantité</label>
                             <div class="col-9">
-                                <input name="qte" placeholder="Quantité" type="number"
+                                <input name="qte" id="quantity" placeholder="Quantité" type="number"
                                     class="form-control secondary-raduis secondary-border">
                             </div>
                         </div>
@@ -67,7 +68,7 @@
                         <div class="row ps-2 mb-4">
                             <label for="prix" class="col-3 col-form-label">Prix</label>
                             <div class="col-9">
-                                <input name="prix" placeholder="Prix" type="text"
+                                <input name="prix" id="price" placeholder="Prix" type="text"
                                     class="form-control secondary-raduis secondary-border">
                             </div>
                         </div>
@@ -80,7 +81,7 @@
                                 <label for="img" class="ms-5">Image</label>
                             </div>
                             <div class="col-6 me-1 img-card-with secondary-raduis secondary-border text-center">
-                                <img class="img-fluid" width="243" src="../../resources/img/product/8001499044010-768x511.jpg" alt="">
+                                <img id="img" class="img-fluid" width="243" src="../../resources/img/product/8001499044010-768x511.jpg" alt="">
                             </div>
                         </div>
                         <div class="row ps-2  mb-4 justify-content-end ">
@@ -88,7 +89,7 @@
                             <div class="col-6 ">
                                 <div class="secondary-border secondary-raduis d-flex justify-content-between">
                                     <span id="spanfile" class="spanfile">choisire une images</span>
-    
+
                                     <label class="input-grp-img">
                                         <input id="inputfile" type="file" />
                                         <div class="mybtn-icon secondary-raduis secondary-border h-100 text-center ">
@@ -105,10 +106,10 @@
                     <!-- description -->
                     <div class="col-12">
                         <div class="row ps-2 mb-4 justify-content-between">
-                            <label for="desc" class="col-1 col-form-label">Description</label>
+                            <label for="desc"  class="col-1 col-form-label">Description</label>
                             <div class="col-10 col-byme">
 
-                                <textarea name="desc" id="" placeholder="Description" cols="30" rows="10"
+                                <textarea name="desc" id="description" placeholder="Description" cols="30" rows="10"
                                     class="form-control secondary-raduis secondary-border"></textarea>
 
                             </div>
@@ -116,8 +117,8 @@
                     </div>
                     <!-- btn ajouter -->
                     <div class="col-12 ">
-
-                        <button
+                        <input type="hidden" name="" id="idProduct">
+                        <button onclick="update_product()"
                             class="mybtn float-end size-btn secondary-border secondary-raduis col-auto ajouter-btn ">Modifier</button>
 
                     </div>
@@ -132,6 +133,7 @@
             </div>
         </div>
         <!-- end main -->
+        <script src="../../resources/js/main.js"></script>
 
         <script src="../../resources/js/produit.js"></script>
         <script src="../../resources/includes/bootstrap/js/bootstrap.min.js"></script>

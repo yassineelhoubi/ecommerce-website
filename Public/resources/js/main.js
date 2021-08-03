@@ -64,6 +64,7 @@ function get_catego_toUpdate(id) {
         });
 
 }
+
 async function update_catego() {
     obj = {
         idCategory: document.getElementById('idCategory_update').value,
@@ -76,6 +77,7 @@ async function update_catego() {
     getAll_catego()
     $('#updateModal').modal('hide');
 }
+
 async function delete_catego(id) {
     if (confirm("Voulez vous vraiment supprimer cette categorie ? \n Attention Les produits de cette categorie sera supprimés aussi ! ")) {
 
@@ -102,10 +104,13 @@ function getAll_catego_for_select() {
     axios.get('http://localhost/projet_fil_rouge/Category/getAll_catego')
         .then((res) => {
             for(i in res.data.message){
-                output += '<option value="'+res.data.message[i].idCategory+'">'+res.data.message[i].category_name+'</option>'
+                if(res.data.state == false){
+                    output = '<option value="0">aucune catégorie </option>'
+                }else{
+                    output += '<option value="'+res.data.message[i].idCategory+'">'+res.data.message[i].category_name+'</option>'
+                }
             }
             document.getElementById('select_categories').innerHTML += output
-            console.log(output);
         });
 }
 
@@ -155,6 +160,7 @@ function create_product() {
             document.getElementById('form_new_product').reset();
         });
 }
+/* list Product */
 
 function getAll_product() {
     output = "";
@@ -162,15 +168,15 @@ function getAll_product() {
         .then((res) => {
             console.log(res.data.message[0]);
             for(i in res.data.message){
-                output +=
+                if (res.data.state == false) {
+                    output = 
                     '<tr>' +
-                    '<td>' + res.data.message[i].name + '</td>' +
-                    '<td>' + '<img class="img-fluid table-img" src="../../resources/img/product/' + res.data
-                    .message[i].img + '" alt="">' + '</td>' +
-                    '<td>' + res.data.message[i].category_name + '</td>' +
-                    '<td>' + res.data.message[i].price + ' DH</td>' +
-                    '<td>' + res.data.message[i].quantity + '</td>' +
-                    '<td>' + '<a href="modifierProduit.html">' +
+                    '<td>xx</td>' +
+                    '<td>xx</td>' +
+                    '<td>xx</td>' +
+                    '<td>xx DH</td>' +
+                    '<td>xx</td>' +
+                    '<td>' + '<a href="#">' +
                     '<button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border">' +
                     '<img class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png" alt="">' +
                     '</button>' +
@@ -182,7 +188,89 @@ function getAll_product() {
                     ' </button>' +
                     '</td>' +
                     '</tr>'
-            }
-            document.getElementById('tbody').innerHTML = output
+                } else {
+                    output +=
+                    '<tr>' +
+                    '<td>' + res.data.message[i].name + '</td>' +
+                    '<td>' + '<img class="img-fluid table-img" src="../../resources/img/product/' + res.data
+                    .message[i].img + '" alt="">' + '</td>' +
+                    '<td>' + res.data.message[i].category_name + '</td>' +
+                    '<td>' + res.data.message[i].price + ' DH</td>' +
+                    '<td>' + res.data.message[i].quantity + '</td>' +
+                    '<td>' + '<a  href="modifierProduit.html?id='+ res.data.message[i].idProduct +'">' +
+                    '<button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border">' +
+                    '<img class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png" alt="">' +
+                    '</button>' +
+                    '</a>' +
+                    '</td>' +
+                    '<td>' +
+                    '<button onclick="delete_product('+ res.data.message[i].idProduct +')" class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border" data-bs-toggle="modal" data-bs-target="#infoModal">' +
+                    '<img class="btn-img img-fluid " src="../../resources/img/icons/supprimer.png" alt="">' +
+                    ' </button>' +
+                    '</td>' +
+                    '</tr>'
+                }
+                }
+                document.getElementById('tbody').innerHTML = output
         });
+    
+}
+function get_id_product(){
+
+var item = location.search.substr(1).split('=')
+id = item[1];
+get_product_toUpdate(id)
+  
+}
+function get_product_toUpdate(id){
+    axios.get('http://localhost/projet_fil_rouge/Product/get_product/'+id)
+    .then((res) => {
+        console.log(res.data.message)
+        document.getElementById('name').value = res.data.message.name
+        document.getElementById('quantity').value = res.data.message.quantity
+        document.getElementById('price').value = res.data.message.price
+        document.getElementById('img').setAttribute('src', '../../resources/img/product/'+res.data.message.img)
+        document.getElementById('spanfile').innerHTML = res.data.message.img
+        document.getElementById('description').value = res.data.message.description
+        document.getElementById('idProduct').value = res.data.message.idProduct
+    });
+    getAll_catego_for_select()
+}
+
+function update_product() {
+    var imgName = document.getElementById('inputfile').files[0]
+
+    console.log(imgName)
+    if(imgName == undefined){
+        console.log('raha undefined')
+        imgName = document.getElementById('spanfile').innerHTML
+    }else{
+        var imgName = uploadImg()
+    }
+    console.log(imgName)
+    obj = {
+        "idProduct": document.getElementById('idProduct').value,
+        "idCategory": document.getElementById('select_categories').value,
+        "name": document.getElementById('name').value,
+        "quantity": document.getElementById('quantity').value,
+        "price": document.getElementById('price').value,
+        "description": document.getElementById('description').value,
+        "img": imgName
+    }
+    axios.put('http://localhost/projet_fil_rouge/Product/update_product', obj)
+        .then((res) => {
+            console.log(res.data)
+        })
+}
+async function delete_product(id){
+    if (confirm("Voulez vous vraiment supprimer ce Produit ?  ")) {
+
+        await axios.delete('http://localhost/projet_fil_rouge/Product/delete_product/' + id)
+            .then((res) => {
+                console.log(res.data)
+            });
+            getAll_product()
+    } else {
+        alert("Le Produit n'a pas été supprimé.")
+    }
 }

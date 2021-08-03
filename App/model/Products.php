@@ -48,7 +48,7 @@
 
     }
     public function get(){
-        $sql = "SELECT * FROM products WHERE idProduct = :idProduct";
+        $sql = "SELECT * FROM products p , categories c WHERE idProduct = :idProduct and c.idCategory=p.idCategory ";
 
         // Clean data
         $this->idProduct=htmlspecialchars(strip_tags($this->idProduct));
