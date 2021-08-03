@@ -2,25 +2,25 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="../../resources/includes/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../resources/css/style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../resources/includes/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../resources/css/style.css" />
 </head>
 <!-- cdn jquery -->
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
-  <!-- include header & footer -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
-  
-<body  >
-  <!-- header -->
-<div id="sidebar"></div>
-  <!--  -->
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
+
+<body onload="getAll_product()">
+    <!-- header -->
+    <div id="sidebar"></div>
+    <!--  -->
 
     <!-- main -->
     <div class="main float-end">
@@ -33,7 +33,7 @@
             <!-- body -->
             <div class="container text-center">
                 <a href="nouveauProduit.html">
-                <button class="mybtn size-btn primary-border primary-raduis ">AjouterProduit</button>
+                    <button class="mybtn size-btn primary-border primary-raduis ">AjouterProduit</button>
                 </a>
             </div>
 
@@ -44,24 +44,25 @@
                             <th>Produits</th>
                             <th>Images</th>
                             <th>Categories</th>
-                            <th>Prix (DH)</th>
+                            <th>Prix</th>
                             <th>Quantity</th>
                             <th>Modifier</th>
                             <th>supprimer</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         <tr>
                             <td>CARAFE AVEC COUVERCLE ORANGE 1 LITRE</td>
-                            <td><img class="img-fluid table-img" src="../../resources/img/product/929591-768x512.jpg" alt="">
+                            <td><img class="img-fluid table-img" src="../../resources/img/product/929591-768x512.jpg"
+                                    alt="">
                             </td>
                             <td>Cuisine</td>
                             <td>20 </td>
                             <td>50</td>
                             <td><a href="modifierProduit.html">
-                                <button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"> <img
-                                            class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png"
-                                            alt=""></button>
+                                    <button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"> <img
+                                            class="btn-img img-fluid "
+                                            src="../../resources/img/icons/modifier-le-fichier.png" alt=""></button>
                                 </a>
                             </td>
                             <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"
@@ -71,15 +72,16 @@
                         </tr>
                         <tr>
                             <td>CARAFE AVEC COUVERCLE ORANGE 1 LITRE</td>
-                            <td><img class="img-fluid table-img" src="../../resources/img/product/8001499044010-768x511.jpg   " alt="">
+                            <td><img class="img-fluid table-img"
+                                    src="../../resources/img/product/8001499044010-768x511.jpg   " alt="">
                             </td>
                             <td>Cuisine</td>
                             <td>20 </td>
                             <td>50</td>
                             <td><a href="modifierProduit.html">
-                                <button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"> <img
-                                            class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png"
-                                            alt=""></button>
+                                    <button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"> <img
+                                            class="btn-img img-fluid "
+                                            src="../../resources/img/icons/modifier-le-fichier.png" alt=""></button>
                                 </a>
                             </td>
                             <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"
@@ -102,7 +104,7 @@
 
 
 
-
+    <script src="../../resources/js/main.js"></script>
 
 
     <script src="../../resources/includes/bootstrap/js/bootstrap.min.js"></script>

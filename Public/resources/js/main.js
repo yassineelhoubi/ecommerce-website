@@ -91,7 +91,7 @@ async function delete_catego(id) {
 
 }
 
-
+/* -------------------------------------------------------------------------------------------------------------- */
 /* new product */
 
 
@@ -153,5 +153,36 @@ function create_product() {
             console.log(res.data);
             Swal.fire(res.data.message)
             document.getElementById('form_new_product').reset();
+        });
+}
+
+function getAll_product() {
+    output = "";
+    axios.get('http://localhost/projet_fil_rouge/Product/getAll_product')
+        .then((res) => {
+            console.log(res.data.message[0]);
+            for(i in res.data.message){
+                output +=
+                    '<tr>' +
+                    '<td>' + res.data.message[i].name + '</td>' +
+                    '<td>' + '<img class="img-fluid table-img" src="../../resources/img/product/' + res.data
+                    .message[i].img + '" alt="">' + '</td>' +
+                    '<td>' + res.data.message[i].category_name + '</td>' +
+                    '<td>' + res.data.message[i].price + ' DH</td>' +
+                    '<td>' + res.data.message[i].quantity + '</td>' +
+                    '<td>' + '<a href="modifierProduit.html">' +
+                    '<button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border">' +
+                    '<img class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png" alt="">' +
+                    '</button>' +
+                    '</a>' +
+                    '</td>' +
+                    '<td>' +
+                    '<button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border" data-bs-toggle="modal" data-bs-target="#infoModal">' +
+                    '<img class="btn-img img-fluid " src="../../resources/img/icons/supprimer.png" alt="">' +
+                    ' </button>' +
+                    '</td>' +
+                    '</tr>'
+            }
+            document.getElementById('tbody').innerHTML = output
         });
 }
