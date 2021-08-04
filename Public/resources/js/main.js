@@ -110,14 +110,14 @@ function getAll_catego_for_select() {
                     output += '<option value="'+res.data.message[i].idCategory+'">'+res.data.message[i].category_name+'</option>'
                 }
             }
-            document.getElementById('select_categories').innerHTML += output
+            document.getElementById('select_categories').innerHTML = output
         });
 }
 
 function uploadImg() {
+   
     var formData = new FormData();
     var imgFile = document.getElementById('inputfile').files[0];
-    /* console.log(formData) */
     if (imgFile === undefined) {
         return null;
     } else {
@@ -130,19 +130,24 @@ function uploadImg() {
         console.log('time : ' + imgName, 'img', imgFile);
         formData.append('imgName', imgName);
         formData.append('imgFile', imgFile);
-
+        event.preventDefault();
         axios.post('http://localhost/projet_fil_rouge/product/upload_img', formData)
             .then((res) => {
                 console.log(res.data);
             });
+            
         return imgName;
     }
 
 }
+/* create */
 
 function create_product() {
-    event.preventDefault();
+    event.preventDefault()
+console.log('yassine')
+   
     var imgName = uploadImg();
+    
     obj = {
 
         idCategory: document.getElementById('select_categories').value,
@@ -223,31 +228,36 @@ get_product_toUpdate(id)
   
 }
 function get_product_toUpdate(id){
+    event.preventDefault()
+    getAll_catego_for_select()
     axios.get('http://localhost/projet_fil_rouge/Product/get_product/'+id)
     .then((res) => {
         console.log(res.data.message)
         document.getElementById('name').value = res.data.message.name
         document.getElementById('quantity').value = res.data.message.quantity
+        document.getElementById('select_categories').value = res.data.message.idCategory
         document.getElementById('price').value = res.data.message.price
         document.getElementById('img').setAttribute('src', '../../resources/img/product/'+res.data.message.img)
         document.getElementById('spanfile').innerHTML = res.data.message.img
         document.getElementById('description').value = res.data.message.description
         document.getElementById('idProduct').value = res.data.message.idProduct
     });
-    getAll_catego_for_select()
+    
 }
+/* update */
 
-function update_product() {
+async function update_product() {
+    event.preventDefault();
     var imgName = document.getElementById('inputfile').files[0]
 
-    console.log(imgName)
+
     if(imgName == undefined){
         console.log('raha undefined')
         imgName = document.getElementById('spanfile').innerHTML
     }else{
         var imgName = uploadImg()
     }
-    console.log(imgName)
+
     obj = {
         "idProduct": document.getElementById('idProduct').value,
         "idCategory": document.getElementById('select_categories').value,
@@ -257,13 +267,16 @@ function update_product() {
         "description": document.getElementById('description').value,
         "img": imgName
     }
-    axios.put('http://localhost/projet_fil_rouge/Product/update_product', obj)
+    await axios.put('http://localhost/projet_fil_rouge/Product/update_product', obj)
         .then((res) => {
             console.log(res.data)
+            Swal.fire(res.data.message)
         })
+        get_id_product()
 }
+/* delete */
 async function delete_product(id){
-    if (confirm("Voulez vous vraiment supprimer ce Produit ?  ")) {
+    if (confirm("Voulez vous vraiment supprimer ce Produit ? ")) {
 
         await axios.delete('http://localhost/projet_fil_rouge/Product/delete_product/' + id)
             .then((res) => {
