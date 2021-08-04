@@ -2,11 +2,11 @@
  class Users {
         // db
         private $conn;
-        // Client properties
+        //users properties
         public $email;
         public $password;
         public $nbrPhone;
-
+        // Client properties
         public $Fname;
         public $Lname;
         public $gender;
@@ -18,6 +18,7 @@
     {
         $this->conn = $db;
     }
+    /* register */
     public function checkemail(){
         $sql = "SELECT * FROM users WHERE email = :email";
         
@@ -92,7 +93,7 @@
         printf("Error %s.\n", $stmt1->error);
         return false;
     }
-
+    /* login  */
     public function login(){
         $sql = "SELECT * FROM users WHERE email = :email";
         
@@ -115,6 +116,73 @@
 
         // print error if something goes wrong
         printf("Error %s.\n", $stmt->error);
+        return false;
+    }
+    public function gen_token()
+    {
+        $customAlphabet = '0123456789ABCDEFabcdefghijklmnopqrstuvwxyz@-';
+        $Token = password_hash(uniqid($customAlphabet, true), PASSWORD_DEFAULT);
+
+        return $Token;
+    }
+    public function gave_token(){
+        $sql="UPDATE users SET token = :token";
+        
+        // Prepare query
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind data
+        $stmt->bindParam(':token', $this->token);
+        
+        
+        if ($stmt->execute()) {
+            
+            return true ;
+        }
+
+        return false;
+    }
+    public function check_token(){
+        $sql="SELECT * FROM users WHERE token = :token";
+        
+        // Prepare query
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind data
+        $stmt->bindParam(':token', $this->token);
+        
+        
+        if ($stmt->execute()) {
+            
+            $row        =   $stmt->rowcount();
+            if($row == 1){
+
+                return true ;
+            }else{
+                return false;
+            }
+            
+        }
+
+        return false;
+    }
+    public function get_role_token(){
+        $sql="SELECT role FROM users WHERE token = :token";
+        
+        // Prepare query
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind data
+        $stmt->bindParam(':token', $this->token);
+        
+        
+        if ($stmt->execute()) {
+            
+            $row        =   $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row;
+        }
+
         return false;
     }
 

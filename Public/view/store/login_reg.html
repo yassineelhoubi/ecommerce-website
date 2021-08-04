@@ -16,7 +16,11 @@
 <script src="../../resources/js/includeTemp.js"></script>
 
 <script src="/node_modules/axios/dist/axios.min.js"></script>
-
+<script>
+  if (sessionStorage.getItem("token") != null) {
+    document.location.href = './index.html'
+  }
+</script>
 <body>
   <!-- header -->
   <div id="header"></div>
@@ -132,7 +136,9 @@
 
       const response = await axios.post('http://localhost/projet_fil_rouge/User/login', obj)
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data.token);
+          sessionStorage.setItem("token",res.data.token)
+          document.location.href = './index.html'
         });
       return response
     }
@@ -167,6 +173,7 @@
           console.log(res.data);
         });
     }
+    
   </script>
 
 

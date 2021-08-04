@@ -34,10 +34,17 @@
                 </div>
               </div>
               <hr>
-              <div class="row justify-content-center">
+              <div class="row justify-content-center" id="seconnecter">
                 <div class="col-10">
                   <a href="login_reg.html">
                     <button class="mybtn w-100 secondary-border secondary-raduis">Se connecter</button>
+                  </a>
+                </div>
+              </div>
+              <div class="row justify-content-center" id="deconnecter">
+                <div class="col-10">
+                  <a href="login_reg.html">
+                    <button class="mybtn w-100 secondary-border secondary-raduis">deconnecter</button>
                   </a>
                 </div>
               </div>
@@ -60,3 +67,13 @@
     </div>
   </nav>
 </div>
+<script>
+
+const seconnecter = document.getElementById('seconnecter')
+  const deconnecter = document.getElementById('deconnecter')
+  if (sessionStorage.getItem("token") != null) {
+    seconnecter.remove();
+  }else{
+    deconnecter.remove();
+  }
+</script>
