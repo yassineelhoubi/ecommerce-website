@@ -59,7 +59,7 @@
         }
     }
     public function getAll(){
-        $sql="SELECT * FROM categories";
+        $sql="SELECT * FROM categories ORDER BY idCategory DESC";
 
         // Prepare query
         $stmt=$this->conn->prepare($sql);

@@ -4,15 +4,11 @@
 
 async function create_catego() {
 
-    const headers = {
-        'Content-Type': 'multipart/form-data'
-    };
+
     obj = {
         category_name: document.getElementById('catego_name_add').value
     }
-    await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', obj, {
-            headers: headers
-        })
+    await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', obj)
         .then((res) => {
             console.log(res.data);
         });

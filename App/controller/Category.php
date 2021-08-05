@@ -15,6 +15,8 @@
 
     public function create_catego() {
 
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return false;
+
         // getdata
         $data=json_decode(file_get_contents("php://input"));
 
