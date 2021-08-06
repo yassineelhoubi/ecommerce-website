@@ -23,11 +23,16 @@
 
     .product {
         .img-card {
-            
-
             img {
                 height: 200px;
                 object-fit: contain;
+            }
+
+        }
+        .card-body{
+            .card-title{ 
+                height: 40px;
+                overflow: hidden;
             }
         }
     }
