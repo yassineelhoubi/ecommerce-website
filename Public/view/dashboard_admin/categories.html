@@ -16,6 +16,11 @@
 <script src="../../resources/js/includeTemp.js"></script>
 <!-- import axios -->
 <script src="/node_modules/axios/dist/axios.min.js"></script>
+<script>
+  if (sessionStorage.getItem("token") == null || sessionStorage.getItem("role") !='admin' ) {
+    document.location.href = './login.html'
+  }
+</script>
 
 <body onload="getAll_catego()" >
   <!-- header -->

@@ -12,6 +12,8 @@
         public $gender;
         public $address1 ;
         public $address2;
+        public $id;
+        public $token ;
         
 
     public function __construct($db)
@@ -121,12 +123,12 @@
     public function gen_token()
     {
         $customAlphabet = '0123456789ABCDEFabcdefghijklmnopqrstuvwxyz@-';
-        $Token = password_hash(uniqid($customAlphabet, true), PASSWORD_DEFAULT);
+        $token = password_hash(uniqid($customAlphabet, true), PASSWORD_DEFAULT);
 
-        return $Token;
+        return $token;
     }
     public function gave_token(){
-        $sql="UPDATE users SET token = :token";
+        $sql="UPDATE users SET token = :token WHERE id = $this->id";
         
         // Prepare query
         $stmt = $this->conn->prepare($sql);
@@ -180,7 +182,7 @@
             
             $row        =   $stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $row;
+            return $row['role'];
         }
 
         return false;

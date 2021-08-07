@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../resources/includes/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../resources/css/style.css" />
+    <!-- import axios -->
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <!-- inmport sweetalert -->
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script>
+        if (sessionStorage.getItem("token") != null) {
+            document.location.href = './analyse.html'
+        }
+    </script>
+</head>
+
+<body style="background-color: #E2FFF9;">
+
+    <div style="margin-top: 15%;" class="container  ">
+        <div class="row ">
+            <div class="col-5 m-auto ">
+                <div class=" primary-border primary-raduis p-4 login-card bg-light shadow_card">
+                    <div class="text-center p-3">
+                        <h3 class="fw-bolder">Admin login</h3>
+                    </div>
+                    <input id="email" type="text" class="form-control mb-3"
+                        placeholder="Adresse e-mail ou numéro de tél.">
+                    <input id="password" type="password" class="form-control mb-3" placeholder="Mot de passe">
+                    <button onclick="login()"
+                        class=" w-100 size-btn mt-2 mb-3  mybtn secondary-raduis secondary-border">Se
+                        connecter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../resources/js/admin.js"></script>
+
+
+</html>

@@ -3,7 +3,15 @@ CREATE Table users (
     id INT  PRIMARY KEY AUTO_INCREMENT ,
     email VARCHAR (55),
     password VARCHAR (60),
-    role VARCHAR (12)
+    role VARCHAR (12),
+    token varchar(255)
+);
+Drop table admin ;
+CREATE table admin (
+    idAdmin INT PRIMARY KEY ,
+    Fname VARCHAR (55),
+    Lname VARCHAR (55),
+    FOREIGN KEY (idAdmin) REFERENCES users(id)
 );
 
 Drop table customers;
@@ -36,3 +44,4 @@ CREATE TABLE products(
     FOREIGN KEY (idCategory) REFERENCES categories(idCategory)ON UPDATE CASCADE ON DELETE CASCADE
 
 );
+

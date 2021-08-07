@@ -19,6 +19,12 @@
 <!-- inmport sweetalert -->
 <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
+<script>
+    if (sessionStorage.getItem("token") == null || sessionStorage.getItem("role") !='admin' ) {
+      document.location.href = './login.html'
+    }
+  </script>
+
 
 <body onload="getAll_catego_for_select()">
     <!-- header -->

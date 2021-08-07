@@ -1,8 +1,8 @@
 <?php class User {
-        public $db;
-        public $product;
+    public $db;
+    public $product;
 
-public function __construct() {
+    public function __construct() {
         // instantiate database
         $database=new Database();
         $this->db=$database->connect();
@@ -10,7 +10,8 @@ public function __construct() {
         //Instantiate User object
         $this->user=new Users($this->db);
 
-}
+    }
+
     public function sign_up() {
 
         // get raw posted data
@@ -27,30 +28,34 @@ public function __construct() {
         $this->user->gender=$data->gender;
 
 
-        $bol = true;
-        $rowCount = $this->user->checkemail();
-        if($rowCount >= 1){
-            $bol = false;
+        $bol=true;
+        $rowCount=$this->user->checkemail();
+
+        if($rowCount >=1) {
+            $bol=false;
         }
-        if($bol){
+
+        if($bol) {
             if ($this->user->create()) {
-            
+
 
                 echo json_encode(array('message'=> 'user iserted',
-                    'state'=> true));
-    
+                        'state'=> true));
+
             }
-    
+
             else {
-    
-            
+
+
                 echo json_encode(array('message'=> 'user not iserted',
-                'state'=> false));
-    
+                        'state'=> false));
+
             }
-        }else{
+        }
+
+        else {
             echo json_encode(array('message'=> 'this email already exist',
-                'state'=> false));
+                    'state'=> false));
         }
 
 
@@ -63,65 +68,85 @@ public function __construct() {
         // get raw posted data
         $data=json_decode(file_get_contents("php://input"));
 
-        $this->user->email    =   $data->email;
-        $password       =   $data->password;
+        $this->user->email=$data->email;
+        $password=$data->password;
 
-        
-        if($row = $this->user->login()){
 
-            $hachPassword = $row['password'];
+        if($row=$this->user->login()) {
+
+            $hachPassword=$row['password'];
+            $this->user->id = $row['id'];
         }
 
-       
 
-        if($row != 0 && password_verify($password , $hachPassword)) {
-            $token          = $this->user->gen_token();
-            $this->user->token    = $token;
-            if($this->user->gave_token()){
-                echo json_encode(array('message'=> 'user login','token'=>$token, 
-                'state'=> true)); 
-            }
+        if($row !=0 && password_verify($password, $hachPassword) && $row['role'] == 'admin') {
+            $token=$this->user->gen_token();
+            $this->user->token=$token;
+
+            $this->user->gave_token();
+            $role = $this->user->get_role_token();
+                echo json_encode(array('message'=> 'user login', 
+                'token'=>$token,
+                'role' =>$role,
+                'state'=> true));
+        }
+        elseif($row !=0 && password_verify($password, $hachPassword)) {
+
+            $token=$this->user->gen_token();
+            $this->user->token=$token;
+
+            $this->user->gave_token();
+                echo json_encode(array('message'=> 'user login', 'token'=>$token,
+                        'state'=> true));
             
-        }elseif($row != 0){
-            echo json_encode(array('message'=>'data not valid' ,
-            'state'=>false));
+
         }
-        else{
-            echo json_encode(array('message'=>"doesn't user exist" , 'state'=>false));
+
+        elseif($row !=0) {
+            echo json_encode(array('message'=>'data not valid',
+                    'state'=>false));
+        }
+
+        else {
+            echo json_encode(array('message'=>"doesn't user exist", 'state'=>false));
         }
 
     }
 
-    public function check_token(){
+    public function check_token() {
 
 
         // get raw posted data
         $data=json_decode(file_get_contents("php://input"));
-        $this->user->token       =   $data->token;
+        $this->user->token=$data->token;
 
-        if($this->user->check_token()){
+        if($this->user->check_token()) {
 
             echo json_encode(array('message'=>'token is valid'));
         }
-        else{
+
+        else {
             echo json_encode(array('message'=>"token not valid"));
         }
-            
+
     }
-    public function get_role_token()
-    {
-            // get raw posted data
-            $data=json_decode(file_get_contents("php://input"));
-            $this->user->token       =   $data->token;
-            if($this->user->check_token()){
-            if($role = $this->user->get_role_token()){
+
+    public function get_role_token() {
+        // get raw posted data
+        $data=json_decode(file_get_contents("php://input"));
+        $this->user->token=$data->token;
+
+        if($this->user->check_token()) {
+            if($role=$this->user->get_role_token()) {
 
                 echo json_encode(array('role'=>$role));
             }
-        }else{
+        }
+
+        else {
             echo json_encode(array('message'=>"token not valid"));
         }
-            
+
 
     }
 }
