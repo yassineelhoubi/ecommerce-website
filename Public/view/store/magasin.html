@@ -14,8 +14,10 @@
   crossorigin="anonymous"></script>
 <!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
 
-<body>
+<body onload="initialize()">
   <!-- header -->
   <div id="header"></div>
   <!--  -->
@@ -24,11 +26,8 @@
     <div class="container mt-5 ">
       <div class="row">
         <div class="col-lg-4 col-7 mt-2">
-          <select class="form-select secondary-border secondary-raduis form-control">
+          <select id="select_catego" class="form-select secondary-border secondary-raduis form-control">
             <option selected>Selecte catégories</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
           </select>
         </div>
         <div class="col-lg-3 col-5 mt-2">
@@ -268,7 +267,7 @@
     <!-- Footer -->
     <div id="footer"></div>
     <!-- end footer -->
-
+<script src="../../resources/js/store.js"></script>
 
 </body>
 
