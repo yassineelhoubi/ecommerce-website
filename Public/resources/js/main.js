@@ -1,21 +1,19 @@
+
+
 /* categories */
-
-
 
 async function create_catego() {
 
-
     obj = {
-        category_name: document.getElementById('catego_name_add').value
+        category_name: document.getElementById('catego_name_add').value,
+        token : sessionStorage.getItem('token')
     }
     await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', obj)
         .then((res) => {
             console.log(res.data);
         });
-
     getAll_catego()
     $('#newCategorieModal').modal('hide');
-
 }
 
 function getAll_catego() {
@@ -64,7 +62,8 @@ function get_catego_toUpdate(id) {
 async function update_catego() {
     obj = {
         idCategory: document.getElementById('idCategory_update').value,
-        category_name: document.getElementById('category_name_update').value
+        category_name: document.getElementById('category_name_update').value,
+        token : sessionStorage.getItem('token')
     }
     await axios.put('http://localhost/projet_fil_rouge/Category/update_catego', obj)
         .then((res) => {
@@ -75,9 +74,13 @@ async function update_catego() {
 }
 
 async function delete_catego(id) {
+    
     if (confirm("Voulez vous vraiment supprimer cette categorie ? \n Attention Les produits de cette categorie sera supprimés aussi ! ")) {
-
-        await axios.delete('http://localhost/projet_fil_rouge/Category/delete_catego/' + id)
+        obj = {
+            idCategory : id,
+            token : sessionStorage.getItem('token')
+        }
+        await axios.post('http://localhost/projet_fil_rouge/Category/delete_catego/' , obj)
             .then((res) => {
                 console.log(res.data)
             });
@@ -145,13 +148,13 @@ console.log('yassine')
     var imgName = uploadImg();
     
     obj = {
-
         idCategory: document.getElementById('select_categories').value,
         name: document.getElementById('name').value,
         quantity: document.getElementById('quantity').value,
         price: document.getElementById('select_price').value,
         description: document.getElementById('description').value,
-        img: imgName
+        img: imgName,
+        token : sessionStorage.getItem('token')
 
     }
     axios.post('http://localhost/projet_fil_rouge/product/create_product', obj)
@@ -223,6 +226,7 @@ id = item[1];
 get_product_toUpdate(id)
   
 }
+/* update */
 function get_product_toUpdate(id){
     event.preventDefault()
     getAll_catego_for_select()
@@ -240,28 +244,28 @@ function get_product_toUpdate(id){
     });
     
 }
-/* update */
+
 
 async function update_product() {
     event.preventDefault();
     var imgName = document.getElementById('inputfile').files[0]
 
-
     if(imgName == undefined){
-        console.log('raha undefined')
+        
         imgName = document.getElementById('spanfile').innerHTML
     }else{
         var imgName = uploadImg()
     }
 
     obj = {
-        "idProduct": document.getElementById('idProduct').value,
-        "idCategory": document.getElementById('select_categories').value,
-        "name": document.getElementById('name').value,
-        "quantity": document.getElementById('quantity').value,
-        "price": document.getElementById('price').value,
-        "description": document.getElementById('description').value,
-        "img": imgName
+        idProduct: document.getElementById('idProduct').value,
+        idCategory: document.getElementById('select_categories').value,
+        name: document.getElementById('name').value,
+        quantity: document.getElementById('quantity').value,
+        price: document.getElementById('price').value,
+        description: document.getElementById('description').value,
+        img: imgName,
+        token : sessionStorage.getItem('token') 
     }
     await axios.put('http://localhost/projet_fil_rouge/Product/update_product', obj)
         .then((res) => {
@@ -273,8 +277,11 @@ async function update_product() {
 /* delete */
 async function delete_product(id){
     if (confirm("Voulez vous vraiment supprimer ce Produit ? ")) {
-
-        await axios.delete('http://localhost/projet_fil_rouge/Product/delete_product/' + id)
+        obj = {
+            idProduct : id,
+            token : sessionStorage.getItem('token')
+        }
+        await axios.post('http://localhost/projet_fil_rouge/Product/delete_product/' , obj)
             .then((res) => {
                 console.log(res.data)
             });
