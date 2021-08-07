@@ -16,11 +16,14 @@
 <script src="../../resources/js/includeTemp.js"></script>
 
 <script src="/node_modules/axios/dist/axios.min.js"></script>
+<!-- inmport sweetalert -->
+<script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script>
   if (sessionStorage.getItem("token") != null) {
     document.location.href = './index.html'
   }
 </script>
+
 <body>
   <!-- header -->
   <div id="header"></div>
@@ -29,7 +32,7 @@
   <div id="login_reg">
     <include src=".header.html"></include>
 
-    <div class="mt-5 mb-5 ms-lg-5 me-lg-5 " >
+    <div class="mt-5 mb-5 ms-lg-5 me-lg-5 ">
       <div class="container  p-lg-5 p-md-5 p-2">
         <div class="row justify-content-center ">
           <div class="col-lg-6  col-12">
@@ -80,26 +83,27 @@
                 </div>
                 <div class="col-6">
                   <label for="prenom" class="mt-1"> Prenom : </label>
-                  <input id="Lname" name="prenom" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                    placeholder="Votre prenom">
+                  <input id="Lname" name="prenom" class="w-100 secondary-border secondary-raduis form-control"
+                    type="text" placeholder="Votre prenom">
                   <label for="telephone" class="mt-1"> Telephone : </label>
-                  <input id="nbrPhone" name="telephone" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                    placeholder="Votre numéro de tél ">
+                  <input id="nbrPhone" name="telephone" class="w-100 secondary-border secondary-raduis form-control"
+                    type="text" placeholder="Votre numéro de tél ">
                 </div>
 
                 <div class="col-12">
-                  <label  for="address 1" class="mt-1"> Address 1 : </label>
-                  <input id="address1" name="address 1" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                    placeholder="Votre adresse a domicile 1">
+                  <label for="address 1" class="mt-1"> Address 1 : </label>
+                  <input id="address1" name="address 1" class="w-100 secondary-border secondary-raduis form-control"
+                    type="text" placeholder="Votre adresse a domicile 1">
                   <label for="address 2" class="mt-1"> Address 2 : </label>
-                  <input id="address2" name="address 2" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                    placeholder="Votre adresse a domicile 2">
+                  <input id="address2" name="address 2" class="w-100 secondary-border secondary-raduis form-control"
+                    type="text" placeholder="Votre adresse a domicile 2">
                   <label for="email" class="mt-1"> Email : </label>
-                  <input id="email_reg" name="email" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                    placeholder="Votre adresse e-mail">
+                  <input id="email_reg" name="email" class="w-100 secondary-border secondary-raduis form-control"
+                    type="text" placeholder="Votre adresse e-mail">
                   <label for="pass" class="mt-1"> Mot de passe : </label>
-                  <input id="password_reg" name="pass" type="password" class="w-100 secondary-border secondary-raduis form-control"
-                    type="text" placeholder="Votre mot de passe ">
+                  <input id="password_reg" name="pass" type="password"
+                    class="w-100 secondary-border secondary-raduis form-control" type="text"
+                    placeholder="Votre mot de passe ">
                 </div>
 
               </div>
@@ -136,9 +140,21 @@
 
       const response = await axios.post('http://localhost/projet_fil_rouge/User/login', obj)
         .then((res) => {
-          console.log(res.data.token);
-          sessionStorage.setItem("token",res.data.token)
-          document.location.href = './index.html'
+
+          if (res.data.state == true) {
+            console.log(res.data.message)
+            console.log(res.data.token);
+            sessionStorage.setItem("token", res.data.token)
+            document.location.href = './magasin.html'
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: res.data.message
+            })
+            console.log(res.data.message)
+          }
+
         });
       return response
     }
@@ -155,7 +171,7 @@
       var nbrPhone = document.getElementById('nbrPhone').value
       var address1 = document.getElementById('address1').value
       var address2 = document.getElementById('address2').value
-      
+
       var obj = {
         email: email_reg,
         password: password_reg,
@@ -166,14 +182,13 @@
         address1: address1,
         address2: address2
       }
-      
+
       axios.post('http://localhost/projet_fil_rouge/User/sign_up', obj)
         .then((res) => {
           localStorage
           console.log(res.data);
         });
     }
-    
   </script>
 
 

@@ -44,7 +44,7 @@
               <div class="row justify-content-center" id="deconnecter">
                 <div class="col-10">
                   <a href="login_reg.html">
-                    <button class="mybtn w-100 secondary-border secondary-raduis">deconnecter</button>
+                    <button class="mybtn w-100 secondary-border secondary-raduis">Se déconnecter</button>
                   </a>
                 </div>
               </div>
@@ -76,4 +76,5 @@ const seconnecter = document.getElementById('seconnecter')
   }else{
     deconnecter.remove();
   }
+  deconnecter.addEventListener('click',()=>{sessionStorage.removeItem('token'); })
 </script>

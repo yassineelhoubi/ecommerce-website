@@ -74,7 +74,7 @@ public function __construct() {
 
        
 
-        if($row == !0 && password_verify($password , $hachPassword)) {
+        if($row != 0 && password_verify($password , $hachPassword)) {
             $token          = $this->user->gen_token();
             $this->user->token    = $token;
             if($this->user->gave_token()){
@@ -82,15 +82,16 @@ public function __construct() {
                 'state'=> true)); 
             }
             
-        }elseif($row ==!0){
-            echo json_encode(array('message'=>'data not valid'));
+        }elseif($row != 0){
+            echo json_encode(array('message'=>'data not valid' ,
+            'state'=>false));
         }
         else{
-            echo json_encode(array('message'=>"doesn't user exist"));
+            echo json_encode(array('message'=>"doesn't user exist" , 'state'=>false));
         }
 
-
     }
+
     public function check_token(){
 
 
