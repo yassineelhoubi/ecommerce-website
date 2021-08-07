@@ -39,17 +39,14 @@
             if ($this->user->create()) {
 
 
-                echo json_encode(array('message'=> 'user iserted',
+                echo json_encode(array('message'=> 'Account created successfult',
                         'state'=> true));
 
             }
 
             else {
-
-
-                echo json_encode(array('message'=> 'user not iserted',
+                echo json_encode(array('message'=> 'error',
                         'state'=> false));
-
             }
         }
 
