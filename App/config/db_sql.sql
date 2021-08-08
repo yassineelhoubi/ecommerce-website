@@ -45,3 +45,23 @@ CREATE TABLE products(
 
 );
 
+DROP table orders ; 
+CREATE Table orders(
+    idOrder INT AUTO_INCREMENT PRIMARY KEY , 
+    idCustomer INT,
+    date DATE ,
+    status  VARCHAR(55),
+    totalPrice INT(4),
+    FOREIGN KEY (idCustomer) REFERENCES customers(idCustomer)
+);
+
+DROP table line_cmd;
+CREATE table line_cmd(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    idOrder INT ,
+    idProduct INT,
+    quantity INT(4) ,
+    totalPrice INT(4),
+    FOREIGN KEY (idProduct) REFERENCES products(idProduct),
+    FOREIGN key (idOrder) REFERENCES orders(idOrder)
+);
