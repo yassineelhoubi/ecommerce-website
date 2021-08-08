@@ -1,11 +1,14 @@
 #produit{
 
     #card-container-product{
-            #imgf{
+        #div-img{
+            height: 300px;
+            #img{
                 
                 width: 98%;
                 object-fit: contain;
             }
+        }
         #description-aria-product{
             width: 100%;
             height: 100px;

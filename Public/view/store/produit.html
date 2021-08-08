@@ -16,8 +16,10 @@
   crossorigin="anonymous"></script>
   <!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
   
-<body  >
+<body onload="get_id_product()" >
   <!-- header -->
 <div id="header"></div>
   <!--  -->
@@ -30,11 +32,11 @@
       <div class="row m-0  col-12" id="card-container-product-column">
         <div id="div-img"
           class="col-lg-4 col-md-10 col-12 p-0 me-lg-3  secondary-border primary-raduis  d-flex justify-content-center">
-          <img class=" primary-raduis" id="imgf" src="../../resources/img/product/8001499044010-768x511.jpg" alt="">
+          <img class=" primary-raduis" id="img" src="../../resources/img/product/8001499044010-768x511.jpg" alt="">
         </div>
         <div class="col-lg-7 col-12 d-flex flex-column justify-content-between m-lg-3  ">
-          <h4 class="mt-lg-0  mt-4 ">CARAFE AVEC COUVERCLE ORANGE 1 LITRE</h4>
-          <h4 class=" mt-lg-0  mt-4">00.00 MAD</h4>
+          <h4 id="name" class="mt-lg-0  mt-4 ">CARAFE AVEC COUVERCLE ORANGE 1 LITRE</h4>
+          <h4 id="price" class=" mt-lg-0  mt-4">00.00 MAD</h4>
           <div class="row mt-lg-0  mt-4">
             <h4 class="col-4">Quantity</h4>
             <div class="col-3 secondary-border secondary-raduis d-flex p-0 ">
@@ -50,7 +52,7 @@
       <div class="row me-0  col-12 m-0 mt-4">
         <h4>Description</h4>
         <div  class=" primary-raduis secondary-border" id="description-aria-product">
-        <p class="fw-normal">Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ipsum, consequatur illo reiciendis beatae excepturi numquam omnis pariatur dolores magnam magni tenetur odio ad suscipit quasi voluptatem saepe cum obcaecati. sit amet sed vitae animi.</p>
+        <p id="description" class="fw-normal">Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ipsum, consequatur illo reiciendis beatae excepturi numquam omnis pariatur dolores magnam magni tenetur odio ad suscipit quasi voluptatem saepe cum obcaecati. sit amet sed vitae animi.</p>
         </div>
 
       </div>
@@ -67,6 +69,7 @@
   <!-- end footer -->
 
   <script src="../../resources/js/style.js"></script>
+  <script src="../../resources/js/store.js"></script>
 </body>
 
 </html>

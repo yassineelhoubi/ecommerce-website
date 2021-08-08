@@ -1,21 +1,26 @@
 
 /* input for img */
-document.getElementById('inputfile').addEventListener('change', 
-function () {
-    var valuefile = document.getElementById('inputfile').value;
-    var namefile = valuefile.split("\\");
-    document.getElementById('spanfile').innerHTML = namefile[namefile.length - 1];
-})
+let inputfile = document.getElementById('inputfile')
+if(inputfile){
 
+    inputfile.onchange = x
+    function x() {
+        var valuefile = document.getElementById('inputfile').value;
+        var namefile = valuefile.split("\\");
+        document.getElementById('spanfile').innerHTML = namefile[namefile.length - 1];
+    }
+}
+    
 
 /* counter */
 let btnadd = document.querySelector('#add');
 let btnsubtract = document.querySelector('#subtract');
 let input = document.querySelector('#input-counter');
 
+if(btnadd && btnsubtract){
 
-btnadd.addEventListener('click',()=>{
-input.value = parseInt(input.value) + 1 ;
+    btnadd.addEventListener('click',()=>{
+        input.value = parseInt(input.value) + 1 ;
 });
 
 btnsubtract.addEventListener('click',()=>{
@@ -25,6 +30,8 @@ btnsubtract.addEventListener('click',()=>{
     }
     else
     {
-    input.value = parseInt(input.value) - 1 ;
+        input.value = parseInt(input.value) - 1 ;
     }
 });
+
+}

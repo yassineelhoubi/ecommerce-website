@@ -63,12 +63,10 @@
             echo json_encode(array('message'=> $rows,
                     'state'=> true));
         }
-
         else {
             echo json_encode(array('message'=> 'no Products found',
                     'state'=> false));
         }
-
     }
 
     public function get_product($idProduct) {
