@@ -20,6 +20,7 @@
     {
         $this->conn = $db;
     }
+
     /* register */
     public function checkemail(){
         $sql = "SELECT * FROM users WHERE email = :email";
@@ -34,7 +35,6 @@
         // Bind data
         $stmt->bindParam(':email', $this->email);
         
-        
         if ($stmt->execute()) {
             $rowCount        =   $stmt->rowCount();
             
@@ -43,13 +43,11 @@
     }
     public function create()
     {
-        
         $sql = " INSERT INTO users (role, email , password) VALUES ('customer' , :email , :password)";
 
         // Clean data
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->password = htmlspecialchars(strip_tags($this->password));
-
 
         // Prepare query
         $stmt = $this->conn->prepare($sql);
@@ -63,8 +61,7 @@
         //get the last id from visitor table
         $last_id  = $this->conn->lastInsertId();
 
-        
-        
+    
         $sql2 = "INSERT INTO customers (Fname, Lname,nbrPhone , gender , address1, address2, idCustomer) 
         VALUES (:Fname, :Lname, :nbrPhone , :gender , :address1, :address2,  ".$last_id.")";
 
@@ -90,9 +87,6 @@
         if ($stmt1->execute()) {
             return true;
         }
-
-        // print error if something goes wrong
-        printf("Error %s.\n", $stmt1->error);
         return false;
     }
     /* login  */
@@ -115,9 +109,6 @@
             
             return $row ;
         }
-
-        // print error if something goes wrong
-        printf("Error %s.\n", $stmt->error);
         return false;
     }
     public function gen_token()
@@ -136,17 +127,14 @@
         // Bind data
         $stmt->bindParam(':token', $this->token);
         
-        
         if ($stmt->execute()) {
             
             return true ;
         }
-
         return false;
     }
     public function check_token(){
         $sql="SELECT * FROM users WHERE token = :token";
-        
         // Prepare query
         $stmt = $this->conn->prepare($sql);
 
@@ -163,13 +151,12 @@
             }else{
                 return false;
             }
-            
         }
 
         return false;
     }
-    public function get_role_token(){
-        $sql="SELECT role FROM users WHERE token = :token";
+    public function get_info_token(){
+        $sql="SELECT * FROM users WHERE token = :token";
         
         // Prepare query
         $stmt = $this->conn->prepare($sql);
@@ -182,7 +169,7 @@
             
             $row        =   $stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $row['role'];
+            return $row;
         }
 
         return false;

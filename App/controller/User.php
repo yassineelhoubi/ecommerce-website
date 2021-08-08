@@ -72,30 +72,27 @@
         if($row=$this->user->login()) {
 
             $hachPassword=$row['password'];
-            $this->user->id = $row['id'];
+            $this->user->id=$row['id'];
         }
 
-
-        if($row !=0 && password_verify($password, $hachPassword) && $row['role'] == 'admin') {
+        if($row !=0 && password_verify($password, $hachPassword) && $row['role']=='admin') 
+        {
             $token=$this->user->gen_token();
             $this->user->token=$token;
 
             $this->user->gave_token();
-            $role = $this->user->get_role_token();
-                echo json_encode(array('message'=> 'user login', 
-                'token'=>$token,
-                'role' =>$role,
-                'state'=> true));
+            $role=$this->user->get_info_token();
+            echo json_encode(array('message'=> 'user login',
+                    'token'=>$token,
+                    'role'=>$role['role'],
+                    'state'=> true));
         }
         elseif($row !=0 && password_verify($password, $hachPassword)) {
-
             $token=$this->user->gen_token();
             $this->user->token=$token;
-
             $this->user->gave_token();
-                echo json_encode(array('message'=> 'user login', 'token'=>$token,
-                        'state'=> true));
-            
+            echo json_encode(array('message'=> 'user login', 'token'=>$token,
+                    'state'=> true));
 
         }
 
@@ -110,15 +107,13 @@
 
     }
 
+/* test */
     public function check_token() {
-
-
         // get raw posted data
         $data=json_decode(file_get_contents("php://input"));
         $this->user->token=$data->token;
 
         if($this->user->check_token()) {
-
             echo json_encode(array('message'=>'token is valid'));
         }
 
@@ -127,23 +122,33 @@
         }
 
     }
-
     public function get_role_token() {
         // get raw posted data
         $data=json_decode(file_get_contents("php://input"));
         $this->user->token=$data->token;
 
         if($this->user->check_token()) {
-            if($role=$this->user->get_role_token()) {
-
-                echo json_encode(array('role'=>$role));
+            if($role=$this->user->get_info_token()) {
+                echo json_encode(array('role'=>$role['role']));
             }
         }
-
         else {
             echo json_encode(array('message'=>"token not valid"));
         }
 
+    }
+    public function get_id_token() {
+        // get raw posted data
+        $data=json_decode(file_get_contents("php://input"));
+        $this->user->token=$data->token;
 
+        if($this->user->check_token()) {
+            if($role=$this->user->get_info_token()) {
+                echo json_encode(array('id'=>$role['id']));
+            }
+        }
+        else {
+            echo json_encode(array('message'=>"token not valid"));
+        }
     }
 }

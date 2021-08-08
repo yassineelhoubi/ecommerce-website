@@ -39,8 +39,11 @@ async function login() {
 /* logout */
 
 var logout = document.getElementById('logout')
-logout.addEventListener('click',()=>{
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('role');
-  document.location.href = './login.html'
- })
+if(logout){
+
+    logout.addEventListener('click',()=>{
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('role');
+        document.location.href = './login.html'
+    })
+}
