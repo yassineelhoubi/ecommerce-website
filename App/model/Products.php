@@ -74,7 +74,7 @@
     }
     public function getAll(){
 
-        $sql="SELECT * FROM products p ,  categories c WHERE c.idCategory=p.idCategory ORDER BY p.idproduct DESC";
+        $sql="SELECT * FROM products   ORDER BY idproduct DESC";
 
         // Prepare query
         $stmt=$this->conn->prepare($sql);
@@ -92,6 +92,27 @@
             return false;
         }
     }
+    public function getAll_quantity_notNull(){
+
+        $sql="SELECT * FROM products  WHERE quantity >=1  ORDER BY idproduct DESC";
+
+        // Prepare query
+        $stmt=$this->conn->prepare($sql);
+
+        if($stmt->execute()) {
+            $rowCount = $stmt->rowCount();
+            if($rowCount == 0){
+                return false;
+            }else{
+                $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $row ;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
 
     public function update(){
 

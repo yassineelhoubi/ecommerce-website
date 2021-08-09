@@ -115,6 +115,19 @@
                     'state'=> false));
         }
     }
+    /* for store */
+    public function getAll_product_store() {
+        $rows=$this->product->getAll_quantity_notNull();
+
+        if($rows) {
+            echo json_encode(array('message'=> $rows,
+                    'state'=> true));
+        }
+        else {
+            echo json_encode(array('message'=> 'no Products found',
+                    'state'=> false));
+        }
+    }
 
     public function get_product($idProduct) {
         $this->product->idProduct=$idProduct;
