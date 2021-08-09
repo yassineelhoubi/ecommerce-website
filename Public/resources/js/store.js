@@ -67,11 +67,20 @@ function get_product(id){
 }
 
 /* Order */
+function get_id_product_for_create_order(){
+    var item = location.search.substr(1).split('=')
+    id = item[1];
+    create_order(id)
+}
  function create_order(id){
+    let quantity = document.getElementById('input_counter_quantity')
+    if(quantity){
+        quantity = document.getElementById('input_counter_quantity').value
+    }
      obj ={
          idProduct     : id,
          token  : sessionStorage.getItem('token'),
-         quantity : document.getElementById('quantity')
+         quantity : quantity
      }
     axios.post('http://localhost/projet_fil_rouge/Order/create',obj)
     .then((res)=>{

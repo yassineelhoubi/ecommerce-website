@@ -15,7 +15,7 @@ if(inputfile){
 /* counter */
 let btnadd = document.querySelector('#add');
 let btnsubtract = document.querySelector('#subtract');
-let input = document.querySelector('#input-counter');
+let input = document.querySelector('#input_counter_quantity');
 
 if(btnadd && btnsubtract){
 

@@ -10,8 +10,6 @@ async function login() {
       .then((res) => {
 
         if (res.data.state == true) {
-          console.log(res.data.message)
-          console.log(res.data.token);
           sessionStorage.setItem("token", res.data.token)
           document.location.href = './magasin.html'
         } else {
@@ -20,7 +18,6 @@ async function login() {
             title: 'Oops...',
             text: res.data.message
           })
-          console.log(res.data.message)
         }
 
       });
@@ -53,7 +50,7 @@ async function login() {
           })
       });
   }
-
+/* nav bar button */
   const seconnecter = document.getElementById('seconnecter')
   const deconnecter = document.getElementById('deconnecter')
   if (sessionStorage.getItem("token") != null) {
