@@ -76,7 +76,30 @@ function get_product(id){
     axios.post('http://localhost/projet_fil_rouge/Order/create',obj)
     .then((res)=>{
         if(res.data.auth == false  ){
-            document.location.href = './login_reg.html'
+            Swal.fire({
+                title: 'veuillez d\'abord vous connecter',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Go!',
+                cancelButtonText: 'Annuler'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    document.location.href = './login_reg.html'
+
+                }else{
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',    
+                        title: "veuillez d\'abord vous connecter",
+                        text : "Puis vous pouvez commander", 
+                        showConfirmButton: false,
+                        timer: 2000
+                      })
+                }
+            })
+
         }else{
             if(res.data.state == true){
                 Swal.fire({
@@ -95,8 +118,6 @@ function get_product(id){
                     timer: 1700
                   })
             }
-            
         }
-        
     })
  }

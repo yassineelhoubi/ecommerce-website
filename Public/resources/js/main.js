@@ -63,30 +63,52 @@ async function update_catego() {
         token : sessionStorage.getItem('token')
     }
     await axios.put('http://localhost/projet_fil_rouge/Category/update_catego', obj)
-        .then((res) => {
-            console.log(res.data)
-        });
     getAll_catego()
     $('#updateModal').modal('hide');
 }
 
 async function delete_catego(id) {
-    
-    if (confirm("Voulez vous vraiment supprimer cette categorie ? \n Attention Les produits de cette categorie sera supprimés aussi ! ")) {
-        obj = {
-            idCategory : id,
-            token : sessionStorage.getItem('token')
+
+    Swal.fire({
+        title: 'Voulez vous vraiment supprimer cette categorie ? ',
+        text: "Attention Les produits de cette categorie sera supprimés aussi ! ",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'supprimer!',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            Confirm_deletion_catego(id)
+            Swal.fire({
+                position: 'center',
+                icon: 'success',    
+                title: "La categorie à été supprimé.",
+                showConfirmButton: false,
+                timer: 1000
+              })
+        }else{
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',    
+                title: "La categorie n'a pas été supprimé.",
+                showConfirmButton: false,
+                timer: 1000
+              })
         }
-        await axios.post('http://localhost/projet_fil_rouge/Category/delete_catego/' , obj)
-            .then((res) => {
-                console.log(res.data)
-            });
-        getAll_catego()
-    } else {
-        alert("La categorie n'a pas été supprimé.")
+    })
+    
+
+}
+async function Confirm_deletion_catego(id){
+    obj = {
+        idCategory : id,
+        token : sessionStorage.getItem('token')
     }
+    await axios.post('http://localhost/projet_fil_rouge/Category/delete_catego/' , obj)
 
-
+    getAll_catego()
 }
 
 /* -------------------------------------------------------------------------------------------------------------- */
@@ -94,7 +116,6 @@ async function delete_catego(id) {
 
 
 
-        
 function getAll_catego_for_select() {
     output = "";
     axios.get('http://localhost/projet_fil_rouge/Category/getAll_catego')
@@ -123,14 +144,12 @@ function uploadImg() {
         var nameTemp = date.toString() + time.toString();
         var ext = imgFile.name.split('.').pop();
         var imgName = nameTemp + '.' + ext;
-        console.log('time : ' + imgName, 'img', imgFile);
+
         formData.append('imgName', imgName);
         formData.append('imgFile', imgFile);
         event.preventDefault();
         axios.post('http://localhost/projet_fil_rouge/product/upload_img', formData)
-            .then((res) => {
-                console.log(res.data);
-            });
+
             
         return imgName;
     }
@@ -140,7 +159,7 @@ function uploadImg() {
 
 function create_product() {
     event.preventDefault()
-console.log('yassine')
+
    
     var imgName = uploadImg();
     
@@ -162,7 +181,7 @@ console.log('yassine')
                     icon: 'success',
                     title: res.data.message,
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1000
                   })
             }else{
                 Swal.fire({
@@ -182,7 +201,7 @@ function getAll_product() {
     output = "";
     axios.get('http://localhost/projet_fil_rouge/Product/getAll_product')
         .then((res) => {
-            console.log(res.data.message[0]);
+
             for(i in res.data.message){
                 if (res.data.state == false) {
                     output = 
@@ -244,7 +263,7 @@ function get_product_toUpdate(id){
     getAll_catego_for_select()
     axios.get('http://localhost/projet_fil_rouge/Product/get_product/'+id)
     .then((res) => {
-        console.log(res.data.message)
+
         document.getElementById('name').value = res.data.message.name
         document.getElementById('quantity').value = res.data.message.quantity
         document.getElementById('select_categories').value = res.data.message.idCategory
@@ -287,7 +306,7 @@ async function update_product() {
                 icon: 'success',
                 title: res.data.message,
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1000
               })
         }else{
             Swal.fire({
@@ -302,18 +321,44 @@ async function update_product() {
         get_id_product()
 }
 /* delete */
-async function delete_product(id){
-    if (confirm("Voulez vous vraiment supprimer ce Produit ? ")) {
-        obj = {
-            idProduct : id,
-            token : sessionStorage.getItem('token')
+ function delete_product(id){
+     Swal.fire({
+        title: 'Voulez vous vraiment supprimer ce Produit ? ',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'supprimer!',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+            Confirm_deletion_product(id)
+            Swal.fire({
+                position: 'center',
+                icon: 'success',    
+                title: "Le Produit à été supprimé.",
+                showConfirmButton: false,
+                timer: 1000
+              })
+        }else{
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',    
+                title: "Le Produit n'a pas été supprimé.",
+                showConfirmButton: false,
+                timer: 1000
+              })
         }
-        await axios.post('http://localhost/projet_fil_rouge/Product/delete_product/' , obj)
-            .then((res) => {
-                console.log(res.data)
-            });
-            getAll_product()
-    } else {
-        alert("Le Produit n'a pas été supprimé.")
+    })
+}
+async function Confirm_deletion_product(id){
+    obj = {
+        idProduct : id,
+        token : sessionStorage.getItem('token')
     }
+    await axios.post('http://localhost/projet_fil_rouge/Product/delete_product/' , obj)
+
+    getAll_product()
+        
 }
