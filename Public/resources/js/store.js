@@ -9,7 +9,6 @@ async function getAll_catego(){
     .then((res)=>{
         for ( i in res.data.message){
             output += '<option value="' + res.data.message[i].idCategory + '">' + res.data.message[i].category_name + '</option>'
-            console.log(output)
         }
     });
     document.getElementById('select_catego').innerHTML += output
@@ -20,7 +19,6 @@ function getAll_product() {
     output = "";
     axios.get('http://localhost/projet_fil_rouge/Product/getAll_product')
         .then((res) => {
-            console.log(res.data.message[0]);
             for(i in res.data.message){
                 output +=        
                         '<div class="col">'+
@@ -35,7 +33,7 @@ function getAll_product() {
                                     res.data.message[i].name+
                                 '</h6>'+
                                 '<div class="d-flex justify-content-between mt-3">'+
-                                  '<button class="mybtn size-btn-card secondary-raduis secondary-border">'+
+                                  '<button onclick="create_order('+res.data.message[i].idProduct+')" class="mybtn size-btn-card secondary-raduis secondary-border">'+
                                     'Ajouter'+
                                   '</button>'+
                                   '<h6 class="pt-1">'+res.data.message[i].price+' DH</h6>'+
@@ -58,7 +56,6 @@ function get_id_product(){
 function get_product(id){
     axios.get('http://localhost/projet_fil_rouge/Product/get_product/'+id)
     .then((res) => {
-        console.log(res.data.message)
         document.getElementById('name').innerHTML = res.data.message.name
         document.getElementById('price').innerHTML = res.data.message.price + '.00 MAD'
         document.getElementById('img').setAttribute('src', '../../resources/img/product/'+res.data.message.img)
@@ -67,5 +64,22 @@ function get_product(id){
         // document.getElementById('idProduct').value = res.data.message.idProduct
         // document.getElementById('quantity').value = res.data.message.quantity
     });
-    
 }
+
+/* Order */
+ function create_order(id){
+     obj ={
+         idProduct     : id,
+         token  : sessionStorage.getItem('token'),
+         quantity : document.getElementById('quantity')
+     }
+    axios.post('http://localhost/projet_fil_rouge/Order/create',obj)
+    .then((res)=>{
+        if(res.data.auth == false  ){
+            document.location.href = './login_reg.html'
+        }else{
+            console.log(res.data.message)
+        }
+        
+    })
+ }

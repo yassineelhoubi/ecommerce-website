@@ -127,6 +127,17 @@
             return false;
         }
     }
+    public function update_quantity(){
+        $sql="UPDATE products SET quantity=$this->quantity WHERE idProduct=$this->idProduct";
+        $stmt=$this->conn->prepare($sql);
+        if($stmt->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
     public function delete(){
         $sql = "DELETE FROM products WHERE idProduct = :idProduct";
 

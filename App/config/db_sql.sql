@@ -57,7 +57,7 @@ CREATE Table orders(
 
 DROP table line_cmd;
 CREATE table line_cmd(
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_line_cmd INT PRIMARY KEY AUTO_INCREMENT,
     idOrder INT ,
     idProduct INT,
     quantity INT(4) ,
