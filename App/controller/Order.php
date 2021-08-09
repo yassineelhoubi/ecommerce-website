@@ -97,7 +97,7 @@ class Order{
         }else{
             
             echo json_encode(array(
-'auth'=> false));
+            'auth'=> false));
         }
     }
 
