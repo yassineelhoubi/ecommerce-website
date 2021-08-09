@@ -78,7 +78,24 @@ function get_product(id){
         if(res.data.auth == false  ){
             document.location.href = './login_reg.html'
         }else{
-            console.log(res.data.message)
+            if(res.data.state == true){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: res.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }else{
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: res.data.message,
+                    showConfirmButton: false,
+                    timer: 1700
+                  })
+            }
+            
         }
         
     })

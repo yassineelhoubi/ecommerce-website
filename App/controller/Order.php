@@ -72,7 +72,7 @@ class Order{
                     }
                 }else{
                     $this->line_cmd->idOrder    =   $resultOrder[0]['idOrder'];
-                    if(empty($this->line_cmd->existe())){
+                    if(empty($this->line_cmd->product_existe())){
                         if($this->line_cmd->create()){
                             echo json_encode(array('message'=> 'The product has been added to your cart',
                             'state'=> true));

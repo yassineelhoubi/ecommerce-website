@@ -53,3 +53,12 @@ async function login() {
           })
       });
   }
+
+  const seconnecter = document.getElementById('seconnecter')
+  const deconnecter = document.getElementById('deconnecter')
+  if (sessionStorage.getItem("token") != null) {
+    seconnecter.remove();
+  }else{
+    deconnecter.remove();
+  }
+  deconnecter.addEventListener('click',()=>{sessionStorage.removeItem('token'); })

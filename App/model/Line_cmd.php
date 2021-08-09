@@ -25,7 +25,7 @@ class Line_cmd{
             } 
         }
 
-        function existe()
+        function product_existe()
         {
             $sql=("SELECT * FROM line_cmd WHERE idOrder=$this->idOrder and idProduct=$this->idProduct");
 
