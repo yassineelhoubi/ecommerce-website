@@ -107,7 +107,17 @@
 
     }
 
-/* test */
+    public function get_info_client_token(){
+        // 
+        $data=json_decode(file_get_contents("php://input"));
+        $this->user->token=$data->token;
+        if($info=$this->user->get_info_token()) {
+            echo json_encode(array('info'=>$info));
+        }else {
+            echo json_encode(array('message'=>"token not valid"));
+        }
+
+    }
     public function check_token() {
         // get raw posted data
         $data=json_decode(file_get_contents("php://input"));

@@ -135,7 +135,27 @@ function create_order(id) {
         })
 }
 /* _______________________________________________________________ */
+
+
 /* cart */
+function initialize_cart(){
+    get_all_cart() ;
+    client_auth();
+}
+async function client_auth(){
+    obj = {
+        token: sessionStorage.getItem('token'),
+    }
+
+   await axios.post('http://localhost/projet_fil_rouge/User/get_info_client_token', obj)
+   .then((res)=>{
+       Fname = res.data.info.Fname
+       Lname = res.data.info.Fname
+       Address1 = res.data.info.address1
+   })
+   document.getElementById('Fullname').innerHTML = Lname + ' ' + Fname;
+   document.getElementById('address1').value = Address1;
+}
 async function get_all_cart() {
     obj = {
         token: sessionStorage.getItem('token'),

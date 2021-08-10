@@ -17,7 +17,7 @@
 <!-- axios -->
 <script src="/node_modules/axios/dist/axios.min.js"></script>
 
-<body onload="get_all_cart()">
+<body onload="initialize_cart()">
   <!-- header -->
   <div id="header"></div>
   <!--  -->
@@ -26,7 +26,7 @@
     <!-- head -->
     <div class=" top-0 start-0 secondary-border" id="div-head">
       <div class="container h-100 d-flex align-items-center justify-content-between">
-        <h6>Bonjour : Yassine Elhoubi</h6>
+        <h6 >Bonjour : <span id="Fullname">Yassine Elhoubi</span> </h6>
         <h4>Panier</h4>
       </div>
     </div>
@@ -66,7 +66,7 @@
             </div>
             <div class="col-8">
               <div class="secondary-raduis d-flex justify-content-between secondary-border w-100 input-address">
-                <input class="w-100 primary-raduis" type="text" readonly value="xxxxxxxxxxxx">
+                <input class="w-100 primary-raduis" type="text" id="address1" readonly value="">
                 <button class="mybtn-icon secondary-border secondary-raduis">
                   <img class="btn-img img-fluid " src="../../resources/img/icons/modifier-le-fichier.png" alt="">
                 </button>

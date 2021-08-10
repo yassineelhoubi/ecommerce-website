@@ -156,7 +156,7 @@
         return false;
     }
     public function get_info_token(){
-        $sql="SELECT * FROM users WHERE token = :token";
+        $sql="SELECT * FROM users , customers WHERE token = :token";
         
         // Prepare query
         $stmt = $this->conn->prepare($sql);
