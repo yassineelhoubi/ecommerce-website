@@ -14,7 +14,7 @@ class Orders{
     }
     
     public function last_order(){
-        $sql="SELECT * FROM orders WHERE idCustomer = '$this->idCustomer'";
+        $sql="SELECT * FROM orders WHERE idCustomer = $this->idCustomer AND status = 'en cour'";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

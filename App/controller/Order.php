@@ -51,6 +51,7 @@ class Order{
 
                 $resultOrder                =   $this->order->last_order();
 
+
                 if(empty($resultOrder) || $resultOrder[0]['status'] != "en cour")
                 {
                     $this->order->status = "en cour";
