@@ -48,7 +48,7 @@ class Cart {
 
                 $getAll = $this->line_cmd->getAll_line_cmd();
                 /* Delivery cost calculator */
-                
+                /*  */
                 if($quantity_All <= 5){
                     if($quantity_30 <= 3){
                         $delivery=3;
