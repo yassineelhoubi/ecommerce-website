@@ -74,7 +74,7 @@
     }
     public function getAll(){
 
-        $sql="SELECT * FROM products   ORDER BY idproduct DESC";
+        $sql="SELECT * FROM products p , categories c WHERE c.idCategory=p.idCategory  ORDER BY idproduct DESC";
 
         // Prepare query
         $stmt=$this->conn->prepare($sql);

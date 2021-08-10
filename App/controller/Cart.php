@@ -7,6 +7,7 @@ class Cart {
     public $user;
     public $line_cmd;
     public $order;
+    public $product;
     /* data from json */
     public $data;
 
@@ -19,6 +20,7 @@ class Cart {
         $this->order    =   new Orders($this->db);
         $this->line_cmd =   new Line_cmd($this->db);
         $this->user     =   new Users($this->db);
+        $this->product  =   new Products($this->db);
 
         // getdata
         $this->data=json_decode(file_get_contents("php://input"));
@@ -49,13 +51,20 @@ class Cart {
                 $getAll = $this->line_cmd->getAll_line_cmd();
                 /* Delivery cost calculator */
                 /*  */
-                if($quantity_All <= 5){
-                    if($quantity_30 <= 3){
-                        $delivery=3;
-                        if($quantity_20 <= 4){
-                            $delivery = 4;
-                            if($quantity_10 <= 5){
-                                $delivery = 5;
+                if($quantity_All != 0){
+                    if($quantity_All <= 5){
+                        if($quantity_30 <= 3){
+                            $delivery=3;
+
+                            if($quantity_20 <= 4){                  
+                                $delivery = 4;
+
+                                if($quantity_10 <= 5){
+                                    $delivery = 5;
+
+                                }else{
+                                    $delivery = 0;
+                                }
                             }else{
                                 $delivery = 0;
                             }
@@ -65,11 +74,13 @@ class Cart {
                     }else{
                         $delivery = 0;
                     }
+                }else{
+                    $delivery = 0;
                 }
                 /* Calculate the total price */
                 
                 foreach($getAll as $get){
-                    $calcPrice += $get['price'];
+                    $calcPrice += $get['totalPrice'];
                 }
                 $totalPrice = $calcPrice + $delivery ;
                 /* */
@@ -84,6 +95,24 @@ class Cart {
         } else {
             echo json_encode(array(
                 'auth'=> false));
+        }
+    }
+
+    function drop($id)
+    {
+        $this->line_cmd->id_line_cmd =   $id;
+
+        $result_line_cmd            =   $this->line_cmd->get_idProduct_line_cmd();
+        $this->product->idProduct   =   $result_line_cmd['idProduct'];
+        $quantity_line_cmd          =   $result_line_cmd['quantity'];
+
+        $result_product             =  $this->product->get();
+        $quantity_stock                   =  $result_product['quantity'];
+
+        if($this->line_cmd->delete()){
+        $this->product->quantity = $quantity_stock + $quantity_line_cmd;
+        $this->product->update_quantity();
+
         }
     }
 }

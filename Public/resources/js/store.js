@@ -167,7 +167,7 @@ async function get_all_cart() {
             
             for (i in res.data.product) {
 
-                 console.log(res.data.product[i].name)
+                 console.log(res.data.product[i])
 
                 output +=
                     ' <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3 shadow_card">' +
@@ -195,7 +195,7 @@ async function get_all_cart() {
                     '</div>' +
                     '<div class="row ms-1 justify-content-end ">' +
 
-                    '<button class="mybtn-icon col-2 p-0 secondary-border secondary-raduis"><img class="btn-img img-fluid"' +
+                    '<button onclick="drop('+res.data.product[i].id_line_cmd+')" class="mybtn-icon col-2 p-0 secondary-border secondary-raduis"><img class="btn-img img-fluid"' +
                     'src="../../resources/img/icons/supprimer.png" alt=""></button>' +
                     '</div>' +
                     '</div>' +
@@ -215,4 +215,41 @@ async function get_all_cart() {
             document.getElementById('totalPrice').innerHTML = totalPrice + '.00 <span>MAD</span>'; 
         }
 
+}
+function drop(id){
+        Swal.fire({
+            title: 'Voulez vous vraiment supprimer ce produit? ',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'supprimer!',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                connfirm_drop_product(id)
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Supprimé avec succès',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: "Le Produit n'a pas été supprimé.",
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
+        })
+
+}
+
+function connfirm_drop_product(id){
+    axios.delete('http://localhost/projet_fil_rouge/Cart/drop/' + id)
+
+    get_all_cart()
 }
