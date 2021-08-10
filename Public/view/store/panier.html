@@ -14,8 +14,10 @@
   crossorigin="anonymous"></script>
 <!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
+<!-- axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
 
-<body>
+<body onload="get_all_cart()">
   <!-- header -->
   <div id="header"></div>
   <!--  -->
@@ -33,76 +35,10 @@
 
     <div class="container row m-auto mt-5 mb-5">
       <!-- product -->
-      <div class="container col-lg-7  ">
-        <!-- 1 -->
-        <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3 shadow_card">
-          <div class="row ">
-            <div class="col-lg-4 col-md-4  col-12 m-auto">
-              <div
-                class="container container-img-product d-flex align-items-center justify-content-center secondary-border primary-raduis  p-0">
-                <img class="img-product img-fluid  primary-raduis" src="../../resources/img/product/plateau.jpg"
-                  alt="">
-              </div>
-            </div>
-            <div class="col-lg-7 col-md-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">
-              <h5>PLATEAU EN BOIS AVEC POIGNÉES 50X25 CM</h5 >
-              <h6>prix : <span>20.00</span> MAD</h6>
-              <div class="container p-0">
-                <div class="row justify-content-between mb-1">
-                  <div class="col-6">
-                    <h6>Quantity : </h6>
-                  </div>
-                  <div class="col-3 secondary-border  secondary-raduis d-flex p-0">
-                    <button id="subtract" class="col-3 mybtn secondary-border secondary-raduis">-</button>
-                    <input type="number" class="col-6 border-0 text-center" readonly id="input-counter" value="1"
-                      min="1">
-                    <button id="add" class="col-3 mybtn  secondary-border secondary-raduis">+</button>
-                  </div>
-                </div>
-              </div>
-              <div class="row ms-1 justify-content-end ">
+      <div id="cart" class="container col-lg-7  ">
 
-                <button class="mybtn-icon col-2 p-0 secondary-border secondary-raduis"><img class="btn-img img-fluid"
-                    src="../../resources/img/icons/supprimer.png" alt=""></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- 2 -->
-        <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3 shadow_card">
-          <div class="row ">
-            <div class="col-lg-4 col-md-4  col-12 m-auto">
-              <div
-                class="container container-img-product d-flex align-items-center justify-content-center secondary-border primary-raduis  p-0">
-                <img class="img-product img-fluid  primary-raduis" src="../../resources/img/product/927065-768x768.png"
-                  alt="">
-              </div>
-            </div>
-            <div class="col-lg-7 col-md-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">
-              <h5>CARAFE AVEC COUVERCLE ORANGE 1 LITRE</h5 >
-              <h6>prix : <span>10.00</span> MAD</h6>
-              <div class="container p-0">
-                <div class="row justify-content-between mb-1">
-                  <div class="col-6">
-                    <h6>Quantity : </h6>
-                  </div>
-                  <div class="col-3 secondary-border  secondary-raduis d-flex p-0">
-                    <button id="subtract" class="col-3 mybtn secondary-border secondary-raduis">-</button>
-                    <input type="number" class="col-6 border-0 text-center" readonly id="input-counter" value="1"
-                      min="1">
-                    <button id="add" class="col-3 mybtn  secondary-border secondary-raduis">+</button>
-                  </div>
-                </div>
-              </div>
-              <div class="row ms-1 justify-content-end ">
-
-                <button class="mybtn-icon col-2 p-0 secondary-border secondary-raduis"><img class="btn-img img-fluid"
-                    src="../../resources/img/icons/supprimer.png" alt=""></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--  -->
+        <!--product  -->
+        
       </div>
       <!-- end product -->
       <div class="container col-lg-4   ">
@@ -113,19 +49,21 @@
           </div>
           <div class="row mb-3">
             <h5 class="col-8">Sous-total</h5>
-            <h5 class=" col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
+            <h5 class=" col-4 pe-0  ps-4" id="calcPrice">00:00 <span>MAD</span></h5>
           </div>
           <div class="row mb-3">
             <h5 class="col-8">Livraison</h5>
-            <h5 class="col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
+            <h5 class="col-4 pe-0  ps-4" id="delivery">00:00 <span>MAD</span></h5>
           </div>
           <div class="row text-center m-auto mb-2" id="line"></div>
           <div class="row mb-3 mt-3">
             <h5 class="col-8 fw-bolder">Total</h5>
-            <h5 class="col-4 pe-0  ps-4">00:00 <span>MAD</span></h5>
+            <h5 class="col-4 pe-0  ps-4" id="totalPrice">00:00 <span>MAD</span></h5>
           </div>
           <div class="row mb-3">
-            <div class="col-4"><h5 class="pt-1">Address</h5></div>
+            <div class="col-4">
+              <h5 class="pt-1">Address</h5>
+            </div>
             <div class="col-8">
               <div class="secondary-raduis d-flex justify-content-between secondary-border w-100 input-address">
                 <input class="w-100 primary-raduis" type="text" readonly value="xxxxxxxxxxxx">
@@ -153,6 +91,7 @@
   <!-- end footer -->
 
   <script src="../../resources/js/style.js"></script>
+  <script src="/Public/resources/js/store.js"></script>
 </body>
 
 </html>

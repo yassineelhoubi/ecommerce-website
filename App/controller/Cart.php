@@ -32,22 +32,52 @@ class Cart {
             $this->order->idCustomer    =   $infoCustomer['id'];  
 
             $resultOrder                =   $this->order->last_order();
-
+            $countAll = 0 ;
+            $delivery = 0;
+            $calcPrice = 0 ;
+            $totalPrice = 0;
             if (!empty($resultOrder)) {
                 $this->line_cmd->idOrder = $resultOrder[0]['idOrder'];
-                /* hna */
 
-                $countAll = $this->line_cmd->count_line_cmd();
-                $count_p_10 = $this->line_cmd->count_line_cmd_product_10();
-                $count_p_20 = $this->line_cmd->count_line_cmd_product_20();
-                $count_p_30 = $this->line_cmd->count_line_cmd_product_30();
+
+                $countAll = $this->line_cmd->count_line_cmd(); 
+                $quantity_All = $this->line_cmd->calc_quantity_cmd_product_All();
+                $quantity_10 = $this->line_cmd->calc_quantity_cmd_product_10();
+                $quantity_20 = $this->line_cmd->calc_quantity_cmd_product_20();
+                $quantity_30 = $this->line_cmd->calc_quantity_cmd_product_30();
+
                 $getAll = $this->line_cmd->getAll_line_cmd();
-                echo json_encode(array('message'=> 'votre pnaier '.$countAll,'product'=>$getAll, '10'=>$count_p_10,'20'=>$count_p_20,
-                '30'=>$count_p_30,                'state'=> true));
+                /* Delivery cost calculator */
+                
+                if($quantity_All <= 5){
+                    if($quantity_30 <= 3){
+                        $delivery=3;
+                        if($quantity_20 <= 4){
+                            $delivery = 4;
+                            if($quantity_10 <= 5){
+                                $delivery = 5;
+                            }else{
+                                $delivery = 0;
+                            }
+                        }else{
+                            $delivery = 0;
+                        }
+                    }else{
+                        $delivery = 0;
+                    }
+                }
+                /* Calculate the total price */
+                
+                foreach($getAll as $get){
+                    $calcPrice += $get['price'];
+                }
+                $totalPrice = $calcPrice + $delivery ;
+                /* */
+
+                echo json_encode(array('message'=> 'votre pnaier ','countAll'=>$countAll, 'quantity_All' =>$quantity_All,'calcPrice'=>$calcPrice,'totalPrice'=>$totalPrice,'delivery'=>$delivery,'product'=>$getAll,'state'=> true));
             } else {
-                $countAll = 0;
-                echo json_encode(array('message'=> 'votre pnaier '.$countAll,
-                'state'=> true));
+                echo json_encode(array('message'=> 'votre pnaier est null','countAll'=>$countAll,
+                'state'=> false));
 
             }
 

@@ -136,8 +136,59 @@ function create_order(id) {
 }
 /* _______________________________________________________________ */
 /* cart */
-function get_all_cart() {
-    axios.get('http://localhost/projet_fil_rouge/Cart/index')
-    then((res) =>
-        console.log(res.data))
+async function get_all_cart() {
+    obj = {
+        token: sessionStorage.getItem('token'),
+    }
+    output = "";
+   await axios.post('http://localhost/projet_fil_rouge/Cart/index', obj)
+        .then((res) => {
+            
+            for (i in res.data.product) {
+
+                 console.log(res.data.product[i].name)
+
+                output +=
+                    ' <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3 shadow_card">' +
+                    '<div class="row ">' +
+                    '<div class="col-lg-4 col-md-4  col-12 m-auto">' +
+                    '<div ' +
+                    'class="container container-img-product d-flex align-items-center justify-content-center secondary-border primary-raduis p-0">' +
+                    '<img class="img-product img-fluid  primary-raduis" src="../../resources/img/product/'+res.data.product[i].img+'" '+
+                    'alt="">' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-lg-7 col-md-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">' +
+                    '<h5>'+res.data.product[i].name+'</h5 >' +
+                    '<h6>prix : <span>'+res.data.product[i].price+'</span> MAD</h6>' +
+                    ' <div class="container p-0">' +
+                    '<div class="row justify-content-between mb-1">' +
+                    '<div class="col-6">' +
+                    '<h6>Quantity : </h6>' +
+                    '</div>' +
+                    '<div class="col-3 secondary-border  secondary-raduis  p-0">' +
+                    '<input type="number" class="col-6 border-0 text-center w-100 secondary-raduis"  id="'+res.data.product[i].id_line_cmd+'" value="'+res.data.product[i].quantity+'"' +
+                    ' min="1">' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="row ms-1 justify-content-end ">' +
+
+                    '<button class="mybtn-icon col-2 p-0 secondary-border secondary-raduis"><img class="btn-img img-fluid"' +
+                    'src="../../resources/img/icons/supprimer.png" alt=""></button>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+            }
+            calcPrice = res.data.calcPrice;
+            delivery = res.data.delivery;
+            totalPrice = res.data.totalPrice;
+
+        })
+        document.getElementById('cart').innerHTML = output;
+        document.getElementById('calcPrice').innerHTML = calcPrice + '.00 <span>MAD</span>'; 
+        document.getElementById('delivery').innerHTML = delivery + '.00 <span>MAD</span>'; 
+        document.getElementById('totalPrice').innerHTML = totalPrice + '.00 <span>MAD</span>'; 
+
 }
