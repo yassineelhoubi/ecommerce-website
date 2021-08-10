@@ -40,8 +40,8 @@
         $this->product->img             =$this->data->img;
         $this->user->token              =$this->data->token;
 
-        $info_user = $this->user->get_info_token();
-        if ($this->user->check_token() && $info_user['role'] == "admin" ) {
+        $role = $this->user->get_role_token();
+        if ($this->user->check_token() && $role == "admin" ) {
             if($this->product->create()) {
                 echo json_encode(array('message'=> 'product created successfuly',
                         'state'=> true));
@@ -67,8 +67,8 @@
         $this->product->img=$this->data->img;
         $this->user->token              =$this->data->token;
 
-        $info_user = $this->user->get_info_token();
-        if ($this->user->check_token() && $info_user['role'] == "admin" ) {
+        $role = $this->user->get_role_token();
+        if ($this->user->check_token() && $role == "admin" ) {
             
             if($this->product->update()) {
                 echo json_encode(array('message'=> 'product updated successfuly',
@@ -91,8 +91,8 @@
         $this->product->idProduct=$this->data->idProduct;
         $this->user->token              =$this->data->token;
 
-        $info_user = $this->user->get_info_token();
-        if ($this->user->check_token() && $info_user['role'] == "admin" ) {
+        $role = $this->user->get_role_token();
+        if ($this->user->check_token() && $role == "admin" ) {
             if($this->product->delete()) {
                 echo json_encode(array('message'=>'the product was deleted', 'state'=>true));
             }

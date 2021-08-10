@@ -24,8 +24,8 @@
         
         $this->category->category_name=$this->data->category_name;
         $this->user->token              =$this->data->token;
-
-        if ($this->user->check_token()) {
+        $role = $this->user->get_role_token();
+        if ($this->user->check_token() && $role == "admin" ) {
 
             if($this->category->create()) {
                 echo json_encode(array('message'=> 'category created successfuly',
@@ -44,8 +44,8 @@
         $this->category->idCategory = $this->data->idCategory;
         $this->category->category_name=$this->data->category_name;
         $this->user->token              =$this->data->token;
-
-        if ($this->user->check_token()) {
+        $role = $this->user->get_role_token();
+        if ($this->user->check_token() && $role == "admin" ) {
 
             if($this->category->update()) {
                 echo json_encode(array('message'=> 'category updated successfuly',
@@ -61,8 +61,8 @@
         // push this->data into properties
         $this->category->idCategory     = $this->data->idCategory;
         $this->user->token              =$this->data->token;
-
-        if ($this->user->check_token()) {
+        $role = $this->user->get_role_token();
+        if ($this->user->check_token() && $role == "admin" ) {
             if($this->category->delete()){
                 echo json_encode(array('message'=> 'the category was deleted','status'=>true));
             }else{

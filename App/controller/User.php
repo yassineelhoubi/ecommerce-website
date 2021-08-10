@@ -81,10 +81,10 @@
             $this->user->token=$token;
 
             $this->user->gave_token();
-            $role=$this->user->get_info_token();
+            $role=$this->user->get_role_token();
             echo json_encode(array('message'=> 'user login',
                     'token'=>$token,
-                    'role'=>$role['role'],
+                    'role'=>$role,
                     'state'=> true));
         }
         elseif($row !=0 && password_verify($password, $hachPassword)) {
@@ -138,8 +138,8 @@
         $this->user->token=$data->token;
 
         if($this->user->check_token()) {
-            if($role=$this->user->get_info_token()) {
-                echo json_encode(array('role'=>$role['role']));
+            if($role=$this->user->get_role_token()) {
+                echo json_encode(array('role'=>$role));
             }
         }
         else {

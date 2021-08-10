@@ -156,7 +156,7 @@
         return false;
     }
     public function get_info_token(){
-        $sql="SELECT * FROM users , customers WHERE token = :token";
+        $sql="SELECT * FROM users , customers WHERE token = :token and users.id = customers.idCustomer";
         
         // Prepare query
         $stmt = $this->conn->prepare($sql);
@@ -173,6 +173,27 @@
         }
 
         return false;
+    }
+    public function get_role_token(){
+        $sql="SELECT role FROM users WHERE token = :token ";
+        
+        // Prepare query
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind data
+        $stmt->bindParam(':token', $this->token);
+        
+        
+        if ($stmt->execute()) {
+            
+            $row        =   $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row['role'];
+        }
+
+        return false;
+    
+
     }
 
 }

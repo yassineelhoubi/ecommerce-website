@@ -150,8 +150,9 @@ async function client_auth(){
    await axios.post('http://localhost/projet_fil_rouge/User/get_info_client_token', obj)
    .then((res)=>{
        Fname = res.data.info.Fname
-       Lname = res.data.info.Fname
+       Lname = res.data.info.Lname
        Address1 = res.data.info.address1
+       console.log(res.data.info)
    })
    document.getElementById('Fullname').innerHTML = Lname + ' ' + Fname;
    document.getElementById('address1').value = Address1;
@@ -207,8 +208,11 @@ async function get_all_cart() {
 
         })
         document.getElementById('cart').innerHTML = output;
-        document.getElementById('calcPrice').innerHTML = calcPrice + '.00 <span>MAD</span>'; 
-        document.getElementById('delivery').innerHTML = delivery + '.00 <span>MAD</span>'; 
-        document.getElementById('totalPrice').innerHTML = totalPrice + '.00 <span>MAD</span>'; 
+        if(totalPrice != undefined ){
+
+            document.getElementById('calcPrice').innerHTML = calcPrice + '.00 <span>MAD</span>'; 
+            document.getElementById('delivery').innerHTML = delivery + '.00 <span>MAD</span>'; 
+            document.getElementById('totalPrice').innerHTML = totalPrice + '.00 <span>MAD</span>'; 
+        }
 
 }
