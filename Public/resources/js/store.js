@@ -187,10 +187,10 @@ async function get_all_cart() {
                     '<div class="col-6">' +
                     '<h6>Quantity : </h6>' +
                     '</div>' +
-                    '<div class="col-3 secondary-border  secondary-raduis  p-0">' +
-                    '<input type="number" class="col-6 border-0 text-center w-100 secondary-raduis"  id="'+res.data.product[i].id_line_cmd+'" value="'+res.data.product[i].quantity+'"' +
-                    ' min="1">' +
-                    '</div>' +
+                    '<div class="col-4 secondary-border  secondary-raduis d-flex p-0">'+
+                    '<input type="number" class="col-8 border-0 text-center secondary-raduis"  id="'+res.data.product[i].id_line_cmd+'" value="'+res.data.product[i].quantity+'" min="1">'+
+                    '<button onclick="update_quantity('+res.data.product[i].id_line_cmd+')" class="col-4 mybtn  secondary-border secondary-raduis">ok</button>'+
+                  '</div>'+
                     '</div>' +
                     '</div>' +
                     '<div class="row ms-1 justify-content-end ">' +
@@ -252,4 +252,22 @@ function connfirm_drop_product(id){
     axios.delete('http://localhost/projet_fil_rouge/Cart/drop/' + id)
 
     get_all_cart()
+}
+
+function update_quantity(id){
+    obj ={
+        new_quantity : document.getElementById(id).value,
+    }
+    axios.put('http://localhost/projet_fil_rouge/Cart/update_quantity_cart/'+id , obj)
+    .then((res)=>{
+        if(res.data.state == false){
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1700
+            })
+        }
+    })
 }

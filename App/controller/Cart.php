@@ -114,7 +114,7 @@ class Cart {
         $new_quantity                   =   $this->data->new_quantity;
         
         if($old_quantity != $new_quantity){
-            if($stock_quantity >= $new_quantity){
+            if($stock_quantity >= $new_quantity - $old_quantity){
                 if($old_quantity > $new_quantity)
                 {
                     $this->line_cmd->totalPrice =   $price * $new_quantity;
@@ -134,7 +134,7 @@ class Cart {
                     if($this->line_cmd->update_quantity_totalPrice_line_cmd())
                     {
                         $result_quantity =  $new_quantity - $old_quantity ;
-                        $this->product->quantity = $stock_quantity + $result_quantity;
+                        $this->product->quantity = $stock_quantity - $result_quantity;
                         $this->product->update_quantity();
                         echo json_encode(array('message'=> 'updated successfully',
                         'state'=> true));
