@@ -241,7 +241,6 @@ function drop(id){
                 })
             }
         })
-
 }
 
 function connfirm_drop_product(id){
@@ -249,6 +248,8 @@ function connfirm_drop_product(id){
 
     get_all_cart()
 }
+/* this variable for clear the timeout in the function update_quantity */
+var varTime;
 
 async function update_quantity(id){
     obj ={
@@ -266,5 +267,11 @@ async function update_quantity(id){
             })
         }
     })
-    get_all_cart()
+    clear_Timeout()
+     varTime = setTimeout(function(){ get_all_cart() },500);
+    
+    // 
+}
+function clear_Timeout(){
+clearTimeout(varTime)
 }
