@@ -163,7 +163,7 @@ async function get_all_cart() {
     output = "";
    await axios.post('http://localhost/projet_fil_rouge/Cart/index', obj)
         .then((res) => {
-            
+
             for (i in res.data.product) {
                 output +=
                     ' <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3 shadow_card">' +
@@ -198,17 +198,21 @@ async function get_all_cart() {
                     '</div>' +
                     '</div>'
             }
-            calcPrice = res.data.calcPrice;
-            delivery = res.data.delivery;
-            totalPrice = res.data.totalPrice;
+            calcPrice   = res.data.calcPrice;
+            delivery    = res.data.delivery;
+            totalPrice  = res.data.totalPrice;
+            idOrder     = res.data.product[0].idOrder; 
 
         })
         document.getElementById('cart').innerHTML = output;
+
         if(totalPrice != undefined ){
 
             document.getElementById('calcPrice').innerHTML = calcPrice + '.00 <span>MAD</span>'; 
             document.getElementById('delivery').innerHTML = delivery + '.00 <span>MAD</span>'; 
             document.getElementById('totalPrice').innerHTML = totalPrice + '.00 <span>MAD</span>'; 
+            document.getElementById('btn_validate').setAttribute('onclick','validate('+idOrder+')');
+
         }
 
 }
@@ -274,4 +278,32 @@ async function update_quantity(id){
 }
 function clear_Timeout(){
 clearTimeout(varTime)
+}
+
+/* order validation */
+function validate(id){
+    obj = {
+        idOrder : id,
+        token : sessionStorage.getItem('token')
+    }
+    axios.post('http://localhost/projet_fil_rouge/Order/validate',obj)
+    .then((res)=>{
+        if(res.data.state == true){
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 3000
+            })
+        }else{
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: res.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    })
 }

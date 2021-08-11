@@ -65,6 +65,10 @@ class Cart {
                     $calcPrice += $get['totalPrice'];
                 }
                 $totalPrice = $calcPrice + $delivery ;
+
+                $this->order->totalPrice = $totalPrice;
+                $this->order->idOrder    = $getAll[0]['idOrder'];
+                $this->order->update_price();
                 /* */
 
                 echo json_encode(array('message'=> 'votre pnaier ','countAll'=>$countAll, 'quantity_All' =>$quantity_All,'calcPrice'=>$calcPrice,'totalPrice'=>$totalPrice,'delivery'=>$delivery,'product'=>$getAll,'state'=> true));

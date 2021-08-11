@@ -102,4 +102,29 @@ class Order{
         }
     }
 
+    public function validate(){
+        $this->user->token      = $this->data->token;
+        $idOrder                = $this->data->idOrder;
+
+        $this->order->idOrder   = $idOrder;
+        $resultOrder            = $this->order->get();
+        /* idCustomer from order table */
+        $idCustomer_order       = $resultOrder['idCustomer'];
+        $info = $this->user->get_info_token();
+        /* idCustomer from token */
+        $idCustomer = $info['idCustomer'];
+
+        if($idCustomer == $idCustomer_order){
+
+            $date = date("Y-m-d");
+            $this->order->date = $date;
+            $this->order->update_validate();
+            echo json_encode(array('message'=>'Cette commande a été validé','date'=>$date , 'state'=>true));
+
+        }else{
+            echo json_encode(array('message' =>'Cette commande n\'a pas été validée',
+                'state'=> false));
+        }
+    }
+
 }

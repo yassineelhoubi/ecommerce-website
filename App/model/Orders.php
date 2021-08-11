@@ -29,5 +29,21 @@ class Orders{
             return false;
         } 
     }
+    public function get(){
+        $sql = "SELECT * FROM orders WHERE idOrder=$this->idOrder ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function update_validate(){
+        $sql = "UPDATE orders SET status = 'Non-livré' , date = '$this->date' WHERE idOrder=$this->idOrder";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    }
+    public function update_price(){
+        $sql = "UPDATE orders SET  totalPrice = $this->totalPrice WHERE idOrder=$this->idOrder";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    }
 
 }
