@@ -44,35 +44,17 @@ class Cart {
 
                 $countAll = $this->line_cmd->count_line_cmd(); 
                 $quantity_All = $this->line_cmd->calc_quantity_cmd_product_All();
-                $quantity_10 = $this->line_cmd->calc_quantity_cmd_product_10();
-                $quantity_20 = $this->line_cmd->calc_quantity_cmd_product_20();
-                $quantity_30 = $this->line_cmd->calc_quantity_cmd_product_30();
 
                 $getAll = $this->line_cmd->getAll_line_cmd();
                 /* Delivery cost calculator */
                 /*  */
                 if($quantity_All != 0){
-                    if($quantity_All <= 5){
-                        if($quantity_30 <= 3){
-                            $delivery=3;
-
-                            if($quantity_20 <= 4){                  
-                                $delivery = 4;
-
-                                if($quantity_10 <= 5){
-                                    $delivery = 5;
-
-                                }else{
-                                    $delivery = 0;
-                                }
-                            }else{
-                                $delivery = 0;
-                            }
-                        }else{
-                            $delivery = 0;
-                        }
+                    if($quantity_All <= 3){
+                        $delivery = 10;
+                    }elseif($quantity_All <= 5){
+                        $delivery = 5;
                     }else{
-                        $delivery = 0;
+                        
                     }
                 }else{
                     $delivery = 0;
@@ -102,7 +84,7 @@ class Cart {
     {
         $this->line_cmd->id_line_cmd =   $id;
 
-        $result_line_cmd            =   $this->line_cmd->get_idProduct_line_cmd();
+        $result_line_cmd            =   $this->line_cmd->get_line_cmd();
         $this->product->idProduct   =   $result_line_cmd['idProduct'];
         $quantity_line_cmd          =   $result_line_cmd['quantity'];
 
@@ -114,5 +96,57 @@ class Cart {
         $this->product->update_quantity();
 
         }
+    }
+    function update_quantity_cart($id){
+        $this->line_cmd->id_line_cmd    =   $id;
+        $result_line_cmd                =   $this->line_cmd->get_line_cmd();
+        /* old quantity in cart( line_cmd) */
+        $old_quantity                   =   $result_line_cmd['quantity'];
+
+        $this->product->idProduct       =   $result_line_cmd['idProduct'];
+        $result_product                 =   $this->product->get();
+        /* quantity in stock  */
+        $stock_quantity                 =   $result_product['quantity'];
+        /* price the product */
+        $price                      =   $result_product['price'];
+
+        /* new quantity from customer */
+        $new_quantity                   =   $this->data->new_quantity;
+        
+        if($old_quantity != $new_quantity){
+            if($stock_quantity >= $new_quantity){
+                if($old_quantity > $new_quantity)
+                {
+                    $this->line_cmd->totalPrice =   $price * $new_quantity;
+                    $this->line_cmd->quantity   =   $new_quantity;  
+                    if($this->line_cmd->update_quantity_totalPrice_line_cmd())
+                    {
+                        $result_quantity = $old_quantity - $new_quantity;
+                        $this->product->quantity = $stock_quantity + $result_quantity;
+                        $this->product->update_quantity();
+                        echo json_encode(array('message'=> 'updated successfully',
+                        'state'=> true));
+                    }
+                }elseif($old_quantity < $new_quantity)
+                {
+                    $this->line_cmd->totalPrice =   $price * $new_quantity;
+                    $this->line_cmd->quantity   =   $new_quantity;  
+                    if($this->line_cmd->update_quantity_totalPrice_line_cmd())
+                    {
+                        $result_quantity =  $new_quantity - $old_quantity ;
+                        $this->product->quantity = $stock_quantity + $result_quantity;
+                        $this->product->update_quantity();
+                        echo json_encode(array('message'=> 'updated successfully',
+                        'state'=> true));
+                    }
+                }
+
+
+            }else{
+                echo json_encode(array('message'=> 'Stoke is not enough',
+                'state'=> false));
+            }
+        }
+
     }
 }

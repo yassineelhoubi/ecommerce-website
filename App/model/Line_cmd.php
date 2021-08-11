@@ -57,31 +57,31 @@ class Line_cmd{
             $quantity_10 = $stmt->fetch(PDO::FETCH_ASSOC);
             return $quantity_10['quantity'];
         }
-        public function calc_quantity_cmd_product_10(){
-            $sql = "SELECT SUM(l.quantity) as quantity FROM line_cmd l , products p WHERE l.idProduct = p.idProduct and p.price = 10 and l.idOrder =$this->idOrder";
-            $stmt   = $this->conn->prepare($sql);
-            $stmt->execute();
-            $quantity_10 = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $quantity_10['quantity'];
-        }
-        public function calc_quantity_cmd_product_20(){
-            $sql = "SELECT SUM(l.quantity) as quantity FROM line_cmd l , products p WHERE l.idProduct = p.idProduct and p.price = 20 and l.idOrder =$this->idOrder";
-            $stmt   = $this->conn->prepare($sql);
-            $stmt->execute();
-            $quantity_20 = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $quantity_20['quantity'];
-        }
-        public function calc_quantity_cmd_product_30(){
-            $sql = "SELECT SUM(l.quantity) as quantity FROM line_cmd l , products p WHERE l.idProduct = p.idProduct and p.price = 30 and l.idOrder =$this->idOrder";
-            $stmt   = $this->conn->prepare($sql);
-            $stmt->execute();
-            $quantity_30 = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $quantity_30['quantity'];
-        }
+        // public function calc_quantity_cmd_product_10(){
+        //     $sql = "SELECT SUM(l.quantity) as quantity FROM line_cmd l , products p WHERE l.idProduct = p.idProduct and p.price = 10 and l.idOrder =$this->idOrder";
+        //     $stmt   = $this->conn->prepare($sql);
+        //     $stmt->execute();
+        //     $quantity_10 = $stmt->fetch(PDO::FETCH_ASSOC);
+        //     return $quantity_10['quantity'];
+        // }
+        // public function calc_quantity_cmd_product_20(){
+        //     $sql = "SELECT SUM(l.quantity) as quantity FROM line_cmd l , products p WHERE l.idProduct = p.idProduct and p.price = 20 and l.idOrder =$this->idOrder";
+        //     $stmt   = $this->conn->prepare($sql);
+        //     $stmt->execute();
+        //     $quantity_20 = $stmt->fetch(PDO::FETCH_ASSOC);
+        //     return $quantity_20['quantity'];
+        // }
+        // public function calc_quantity_cmd_product_30(){
+        //     $sql = "SELECT SUM(l.quantity) as quantity FROM line_cmd l , products p WHERE l.idProduct = p.idProduct and p.price = 30 and l.idOrder =$this->idOrder";
+        //     $stmt   = $this->conn->prepare($sql);
+        //     $stmt->execute();
+        //     $quantity_30 = $stmt->fetch(PDO::FETCH_ASSOC);
+        //     return $quantity_30['quantity'];
+        // }
 
         /* ___________________________________________ */
 
-        public function get_idProduct_line_cmd(){
+        public function get_line_cmd(){
             $sql = "SELECT * FROM line_cmd WHERE id_line_cmd = $this->id_line_cmd ";
             $stmt   = $this->conn->prepare($sql);
             $stmt->execute();
@@ -97,5 +97,15 @@ class Line_cmd{
                 return false ;  
             }
             
+        }
+        function update_quantity_totalPrice_line_cmd(){
+            $sql="UPDATE line_cmd SET quantity=$this->quantity , totalPrice=$this->totalPrice WHERE id_line_cmd=$this->id_line_cmd";
+            $stmt=$this->conn->prepare($sql);
+            if($stmt->execute()) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 }
