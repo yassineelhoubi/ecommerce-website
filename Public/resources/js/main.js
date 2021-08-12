@@ -1,7 +1,6 @@
 
 
 /* categories */
-
 async function create_catego() {
 
     obj = {
@@ -361,4 +360,61 @@ async function Confirm_deletion_product(id){
 
     getAll_product()
         
+}
+
+/* orders */
+function showOrder(){
+    output = "";
+    axios.get('http://localhost/projet_fil_rouge/Order/showOrder')
+    .then((res)=>{
+       
+        for(i in res.data.message){
+            if(res.data.state == true){
+                output +=                        
+                '<tr>'+
+                '<td>'+res.data.message[i].idOrder+'</td>'+
+                '<td>'+res.data.message[i].Lname +' '+res.data.message[i].Lname+'</td>'+
+                '<td>'+res.data.message[i].nbrPhone+'</td>'+
+                '<td>'+res.data.message[i].date+'</td>'+
+                '<td>'+res.data.message[i].address1+'</td>'+
+                '<td>'+res.data.message[i].totalPrice+'</td>'+
+                '<td>'+res.data.message[i].status+'</td>'+
+                '<td>'+
+                    '<button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border">' +
+                        '<img class="btn-img img-fluid " src="../../resources/img/icons/send.png" alt="">'+
+                    '</button>'+
+                '</td>'+
+                '<td>'+
+                    '<button onclick="show_Product_Order('+res.data.message[i].idOrder+')" class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"'+
+                    'data-bs-toggle="modal" data-bs-target="#infoModal">' +
+                        '<img class="btn-img img-fluid " src="../../resources/img/icons/eye.png" alt="">'+
+                     '</button>'+
+                '</td>'+
+            '</tr>'
+            }
+        }
+        document.getElementById('tbody').innerHTML = output;
+        
+    })
+}
+function show_Product_Order(idOrder){
+output ="";
+    axios.get('http://localhost/projet_fil_rouge/Order/show_line_cmd_order/'+idOrder)
+    .then((res)=>{
+        for(i in res.data.message){
+            output += 
+            '<div class="container secondary-raduis secondary-border d-flex justify-content-between mb-2 ">'+
+            '<div class="col-3 ">'+
+                '<img src="../../resources/img/product/'+res.data.message[i].img+'" alt="" width="100px">'+
+            '</div>'+
+            '<div class="col-8 p-1 ">'+
+                '<h6>'+res.data.message[i].name+'</h6>'+
+                '<h6><span>quantity : </span> '+res.data.message[i].quantity+'</h6>'+
+            '</div>'+
+        '</div>'
+        }
+        document.getElementById('modal_body_product').innerHTML = output
+        document.getElementById('modal_info_title').innerHTML = idOrder
+    })
+ 
 }

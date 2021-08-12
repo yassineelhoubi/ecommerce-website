@@ -101,6 +101,22 @@ class Order{
             'auth'=> false));
         }
     }
+    public function showOrder(){
+            $rows = $this->order->showOrder();
+            if($rows){
+                echo json_encode(array('message'=> $rows,
+                'state'=> true));
+            }else{
+                echo json_encode(array('message'=> 'no Commandes found',
+                'state'=> false));
+            }
+    }
+    public function show_line_cmd_order($idOrder){
+        $this->line_cmd->idOrder = $idOrder;
+        $rows = $this->line_cmd->getAll_line_cmd();
+        echo json_encode(array('message'=> $rows,
+        'state'=> true));
+    }
 
     public function validate(){
         $this->user->token      = $this->data->token;

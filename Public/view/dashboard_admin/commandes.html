@@ -2,31 +2,30 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="../../resources/includes/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../resources/css/style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../resources/includes/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../resources/css/style.css" />
 </head>
 <!-- cdn jquery -->
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
-  <!-- include header & footer -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
 
 <script>
-    if (sessionStorage.getItem("token") == null || sessionStorage.getItem("role") !='admin' ) {
-      document.location.href = './login.html'
+    if (sessionStorage.getItem("token") == null || sessionStorage.getItem("role") != 'admin') {
+        document.location.href = './login.html'
     }
-  </script>
-  
-<body  >
-  <!-- header -->
-<div id="sidebar"></div>
-  <!--  -->
+</script>
+
+<body onload="showOrder()">
+
+    <!-- header -->
+    <div id="sidebar"></div>
+    <!--  -->
 
     <!-- main -->
     <div class="main float-end">
@@ -43,26 +42,31 @@
                         <tr>
                             <th>N° CMD</th>
                             <th>Client</th>
+                            <th>Téléphone</th>
                             <th>Date</th>
+                            <th>adresse</th>
                             <th>Prix (DH)</th>
                             <th>Status</th>
                             <th>livré</th>
                             <th>Info</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         <tr>
                             <td>987</td>
                             <td>yassine elhoubi</td>
+                            <td>0621409091</td>
                             <td>7/23/2021</td>
+                            <td> isd sd c sdib sdkjsdf isdf sid f sd sd sdoj d</td>
                             <td>50 </td>
                             <td>non-livré</td>
                             <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"> <img
-                                        class="btn-img img-fluid " src="../../resources/img/icons/send.png" alt=""></button>
+                                        class="btn-img img-fluid " src="../../resources/img/icons/send.png"
+                                        alt=""></button>
                             </td>
                             <td><button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border"
-                                data-bs-toggle="modal" data-bs-target="#infoModal"> <img
-                                        class="btn-img img-fluid " src="../../resources/img/icons/eye.png" alt=""></button>
+                                    data-bs-toggle="modal" data-bs-target="#infoModal"> <img class="btn-img img-fluid "
+                                        src="../../resources/img/icons/eye.png" alt=""></button>
                             </td>
                         </tr>
                         <tr>
@@ -86,22 +90,22 @@
                 </table>
 
             </div>
-            <!--indo Modal -->
-            <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <!--info Modal -->
+            <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Informations sur la commande</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Informations sur la commande <span id="modal_info_title"></span></h5>
                             <button type="button" class="mybtn-icon secondary-raduis secondary-border"
-                            data-bs-dismiss="modal" aria-label="Close"><img src="../../resources/img/icons/cancel.png"
-                                style="width: 20px;" alt=""></button>
+                                data-bs-dismiss="modal" aria-label="Close"><img
+                                    src="../../resources/img/icons/cancel.png" style="width: 20px;" alt=""></button>
                         </div>
-                        <div class="modal-body">
+                        <div id="modal_body_product" class="modal-body">
                             <!-- 1 -->
-                            <div class="container secondary-raduis secondary-border d-flex justify-content-between mb-2 ">
-                                <div class="col-3 " >
-                                    <img  src="../../resources/img/product/929591-768x512.jpg" alt="" width="100px" >
+                            <div
+                                class="container secondary-raduis secondary-border d-flex justify-content-between mb-2 ">
+                                <div class="col-3 ">
+                                    <img src="../../resources/img/product/202186195131.png" alt="" width="100px">
                                 </div>
                                 <div class="col-8 p-1 ">
                                     <h6>title title title zeop,</h6>
@@ -109,9 +113,10 @@
                                 </div>
                             </div>
                             <!-- 2 -->
-                            <div class="container secondary-raduis secondary-border d-flex justify-content-between mb-2 ">
-                                <div class="col-3 " >
-                                    <img  src="../../resources/img/product/929591-768x512.jpg" alt="" width="100px" >
+                            <div
+                                class="container secondary-raduis secondary-border d-flex justify-content-between mb-2 ">
+                                <div class="col-3 ">
+                                    <img src="../../resources/img/product/20218912121.png" alt="" width="100px">
                                 </div>
                                 <div class="col-8 p-1 ">
                                     <h6>title title title zeop,</h6>
@@ -131,7 +136,7 @@
     <!-- end main -->
 
 
-
+    <script src="../../resources/js/main.js"></script>
 
 
 

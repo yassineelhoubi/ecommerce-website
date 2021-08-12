@@ -29,6 +29,22 @@ class Orders{
             return false;
         } 
     }
+    public function showOrder(){
+        $sql ="SELECT * FROM orders o , customers c WHERE o.status != 'en cour' and o.idCustomer =c.idCustomer ORDER BY idOrder DESC";
+        $stmt = $this->conn->prepare($sql);
+        if($stmt->execute()) {
+            $rowCount = $stmt->rowCount();
+            if($rowCount == 0){
+                return false;
+            }else{
+                $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $row ;
+            }
+        }
+        else {
+            return false;
+        }
+    }
     public function get(){
         $sql = "SELECT * FROM orders WHERE idOrder=$this->idOrder ";
         $stmt = $this->conn->prepare($sql);
