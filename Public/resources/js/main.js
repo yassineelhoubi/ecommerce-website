@@ -1,3 +1,4 @@
+/* const { default: axios } = require("axios"); */
 
 /* categories */
 async function create_catego() {
@@ -360,11 +361,11 @@ async function Confirm_deletion_product(id){
     getAll_product()
         
 }
-
+/* _________________________________________________________ */
 /* orders */
-function showOrder(){
+async function showOrder(){
     output = "";
-    axios.get('http://localhost/projet_fil_rouge/Order/showOrder')
+    await axios.get('http://localhost/projet_fil_rouge/Order/showOrder')
     .then((res)=>{
        
         for(i in res.data.message){
@@ -392,10 +393,13 @@ function showOrder(){
             '</tr>'
             }
         }
-        document.getElementById('tbody').innerHTML = output;
+
         
     })
+
+    document.getElementById('tbody').innerHTML = output;
 }
+
 function show_Product_Order(idOrder){
 output ="";
     axios.get('http://localhost/projet_fil_rouge/Order/show_line_cmd_order/'+idOrder)
@@ -444,5 +448,30 @@ function delivered(idOrder){
                 timer: 1000
               })
         }
+    })
+}
+
+/* ____________________________________________ */
+/* Statistics */
+
+
+function count_delivered_orders(){
+    axios.get('http://localhost/projet_fil_rouge/Statistical/count_delivered_orders')
+    .then((res)=>{
+        document.getElementById('count_delivered_orders').innerHTML = res.data
+    })
+    count_validated_Orders();
+}
+function count_validated_Orders(){
+    axios.get('http://localhost/projet_fil_rouge/Statistical/count_validated_Orders')
+    .then((res)=>{
+        document.getElementById('count_validated_Orders').innerHTML = res.data
+    })
+    count_customers()
+}
+function count_customers(){
+    axios.get('http://localhost/projet_fil_rouge/Statistical/count_customers')
+    .then((res)=>{
+        document.getElementById('count_customers').innerHTML = res.data
     })
 }

@@ -16,13 +16,15 @@
   crossorigin="anonymous"></script>
   <!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
 <script>
   if (sessionStorage.getItem("token") == null || sessionStorage.getItem("role") !='admin' ) {
     document.location.href = './login.html'
   }
 </script>
   
-<body  >
+<body onload="count_delivered_orders()" >
   <!-- header -->
 <div id="sidebar"></div>
   <!--  -->
@@ -43,7 +45,7 @@
               <div class="card-body ">
                 <h4 class="text-center">Nombre de 
                   commande effectuée</h4>
-                  <h4 class="text-center">22</h4>
+                  <h4 id="count_validated_Orders" class="text-center">0</h4>
               </div>
             </div>
           </div>
@@ -51,8 +53,8 @@
           <div class="col-6 ">
             <div class="card p-5 ps-2 pe-2 ">
               <div class="card-body">
-                <h4 class="text-center">Nombre de commandeslivrées</h4>
-                <h4 class="text-center">22</h4>
+                <h4 class="text-center">Nombre de commandes livrées</h4>
+                <h4 id="count_delivered_orders" class="text-center">0</h4>
               </div>
             </div>
           </div>
@@ -61,7 +63,7 @@
             <div class="card p-5 ps-2 pe-2">
               <div class="card-body ">
                 <h4 class="text-center">Nombre d'inscription</h4>
-                <h4 class="text-center">22</h4>
+                <h4 id="count_customers" class="text-center">0</h4>
               </div>
             </div>
           </div>
@@ -77,7 +79,7 @@
 
 
 
-
+  <script src="../../resources/js/main.js"></script>
   <script src="../../resources/includes/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
