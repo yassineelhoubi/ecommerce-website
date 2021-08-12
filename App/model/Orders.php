@@ -45,6 +45,11 @@ class Orders{
             return false;
         }
     }
+    public function delivered(){
+        $sql = "UPDATE orders SET status = 'livrée'  WHERE idOrder=$this->idOrder";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    }
     public function get(){
         $sql = "SELECT * FROM orders WHERE idOrder=$this->idOrder ";
         $stmt = $this->conn->prepare($sql);

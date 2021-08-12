@@ -117,6 +117,22 @@ class Order{
         echo json_encode(array('message'=> $rows,
         'state'=> true));
     }
+    public function delivered(){
+        $this->user->token  = $this->data->token;
+
+        $role = $this->user->get_role_token();
+        if ($this->user->check_token() && $role == "admin" ) {
+            $this->order->idOrder = $this->data->idOrder;
+            $this->order->delivered();
+                echo json_encode(array('message'=> 'dazet',
+                'state'=> true));
+            
+        }
+        
+    }
+
+
+
 
     public function validate(){
         $this->user->token      = $this->data->token;

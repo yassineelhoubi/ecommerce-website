@@ -1,5 +1,4 @@
 
-
 /* categories */
 async function create_catego() {
 
@@ -380,7 +379,7 @@ function showOrder(){
                 '<td>'+res.data.message[i].totalPrice+'</td>'+
                 '<td>'+res.data.message[i].status+'</td>'+
                 '<td>'+
-                    '<button class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border">' +
+                    '<button onclick="delivered('+res.data.message[i].idOrder+')" class="mybtn-icon ps-2 pe-2 secondary-raduis secondary-border">' +
                         '<img class="btn-img img-fluid " src="../../resources/img/icons/send.png" alt="">'+
                     '</button>'+
                 '</td>'+
@@ -404,7 +403,7 @@ output ="";
         for(i in res.data.message){
             output += 
             '<div class="container secondary-raduis secondary-border d-flex justify-content-between mb-2 ">'+
-            '<div class="col-3 ">'+
+            '<div class="col-2 ms-3 ">'+
                 '<img src="../../resources/img/product/'+res.data.message[i].img+'" alt="" width="100px">'+
             '</div>'+
             '<div class="col-8 p-1 ">'+
@@ -417,4 +416,33 @@ output ="";
         document.getElementById('modal_info_title').innerHTML = idOrder
     })
  
+}
+function delivered(idOrder){
+    obj ={
+        token :sessionStorage.getItem('token'),
+        idOrder : idOrder 
+    }
+    axios.post('http://localhost/projet_fil_rouge/Order/delivered',obj)
+    .then((res)=>{
+
+        if(res.data.state == true){
+            Swal.fire({
+                position: 'center',
+                icon: 'success',    
+                title: "la commande a été livrée",
+                showConfirmButton: false,
+                timer: 1000
+              })
+              showOrder();
+
+        }else{
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',    
+                title: "La commande n'a pas été livrée.",
+                showConfirmButton: false,
+                timer: 1000
+              })
+        }
+    })
 }
