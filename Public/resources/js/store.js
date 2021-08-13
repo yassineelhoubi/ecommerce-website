@@ -342,29 +342,4 @@ function validate(id){
         }
     })
 }
-function Customer_info(){
-    obj ={
-        token : sessionStorage.getItem('token')
-    }
-    axios.post('http://localhost/projet_fil_rouge/User/get_info_customer',obj)
-    .then((res)=>{
-        document.getElementById('Fname').innerHTML = res.data.Fname;
-        document.getElementById('Fname-m').value = res.data.Fname;
-        document.getElementById('Lname').innerHTML = res.data.Lname;
-        document.getElementById('Lname-m').value = res.data.Lname;
-        document.getElementById('nbrPhone').innerHTML = res.data.nbrPhone;
-        document.getElementById('nbrPhone-m').value = res.data.nbrPhone;
-        document.getElementById('email').innerHTML = res.data.email;
-        document.getElementById('email-m').value = res.data.email;
-        document.getElementById('address1').innerHTML = res.data.address1;
-        document.getElementById('address1-m').value = res.data.address1;
-        document.getElementById('address2').innerHTML = res.data.address2;
-        document.getElementById('address2-m').value = res.data.address2;
-        if(res.data.gender == 'man'){
-            document.getElementById('gender').innerHTML = "Homme";
-        }else{
-            document.getElementById('gender').innerHTML = "Femme";    
-        }
-        document.getElementById('gender-m').value = res.data.gender;
-    })
-}
+/* ____________________________________________________ */

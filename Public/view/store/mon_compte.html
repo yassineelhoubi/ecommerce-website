@@ -10,16 +10,21 @@
   <link rel="stylesheet" href="../../resources/css/style.css" />
 </head>
 <!-- cdn jquery -->
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
-  <!-- include header & footer -->
+<!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
-<!-- import axios -->
+<!-- axios -->
 <script src="/node_modules/axios/dist/axios.min.js"></script>
-
-  
+<!-- inmport sweetalert -->
+<script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script>
+  if (sessionStorage.getItem("token") != null) {
+    
+  }else{
+    document.location.href = './login_reg.html'
+  }
+  </script>
 <body onload="Customer_info()" >
   <!-- header -->
 <div id="header"></div>
@@ -124,7 +129,7 @@
 
 <div id="footer"></div>
     <!-- end footer -->
-    <script src="../../resources/js/store.js"></script>
+    <script src="../../resources/js/clients.js"></script>
 
 </body>
 
