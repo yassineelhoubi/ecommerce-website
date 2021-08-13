@@ -52,7 +52,7 @@ CREATE Table orders(
     date DATE ,
     status  VARCHAR(55),
     totalPrice INT(4),
-    FOREIGN KEY (idCustomer) REFERENCES customers(idCustomer)
+    FOREIGN KEY (idCustomer) REFERENCES customers(idCustomer) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 DROP table line_cmd;
@@ -62,6 +62,6 @@ CREATE table line_cmd(
     idProduct INT,
     quantity INT(4) ,
     totalPrice INT(4),
-    FOREIGN KEY (idProduct) REFERENCES products(idProduct),
-    FOREIGN key (idOrder) REFERENCES orders(idOrder)
+    FOREIGN KEY (idProduct) REFERENCES products(idProduct)ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN key (idOrder) REFERENCES orders(idOrder)ON UPDATE CASCADE ON DELETE CASCADE
 );
