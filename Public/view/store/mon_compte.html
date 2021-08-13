@@ -16,9 +16,11 @@
   crossorigin="anonymous"></script>
   <!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
 
   
-<body  >
+<body onload="Customer_info()" >
   <!-- header -->
 <div id="header"></div>
   <!--  -->
@@ -37,17 +39,17 @@
                 </div>
                 <div class="col-lg-6 col-12 ps-lg-5">
 
-                    <h5>Nom : <span> elhoubi</span></h5>
-                    <h5>Prenom : <span> yassine</span></h5>
-                    <h5>Telephone : <span>0621409091</span></h5>
-                    <h5>Genre : <span>Homme</span></h5>
+                    <h5>Nom : <span id="Fname"> </span></h5>
+                    <h5>Prenom : <span id="Lname"></span></h5>
+                    <h5>Telephone : <span id="nbrPhone"></span></h5>
+                    <h5>Genre : <span id="gender"></span></h5>
 
                 </div>
                 <div class="col-lg-6 col-12 ps-lg-5 ">
 
-                    <h5>Email : <span>elhoubiyassine@gmail.com</span></h5>
-                    <h5>Address 1 : <span>87 RUE ZEPIFZ QU ZFNUOZE OIRJ</span></h5>
-                    <h5>Address 2 : <span>87 RUE ZEPIFZ QU ZFNUOZE OIRJ</span></h5>
+                    <h5>Email : <span id="email">elhoubiyassine@gmail.com</span></h5>
+                    <h5>Address 1 : <span id="address1"></span></h5>
+                    <h5>Address 2 : <span id="address2"></span></h5>
                 </div>
                 <div class="col-lg-3 col-6 m-auto mt-2">
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -76,34 +78,34 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="nom" class="mt-1"> Nom : </label>
-                                    <input name="nom" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                        value="yassine">
-                                    <label for="genre" class="mt-1"> Genre : </label>
-                                    <select  name="genre" class="w-100 secondary-border secondary-raduis form-control ">
+                                    <input name="nom" id="Fname-m" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                                        value="">
+                                    <label for="genre"  class="mt-1"> Genre : </label>
+                                    <select id="gender-m" name="genre" class="w-100 secondary-border secondary-raduis form-control ">
                                         <option value="" disabled selected>Genre</option>
-                                        <option value="" >Homme</option>
-                                        <option value="" >Femme</option>
+                                        <option value="man" >Homme</option>
+                                        <option value="woman" >Femme</option>
                                     </select>
                                 </div>
                                 <div class="col-6">
-                                    <label for="prenom" class="mt-1"> Prenom : </label>
-                                    <input name="prenom" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                        value="elhoubi">
-                                    <label for="telephone" class="mt-1"> Telephone : </label>
-                                    <input name="telephone" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                        value="097654876">
+                                    <label for="prenom"  class="mt-1"> Prenom : </label>
+                                    <input name="prenom" id="Lname-m" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                                        value="">
+                                    <label for="telephone"  class="mt-1"> Telephone : </label>
+                                    <input name="telephone" id="nbrPhone-m" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                                        value="">
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="email" class="mt-1"> Email : </label>
-                                    <input name="email" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                        value="elhoubiyassine@gmail.com">
-                                    <label for="address 1" class="mt-1"> Address 1 : </label>
-                                    <input name="address 1" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                        value="87 RUE ZEPIFZ QU ZFNUOZE OIRJ">
-                                    <label for="address 2" class="mt-1"> Address 2 : </label>
-                                    <input name="address 2" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                        value="87 RUE ZEPIFZ QU ZFNUOZE OIRJ">
+                                    <label for="email"  class="mt-1"> Email : </label>
+                                    <input name="email" id="email-m" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                                        value="">
+                                    <label for="address 1"  class="mt-1"> Address 1 : </label>
+                                    <input name="address 1" id="address1-m" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                                        value="">
+                                    <label for="address 2"  class="mt-1"> Address 2 : </label>
+                                    <input name="address 2" id="address2-m" class="w-100 secondary-border secondary-raduis form-control" type="text"
+                                        value="">
                                 </div>
                             </div>
                         </form>
@@ -122,7 +124,7 @@
 
 <div id="footer"></div>
     <!-- end footer -->
-
+    <script src="../../resources/js/store.js"></script>
 
 </body>
 

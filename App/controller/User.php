@@ -161,4 +161,16 @@
             echo json_encode(array('message'=>"token not valid"));
         }
     }
+    public function get_info_customer(){
+        
+        // get raw posted data
+        $data=json_decode(file_get_contents("php://input"));
+
+        $this->user->token=$data->token;
+        if($this->user->check_token()) {
+            if($info=$this->user->get_info_token()) {
+                echo json_encode($info);
+            }
+        }
+    }
 }
