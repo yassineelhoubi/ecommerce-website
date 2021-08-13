@@ -225,10 +225,10 @@ function getAll_product() {
                 } else {
                     output +=
                     '<tr>' +
-                    '<td>' + res.data.message[i].name + '</td>' +
+                    '<td class="text-start" >' + res.data.message[i].name + '</td>' +
                     '<td>' + '<img class="img-fluid table-img" src="../../resources/img/product/' + res.data
                     .message[i].img + '" alt="">' + '</td>' +
-                    '<td>' + res.data.message[i].category_name + '</td>' +
+                    '<td class="text-start" >' + res.data.message[i].category_name + '</td>' +
                     '<td>' + res.data.message[i].price + ' DH</td>' +
                     '<td>' + res.data.message[i].quantity + '</td>' +
                     '<td>' + '<a  href="modifierProduit.html?id='+ res.data.message[i].idProduct +'">' +
@@ -373,7 +373,7 @@ async function showOrder(){
                 output +=                        
                 '<tr>'+
                 '<td>'+res.data.message[i].idOrder+'</td>'+
-                '<td>'+res.data.message[i].Lname +' '+res.data.message[i].Lname+'</td>'+
+                '<td>'+res.data.message[i].Lname +' '+res.data.message[i].Fname+'</td>'+
                 '<td>'+res.data.message[i].nbrPhone+'</td>'+
                 '<td>'+res.data.message[i].date+'</td>'+
                 '<td>'+res.data.message[i].address1+'</td>'+
