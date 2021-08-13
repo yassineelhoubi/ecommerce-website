@@ -1,6 +1,7 @@
 <?php class User {
     public $db;
     public $product;
+    public $data;
 
     public function __construct() {
         // instantiate database
@@ -9,23 +10,24 @@
 
         //Instantiate User object
         $this->user=new Users($this->db);
+        
+        // fetch data
+        $this->data=json_decode(file_get_contents("php://input"));
 
     }
 
     public function sign_up() {
 
-        // get raw posted data
-        $data=json_decode(file_get_contents("php://input"));
 
-        $this->user->email=$data->email;
-        $this->user->password=password_hash($data->password, PASSWORD_DEFAULT);
+        $this->user->email=$this->data->email;
+        $this->user->password=password_hash($this->data->password, PASSWORD_DEFAULT);
 
-        $this->user->nbrPhone=$data->nbrPhone;
-        $this->user->Fname=$data->Fname;
-        $this->user->Lname=$data->Lname;
-        $this->user->address1=$data->address1;
-        $this->user->address2=$data->address2;
-        $this->user->gender=$data->gender;
+        $this->user->nbrPhone=$this->data->nbrPhone;
+        $this->user->Fname=$this->data->Fname;
+        $this->user->Lname=$this->data->Lname;
+        $this->user->address1=$this->data->address1;
+        $this->user->address2=$this->data->address2;
+        $this->user->gender=$this->data->gender;
 
 
         $bol=true;
@@ -62,11 +64,9 @@
 
     public function login() {
 
-        // get raw posted data
-        $data=json_decode(file_get_contents("php://input"));
 
-        $this->user->email=$data->email;
-        $password=$data->password;
+        $this->user->email=$this->data->email;
+        $password=$this->data->password;
 
 
         if($row=$this->user->login()) {
@@ -108,9 +108,8 @@
     }
 
     public function get_info_client_token(){
-        // 
-        $data=json_decode(file_get_contents("php://input"));
-        $this->user->token=$data->token;
+        
+        $this->user->token=$this->data->token;
         if($info=$this->user->get_info_token()) {
             echo json_encode(array('info'=>$info));
         }else {
@@ -119,9 +118,8 @@
 
     }
     public function check_token() {
-        // get raw posted data
-        $data=json_decode(file_get_contents("php://input"));
-        $this->user->token=$data->token;
+
+        $this->user->token=$this->data->token;
 
         if($this->user->check_token()) {
             echo json_encode(array('message'=>'token is valid'));
@@ -133,9 +131,8 @@
 
     }
     public function get_role_token() {
-        // get raw posted data
-        $data=json_decode(file_get_contents("php://input"));
-        $this->user->token=$data->token;
+
+        $this->user->token=$this->data->token;
 
         if($this->user->check_token()) {
             if($role=$this->user->get_role_token()) {
@@ -148,13 +145,12 @@
 
     }
     public function get_id_token() {
-        // get raw posted data
-        $data=json_decode(file_get_contents("php://input"));
-        $this->user->token=$data->token;
+
+        $this->user->token=$this->data->token;
 
         if($this->user->check_token()) {
-            if($role=$this->user->get_info_token()) {
-                echo json_encode(array('id'=>$role['id']));
+            if($info=$this->user->get_info_token()) {
+                echo json_encode(array('id'=>$info['id']));
             }
         }
         else {
@@ -162,14 +158,33 @@
         }
     }
     public function get_info_customer(){
-        
-        // get raw posted data
-        $data=json_decode(file_get_contents("php://input"));
 
-        $this->user->token=$data->token;
+
+        $this->user->token=$this->data->token;
         if($this->user->check_token()) {
             if($info=$this->user->get_info_token()) {
                 echo json_encode($info);
+            }
+        }
+    }
+
+    public function update_customer_info(){
+        $this->user->token=$this->data->token;
+        if($this->user->check_token()) {
+            if($info=$this->user->get_info_token()) {
+                $this->user->idCustomer = $info['id'];
+                $this->user->nbrPhone=$this->data->nbrPhone;
+                $this->user->Fname=$this->data->Fname;
+                $this->user->Lname=$this->data->Lname;
+                $this->user->address1=$this->data->address1;
+                $this->user->address2=$this->data->address2;
+                $this->user->gender=$this->data->gender;
+        
+                if($this->user->update_customer_info()){
+                    echo json_encode(array('message'=>"Update successfuly", 'state'=>true));
+                }else{
+                    echo json_encode(array('message'=>"err", 'state'=>false));
+                }
             }
         }
     }

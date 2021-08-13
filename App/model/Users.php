@@ -14,6 +14,7 @@
         public $address2;
         public $id;
         public $token ;
+        public $idCustomer;
         
 
     public function __construct($db)
@@ -193,6 +194,35 @@
 
         return false;
     
+
+    }
+    public function update_customer_info(){
+        $sql = "UPDATE customers  
+                SET Fname = :Fname , Lname=:Lname , nbrPhone=:nbrPhone , address1=:address1 , address2=:address2 , gender=:gender
+                WHERE idCustomer = $this->idCustomer";
+                
+        // clean client informations
+        $this->Fname = htmlspecialchars(strip_tags($this->Fname));
+        $this->Lname = htmlspecialchars(strip_tags($this->Lname));
+        $this->nbrPhone = htmlspecialchars(strip_tags($this->nbrPhone));
+        $this->gender = htmlspecialchars(strip_tags($this->gender));
+        $this->address1 = htmlspecialchars(strip_tags($this->address1));
+        $this->address2 = htmlspecialchars(strip_tags($this->address2));
+
+        $stmt = $this->conn->prepare($sql);
+        
+        // bind data
+        $stmt->bindParam(':Fname', $this->Fname);
+        $stmt->bindParam(':Lname', $this->Lname);
+        $stmt->bindParam(':nbrPhone', $this->nbrPhone);
+        $stmt->bindParam(':gender', $this->gender);
+        $stmt->bindParam(':address1', $this->address1);
+        $stmt->bindParam(':address2', $this->address2);
+        
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
 
     }
 

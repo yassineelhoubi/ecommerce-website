@@ -16,13 +16,12 @@
 <script src="../../resources/js/includeTemp.js"></script>
 <!-- axios -->
 <script src="/node_modules/axios/dist/axios.min.js"></script>
-<!-- inmport sweetalert -->
-<script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
 <script>
   if (sessionStorage.getItem("token") != null) {
     
   }else{
-    document.location.href = './login_reg.html'
+    document.location.href = './login.html'
   }
   </script>
 <body onload="Customer_info()" >
@@ -57,7 +56,7 @@
                     <h5>Address 2 : <span id="address2"></span></h5>
                 </div>
                 <div class="col-lg-3 col-6 m-auto mt-2">
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    <button data-bs-toggle="modal" data-bs-target="#Update_modal"
                         class="mybtn size-btn w-100  secondary-border secondary-raduis">Modifier</button>
                 </div>
             </div>
@@ -69,7 +68,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="Update_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content primary-border">
                     <div class="modal-header">
@@ -102,9 +101,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="email"  class="mt-1"> Email : </label>
-                                    <input name="email" id="email-m" class="w-100 secondary-border secondary-raduis form-control" type="text"
-                                        value="">
+
                                     <label for="address 1"  class="mt-1"> Address 1 : </label>
                                     <input name="address 1" id="address1-m" class="w-100 secondary-border secondary-raduis form-control" type="text"
                                         value="">
@@ -117,7 +114,7 @@
                     </div>
                     <div class="modal-footer">
 
-                        <button type="button" class="mybtn secondary-raduis secondary-border">Enregistrez</button>
+                        <button type="button" onclick="update_customer_info()" class="mybtn secondary-raduis secondary-border">Enregistrez</button>
                     </div>
                 </div>
             </div>
@@ -129,7 +126,7 @@
 
 <div id="footer"></div>
     <!-- end footer -->
-    <script src="../../resources/js/clients.js"></script>
+
 
 </body>
 

@@ -81,7 +81,7 @@ function Customer_info(){
       document.getElementById('nbrPhone').innerHTML = res.data.nbrPhone;
       document.getElementById('nbrPhone-m').value = res.data.nbrPhone;
       document.getElementById('email').innerHTML = res.data.email;
-      document.getElementById('email-m').value = res.data.email;
+
       document.getElementById('address1').innerHTML = res.data.address1;
       document.getElementById('address1-m').value = res.data.address1;
       document.getElementById('address2').innerHTML = res.data.address2;
@@ -101,8 +101,24 @@ function update_customer_info(){
       Lname : document.getElementById('Lname-m').value,
       gender : document.getElementById('gender-m').value,
       nbrPhone : document.getElementById('nbrPhone-m').value,
-      email : document.getElementById('email-m').value,
       address1 :document.getElementById('address1-m').value,
       address2 :document.getElementById('address2-m').value,
   }
+  axios.post('http://localhost/projet_fil_rouge/User/update_customer_info',obj)
+  .then((res)=>{
+    Customer_info()
+    if(res.data.state == true){
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: res.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }else{
+
+    }
+  })
+  
+  $('#Update_modal').modal('hide');
 }
