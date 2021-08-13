@@ -11,7 +11,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="analyse.html" class="nav-link active fs-6" aria-current="page">
+        <a href="analyse.html" class="nav-link text-white fs-6" aria-current="page">
           <img src="../../resources/img/icons/en-cours-d'analyse.png" alt="" class=" me-3 ms-3" width="20" height="20">
           Analyse
         </a>
@@ -49,3 +49,24 @@
   </div>
 </div>
 <script src="../../resources/js/admin.js"></script>
+
+<script >
+  
+  /* active class */
+  const curentLocation = location.href;
+  const menuItem = document.querySelectorAll('.nav-link');
+
+  const location_add_product    = "http://localhost:3000/Public/view/dashboard_admin/nouveauProduit.html"
+  var item = location.search.substr(1).split('=')
+  id = item[1];
+
+  const location_update_product = "http://localhost:3000/Public/view/dashboard_admin/modifierProduit.html?id="+id+""
+  for (let i=0 ; i<=4 ; i++){
+    if( location_add_product=== curentLocation || location_update_product=== curentLocation  ){
+      menuItem[2].className = "nav-link active"
+    }
+      if(menuItem[i].href === curentLocation){
+          menuItem[i].className = "nav-link active"
+      }
+  }
+  </script>

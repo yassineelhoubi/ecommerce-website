@@ -16,6 +16,13 @@
         border-radius: 0% !important;
         color: #fff !important;
     } 
+    .nav-link{
+        &:hover{
+            background-color: #9ba9b6 !important;
+            border-radius: 0% !important;
+            color: #fff !important;
+        }
+    }
 }
     .main{
         width: calc(100% - 250px);

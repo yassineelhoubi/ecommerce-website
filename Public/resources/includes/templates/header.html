@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item me-4">
-            <a class="nav-link active" aria-current="page" href="index.html">ACCUEIL</a>
+            <a class="nav-link " aria-current="page" href="index.html">ACCUEIL</a>
           </li>
           <li class="nav-item me-4">
             <a class="nav-link" href="magasin.html">MAGASIN</a>
@@ -69,3 +69,21 @@
     </div>
   </nav>
 </div>
+<script >
+  
+  /* active class */
+  const curentLocation = location.href;
+  const menuItem = document.querySelectorAll('.nav-link');
+console.log(curentLocation)
+  const location_account    = "http://localhost:3000/Public/view/store/mon_compte.html"
+
+  const location_auth = "http://localhost:3000/Public/view/store/login_reg.html"
+  for (let i=0 ; i<=4 ; i++){
+    if( location_account=== curentLocation || location_auth=== curentLocation  ){
+      menuItem[3].className = "nav-link dropdown-toggle active"
+    }
+      if(menuItem[i].href === curentLocation){
+          menuItem[i].className = "nav-link active"
+      }
+  }
+  </script>
