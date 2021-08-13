@@ -1,3 +1,5 @@
+/* const { default: axios } = require("axios"); */
+
 function initialize() {
     getAll_catego();
     getAll_product()
@@ -15,14 +17,14 @@ async function getAll_catego() {
     output = ""
 }
 
-function getAll_product() {
+async function getAll_product() {
     output = "";
-    axios.get('http://localhost/projet_fil_rouge/Product/getAll_product_store')
+    await axios.get('http://localhost/projet_fil_rouge/Product/getAll_product_store')
         .then((res) => {
             for (i in res.data.message) {
                 output +=
                     '<div class="col">' +
-                    '<div class="card border border-dark  product shadow_card">' +
+                    '<div class="card  product shadow_card">' +
                     '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
                     '<a href="produit.html?=' + res.data.message[i].idProduct + '">' +
                     '<img src="../../resources/img/product/' + res.data.message[i].img + '" class="img-fluid" alt="" />' +
@@ -43,9 +45,42 @@ function getAll_product() {
                     '</div> '
 
             }
-            document.getElementById('body_product').innerHTML = output
+            
 
         });
+        document.getElementById('body_product').innerHTML = output
+}
+async function top_product(){
+    output ="";
+    await axios.get('http://localhost/projet_fil_rouge/Product/top_product')
+    .then((res)=>{
+        for (i in res.data.message) {
+            output +=
+                '<div class="col">' +
+                '<div class="card  product shadow_card">' +
+                '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
+                '<a href="produit.html?=' + res.data.message[i].idProduct + '">' +
+                '<img src="../../resources/img/product/' + res.data.message[i].img + '" class="img-fluid" alt="" />' +
+                '</a>' +
+                '</div>' +
+                '<div class="card-body">' +
+                '<h6 class="card-title fw-bold mt-2">' +
+                res.data.message[i].name +
+                '</h6>' +
+                '<div class="d-flex justify-content-between mt-3">' +
+                '<button onclick="create_order(' + res.data.message[i].idProduct + ')" class="mybtn size-btn-card secondary-raduis secondary-border">' +
+                'Ajouter' +
+                '</button>' +
+                '<h6 class="pt-1">' + res.data.message[i].price + ' DH</h6>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div> '
+
+        }
+        
+    })
+    document.getElementById('top_product').innerHTML = output
 }
 /* _____________________________________________________________________________________________ */
 // get idProduct from url

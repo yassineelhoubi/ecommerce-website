@@ -178,6 +178,13 @@
             return false;
         }
     }
+    public function top_product(){
+        $sql = "SELECT  p.* , count(l.idProduct) as count FROM products p , line_cmd l WHERE p.idProduct=l.idProduct  GROUP BY l.idProduct ORDER by count DESC LIMIT 4";
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row ;
+    }
 
 
 

@@ -14,8 +14,10 @@
   crossorigin="anonymous"></script>
 <!-- include header & footer -->
 <script src="../../resources/js/includeTemp.js"></script>
+<!-- import axios -->
+<script src="/node_modules/axios/dist/axios.min.js"></script>
 
-<body>
+<body onload="top_product()">
   <!-- header -->
   <div id="header"></div>
   <!--  -->
@@ -44,59 +46,12 @@
 
     <!-- card -->
     <div class="container mt-5 pt-5">
-      <h1 class="fw-bold text-center">Choisissez votre catégorie</h1>
+      <h1 class="fw-bold text-center">Les produits les plus vendus</h1>
       <div class="line mx-auto  mt-3"></div>
     </div>
     <div  class="container  mb-5">
-      <div class="row justify-content-between ps-5 pe-5 g-4  m-md-0  ">
-
-        <div  class="col-lg-4 col-md-6 col-12">
-          <div  class="card primary-raduis primary-border card-body shadow_card ">
-            <div class="d-flex flex-column align-items-center mt-4">
-              <h2 class="card-title fw-bold mt-1">10 MAD</h2>
-              <div class="line mb-4"></div>
-              <h4 class="fw-bold mb-3">les frais de livraison</h4>
-              <div class="col-2 m-auto">
-                <img class="img-fluid mb-2" src="../../resources/img/icons/054-delivery.png" alt="" />
-              </div>
-              <h4 class="card-text">Jusqu'à 5 produits : 5DH</h4>
-              <h4>Plus de 5 produits : 0DH</h4>
-              <button class="mybtn size-btn secondary-raduis secondary-border mt-3 ">Choisir</button>
-            </div>
-          </div>
-        </div>
-        <!--  -->
-        <div class="col-lg-4 col-md-6 col-12" >
-          <div   class="card primary-raduis primary-border card-body  shadow_card">
-            <div class="d-flex flex-column align-items-center mt-4">
-              <h2 class="card-title fw-bold mt-1">20 MAD</h2>
-              <div class="line mb-4"></div>
-              <h4 class="fw-bold mb-3">les frais de livraison</h4>
-              <div class="col-2 m-auto">
-                <img class="img-fluid mb-2" src="../../resources/img/icons/054-delivery.png" alt="" />
-              </div>
-              <h4 class="card-text">Jusqu'à 4 produits : 3DH</h4>
-              <h4>Plus de 4 produits : 0DH</h4>
-              <button class="mybtn size-btn secondary-border secondary-raduis mt-3 ">Choisir</button>
-            </div>
-          </div>
-        </div>
-        <!--  -->
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="card primary-raduis primary-border card-body shadow_card ">
-            <div class="d-flex flex-column align-items-center mt-4">
-              <h2 class="card-title fw-bold mt-1">30 MAD</h2>
-              <div class="line mb-4"></div>
-              <h4 class="fw-bold mb-3">les frais de livraison</h4>
-              <div class="col-2 m-auto">
-                <img class="img-fluid mb-2" src="../../resources/img/icons/054-delivery.png" alt="" />
-              </div>
-              <h4 class="card-text">Jusqu'à 3 produits : 3DH</h4>
-              <h4>Plus de 3 produits : 0DH</h4>
-              <button class="mybtn size-btn secondary-raduis secondary-border mt-3 ">Choisir</button>
-            </div>
-          </div>
-        </div>
+      <div id="top_product" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4  ">
+        <!-- product -->        
       </div>
     </div>
 
@@ -139,7 +94,7 @@
 
   <div id="footer"></div>
   <!-- end footer -->
-
+  <script src="../../resources/js/store.js"></script>
 
 </body>
 

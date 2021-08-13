@@ -25,6 +25,21 @@
         height: 400px;
         border-radius: 50px;
     }
+    .product {
+        .img-card {
+            img {
+                height: 200px;
+                object-fit: contain;
+            }
+
+        }
+        .card-body{
+            .card-title{ 
+                height: 40px;
+                overflow: hidden;
+            }
+        }
+    }
 
 @media (max-width: 990px) {
     #line_for_hidden{

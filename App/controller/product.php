@@ -141,5 +141,10 @@
             echo json_encode(array('message'=>'No Product found', 'state'=>false));
         }
     }
+    
+    public function top_product(){
+        $rows = $this->product->top_product();
+        echo json_encode(array('message'=>$rows, 'state'=>true));
+    }
 
 }
