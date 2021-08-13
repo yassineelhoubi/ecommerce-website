@@ -356,7 +356,7 @@ async function Confirm_deletion_product(id){
         idProduct : id,
         token : sessionStorage.getItem('token')
     }
-    await axios.post('http://localhost/projet_fil_rouge/Product/delete_product/' , obj)
+    await axios.post('http://localhost/projet_fil_rouge/Product/delete_product' , obj)
 
     getAll_product()
         
