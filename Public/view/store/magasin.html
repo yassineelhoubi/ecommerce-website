@@ -46,8 +46,8 @@
               d-flex
               justify-content-between
             ">
-            <input class="m-1" type="text" style="width: 100%;" placeholder="Rechercher" />
-            <button class="mybtn secondary-border secondary-raduis">
+            <input onkeyup="getAll_product()" id="txt_search" class="m-1" type="text" style="width: 100%;" placeholder="Rechercher" />
+            <button onclick="getAll_product()" class="mybtn secondary-border secondary-raduis">
               chercher
             </button>
           </div>

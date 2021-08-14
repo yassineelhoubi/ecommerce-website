@@ -21,8 +21,11 @@ async function getAll_product() {
     output = "";
     await axios.get('http://localhost/projet_fil_rouge/Product/getAll_product_store')
         .then((res) => {
-            for (i in res.data.message) {
-                output +=
+            const txtvalue = document.getElementById('txt_search').value
+            if(txtvalue === ''){
+
+                for (i in res.data.message) {
+                    output +=
                     '<div class="col">' +
                     '<div class="card  product shadow_card">' +
                     '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
@@ -43,13 +46,56 @@ async function getAll_product() {
                     '</div>' +
                     '</div>' +
                     '</div> '
-
+                    
+                }
+                
+                
+            }else{
+                var regex  = new RegExp(txtvalue , "i");
+                // console.log(res.data.message)
+                for(i in res.data.message){
+                    result_data = res.data.message[i].name
+                   result_data.search(regex);
+                   if(result_data.search(regex) != -1)
+                   output +=                     '<div class="col">' +
+                   '<div class="card  product shadow_card">' +
+                   '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
+                   '<a href="produit.html?=' + res.data.message[i].idProduct + '">' +
+                   '<img src="../../resources/img/product/' + res.data.message[i].img + '" class="img-fluid" alt="" />' +
+                   '</a>' +
+                   '</div>' +
+                   '<div class="card-body">' +
+                   '<h6 class="card-title fw-bold mt-2">' +
+                   res.data.message[i].name +
+                   '</h6>' +
+                   '<div class="d-flex justify-content-between mt-3">' +
+                   '<button onclick="create_order(' + res.data.message[i].idProduct + ')" class="mybtn size-btn-card secondary-raduis secondary-border">' +
+                   'Ajouter' +
+                   '</button>' +
+                   '<h6 class="pt-1">' + res.data.message[i].price + ' DH</h6>' +
+                   '</div>' +
+                   '</div>' +
+                   '</div>' +
+                   '</div> '
+                } 
+                
             }
-            
 
         });
+        // document.getElementById('txt_search').addEventListener('keyup',search)
+        // function search(){
+        //     const txtvalue = document.getElementById('txt_search').value
+        //     if(txtvalue === ''){
+        //         document.getElementById('body_product').innerHTML = output
+        //     }else{
+        //         var regex  = new RegExp(txtvalue );
+        //         console.log(regex)
+        //         document.querySelectorAll
+        //     }
+        // }
         document.getElementById('body_product').innerHTML = output
 }
+
 async function top_product(){
     output ="";
     await axios.get('http://localhost/projet_fil_rouge/Product/top_product')
