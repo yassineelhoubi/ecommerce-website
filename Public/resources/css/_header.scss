@@ -14,11 +14,16 @@
         }
         
     }
+    // .active{
+    //     background-color: #648db6 !important;
+    //     border-radius: 0% !important;
+    //     color: #fff !important;
+    // } 
     .active{
-        background-color: #648db6 !important;
-        border-radius: 0% !important;
-        color: #fff !important;
-    } 
+        height: 2px;
+        width: 100%;
+        background-color: $mygreen;
+    }
 
     
 }
