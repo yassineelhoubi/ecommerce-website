@@ -27,15 +27,15 @@
       <div class="row">
         <div class="col-lg-4 col-7 mt-2">
           <select id="select_catego" class="form-select secondary-border secondary-raduis form-control">
-            <option selected>Selecte catégories</option>
+            <option value="" selected>Selecte catégories</option>
           </select>
         </div>
         <div class="col-lg-3 col-5 mt-2">
-          <select class="form-select secondary-border secondary-raduis form-control">
-            <option selected>Prix</option>
-            <option value="1">10 DH</option>
-            <option value="2">20 DH</option>
-            <option value="3">30 DH</option>
+          <select id="select_price" onclick="filter_price()" class="form-select secondary-border secondary-raduis form-control">
+            <option value="" selected>Prix</option>
+            <option value="10">10 DH</option>
+            <option value="20">20 DH</option>
+            <option value="30">30 DH</option>
           </select>
         </div>
         <div class="col-lg-5 col-12 mt-2">
@@ -46,7 +46,8 @@
               d-flex
               justify-content-between
             ">
-            <input onkeyup="getAll_product()" id="txt_search" class="m-1" type="text" style="width: 100%;" placeholder="Rechercher" />
+            <input onkeyup="getAll_product()" id="txt_search" class="m-1" type="text" style="width: 100%;"
+              placeholder="Rechercher" />
             <button onclick="getAll_product()" class="mybtn secondary-border secondary-raduis">
               chercher
             </button>
@@ -61,7 +62,7 @@
 
     <div class="container mt-5 mb-5">
       <div id="body_product" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4  ">
-        <!-- product -->        
+        <!-- product -->
       </div>
     </div>
     <!-- end product -->
@@ -81,8 +82,25 @@
     <!-- Footer -->
     <div id="footer"></div>
     <!-- end footer -->
+  </div>
+<script>
+  function filter_price(){
+    const select_price = document.getElementById('select_price').value
+    const pricecard=document.getElementsByName("price");
+    const card=document.getElementsByName("card");
 
+    for(i=0 ; i<card.length ; i++){
+      if(select_price == ""){
+        card[i].style.display="block";
+      }else if(select_price == pricecard[i].innerHTML){
+        card[i].style.display="block";
+      }else{
+        card[i].style.display="none";
+      }
 
+    }
+  }
+</script>
 </body>
 
 </html>

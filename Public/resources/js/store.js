@@ -25,8 +25,9 @@ async function getAll_product() {
             if(txtvalue === ''){
 
                 for (i in res.data.message) {
+
                     output +=
-                    '<div class="col">' +
+                    '<div name="card" class="col">' +
                     '<div class="card  product shadow_card">' +
                     '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
                     '<a href="produit.html?=' + res.data.message[i].idProduct + '">' +
@@ -41,11 +42,12 @@ async function getAll_product() {
                     '<button onclick="create_order(' + res.data.message[i].idProduct + ')" class="mybtn size-btn-card secondary-raduis secondary-border">' +
                     'Ajouter' +
                     '</button>' +
-                    '<h6 class="pt-1">' + res.data.message[i].price + ' DH</h6>' +
+                    '<h6  class="pt-1"><span name="price">' + res.data.message[i].price + '</span> DH</h6>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
-                    '</div> '
+                    '</div> ';
+                    
                     
                 }
                 
@@ -57,7 +59,8 @@ async function getAll_product() {
                     result_data = res.data.message[i].name
                    result_data.search(regex);
                    if(result_data.search(regex) != -1)
-                   output +=                     '<div class="col">' +
+                   output +=                    
+                   '<div name="card" class="col">' +
                    '<div class="card  product shadow_card">' +
                    '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
                    '<a href="produit.html?=' + res.data.message[i].idProduct + '">' +
@@ -72,7 +75,7 @@ async function getAll_product() {
                    '<button onclick="create_order(' + res.data.message[i].idProduct + ')" class="mybtn size-btn-card secondary-raduis secondary-border">' +
                    'Ajouter' +
                    '</button>' +
-                   '<h6 class="pt-1">' + res.data.message[i].price + ' DH</h6>' +
+                   '<h6  class="pt-1"><span name="price">' + res.data.message[i].price + '</span> DH</h6>' +
                    '</div>' +
                    '</div>' +
                    '</div>' +
