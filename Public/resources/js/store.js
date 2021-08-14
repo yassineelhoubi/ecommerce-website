@@ -87,17 +87,7 @@ async function getAll_product() {
             }
 
         });
-        // document.getElementById('txt_search').addEventListener('keyup',search)
-        // function search(){
-        //     const txtvalue = document.getElementById('txt_search').value
-        //     if(txtvalue === ''){
-        //         document.getElementById('body_product').innerHTML = output
-        //     }else{
-        //         var regex  = new RegExp(txtvalue );
-        //         console.log(regex)
-        //         document.querySelectorAll
-        //     }
-        // }
+
         document.getElementById('body_product').innerHTML = output
 }
 
@@ -148,9 +138,8 @@ function get_product(id) {
             document.getElementById('price').innerHTML = res.data.message.price + '.00 MAD'
             document.getElementById('img').setAttribute('src', '../../resources/img/product/' + res.data.message.img)
             document.getElementById('description').innerHTML = res.data.message.description
-            // document.getElementById('spanfile').innerHTML = res.data.message.img
-            // document.getElementById('idProduct').value = res.data.message.idProduct
-            // document.getElementById('quantity').value = res.data.message.quantity
+            document.getElementById('category').innerHTML = res.data.message.category_name
+
         });
 }
 /* ___________________________________________________________________________________ */
@@ -394,3 +383,46 @@ function validate(id){
     })
 }
 /* ____________________________________________________ */
+/* filter */
+
+function filter_price(){
+    document.getElementById('select_catego').value = "";
+    const select_price = document.getElementById('select_price').value
+    const pricecard=document.getElementsByName("price");
+    const card=document.getElementsByName("card");
+
+    for(i=0 ; i<card.length ; i++){
+      if(select_price == ""){
+        card[i].style.display="block";
+      }else if(select_price == pricecard[i].innerHTML){
+        card[i].style.display="block";
+      }else{
+        card[i].style.display="none";
+      }
+
+    }
+  }
+  
+function filter_catego(){
+  document.getElementById('select_price').value = "";
+  const select_catego = document.getElementById('select_catego');
+  const categoCard = document.getElementsByName('category_name');
+  const card=document.getElementsByName("card");
+  console.log(categoCard[0].value)
+  console.log(select_catego.value)
+
+  for(i=0 ; i < card.length ; i++){
+    if(select_catego.value == ""){
+
+      card[i].style.display="block";
+
+    }else if(select_catego.value == categoCard[i].value){
+
+        card[i].style.display="block";
+
+    }else{
+
+        card[i].style.display="none";
+    }
+  }
+}

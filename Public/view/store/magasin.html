@@ -83,49 +83,7 @@
     <div id="footer"></div>
     <!-- end footer -->
   </div>
-<script>
-  function filter_price(){
-    document.getElementById('select_catego').value = "";
-    const select_price = document.getElementById('select_price').value
-    const pricecard=document.getElementsByName("price");
-    const card=document.getElementsByName("card");
 
-    for(i=0 ; i<card.length ; i++){
-      if(select_price == ""){
-        card[i].style.display="block";
-      }else if(select_price == pricecard[i].innerHTML){
-        card[i].style.display="block";
-      }else{
-        card[i].style.display="none";
-      }
-
-    }
-  }
-function filter_catego(){
-  document.getElementById('select_price').value = "";
-  const select_catego = document.getElementById('select_catego');
-  const categoCard = document.getElementsByName('category_name');
-  const card=document.getElementsByName("card");
-  console.log(categoCard[0].value)
-  console.log(select_catego.value)
-
-  for(i=0 ; i < card.length ; i++){
-    if(select_catego.value == ""){
-
-      card[i].style.display="block";
-
-    }else if(select_catego.value == categoCard[i].value){
-
-        card[i].style.display="block";
-
-    }else{
-
-        card[i].style.display="none";
-    }
-  }
-}
-  
-</script>
 </body>
 
 </html>
