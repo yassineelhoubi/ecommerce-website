@@ -94,7 +94,7 @@
     }
     public function getAll_quantity_notNull(){
 
-        $sql="SELECT * FROM products  WHERE quantity >=1  ORDER BY idproduct DESC";
+        $sql="SELECT * FROM products p , categories c WHERE c.idCategory=p.idCategory and quantity >=1  ORDER BY idproduct DESC";
 
         // Prepare query
         $stmt=$this->conn->prepare($sql);

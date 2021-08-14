@@ -28,6 +28,7 @@ async function getAll_product() {
 
                     output +=
                     '<div name="card" class="col">' +
+                    '<input name="category_name" type="hidden" value="'+res.data.message[i].idCategory+'">'+                 
                     '<div class="card  product shadow_card">' +
                     '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
                     '<a href="produit.html?=' + res.data.message[i].idProduct + '">' +
@@ -61,6 +62,7 @@ async function getAll_product() {
                    if(result_data.search(regex) != -1)
                    output +=                    
                    '<div name="card" class="col">' +
+                   '<input name="category_name" type="hidden" value="'+res.data.message[i].idCategory+'">'+
                    '<div class="card  product shadow_card">' +
                    '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
                    '<a href="produit.html?=' + res.data.message[i].idProduct + '">' +
