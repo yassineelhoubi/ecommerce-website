@@ -149,7 +149,7 @@ function getAll_catego_for_select() {
                     output += '<option value="'+res.data.message[i].idCategory+'">'+res.data.message[i].category_name+'</option>'
                 }
             }
-            document.getElementById('select_categories').innerHTML = output
+            document.getElementById('select_categories').innerHTML += output
         });
 }
 
