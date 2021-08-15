@@ -172,27 +172,45 @@ function create_product() {
         token : sessionStorage.getItem('token')
 
     }
-    axios.post('http://localhost/projet_fil_rouge/product/create_product', obj)
-        .then((res) => {
-            if(res.data.state == true){
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: res.data.message,
-                    showConfirmButton: false,
-                    timer: 1000
-                  })
-            }else{
-                Swal.fire({
-                    position: 'center',
-                    icon: 'warning',
-                    title: res.data.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-            }
-            document.getElementById('form_new_product').reset();
-        });
+    /* validation */
+    data = true;
+    for(i in obj){
+        if(obj[i] == null || obj[i] == ""){
+            data = false
+        }
+    }
+    if(data){
+        axios.post('http://localhost/projet_fil_rouge/product/create_product', obj)
+            .then((res) => {
+                if(res.data.state == true){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: res.data.message,
+                        showConfirmButton: false,
+                        timer: 1000
+                      })
+                }else{
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: res.data.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                }
+                document.getElementById('form_new_product').reset();
+            });
+    }else{
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: "les données incomplète",
+            showConfirmButton: false,
+            timer: 1500
+          })
+    }
+
 }
 /* list Product */
 
@@ -249,6 +267,9 @@ function getAll_product() {
         });
     
 }
+
+/* _______________________________________ */
+/* update products */
 function get_id_product(){
 
 var item = location.search.substr(1).split('=')
@@ -256,7 +277,7 @@ id = item[1];
 get_product_toUpdate(id)
   
 }
-/* update */
+
 function get_product_toUpdate(id){
     event.preventDefault()
     getAll_catego_for_select()
@@ -297,27 +318,44 @@ async function update_product() {
         img: imgName,
         token : sessionStorage.getItem('token') 
     }
-    await axios.put('http://localhost/projet_fil_rouge/Product/update_product', obj)
-        .then((res) => {
-        if(res.data.state == true){
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: res.data.message,
-                showConfirmButton: false,
-                timer: 1000
-              })
-        }else{
-            Swal.fire({
-                position: 'center',
-                icon: 'warning',
-                title: res.data.message,
-                showConfirmButton: false,
-                timer: 1500
-              })
+    /* validation */
+    data = true;
+    for(i in obj){
+        if(obj[i] == null || obj[i] == ""){
+            data = false
         }
-        })
-        get_id_product()
+    }
+    if(data){
+        await axios.put('http://localhost/projet_fil_rouge/Product/update_product', obj)
+            .then((res) => {
+            if(res.data.state == true){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: res.data.message,
+                    showConfirmButton: false,
+                    timer: 1000
+                  })
+            }else{
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: res.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
+            })
+            get_id_product()
+    }else{
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: "les données incomplète",
+            showConfirmButton: false,
+            timer: 1500
+          })
+    }
 }
 /* delete */
  function delete_product(id){
