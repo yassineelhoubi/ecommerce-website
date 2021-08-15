@@ -9,6 +9,15 @@
         .navbar-nav {
             .nav-link{
                 color: #415161 !important;
+                &:hover{+
+                    .underline{
+        
+                        height: 2px;
+                        width: 100%;
+                        background-color: #83f5de;
+                    
+                }
+                }
                 
             }
         }
@@ -24,6 +33,7 @@
         width: 100%;
         background-color: $mygreen;
     }
+
 
     
 }
