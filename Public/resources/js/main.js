@@ -2,14 +2,26 @@
 
 /* categories */
 async function create_catego() {
-
+    event.preventDefault()
     obj = {
         category_name: document.getElementById('catego_name_add').value,
         token : sessionStorage.getItem('token')
     }
-    await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', obj)
-    getAll_catego()
-    $('#newCategorieModal').modal('hide');
+    
+    if(obj.category_name == ""){
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: "les données incomplète",
+            showConfirmButton: false,
+            timer: 1500
+          })
+    }else{
+        await axios.post('http://localhost/projet_fil_rouge/Category/create_catego', obj)
+        getAll_catego()
+        $('#newCategorieModal').modal('hide');
+        document.getElementById('form_new_catego').reset();
+    }
 }
 
 function getAll_catego() {
@@ -61,9 +73,20 @@ async function update_catego() {
         category_name: document.getElementById('category_name_update').value,
         token : sessionStorage.getItem('token')
     }
-    await axios.put('http://localhost/projet_fil_rouge/Category/update_catego', obj)
-    getAll_catego()
-    $('#updateModal').modal('hide');
+    if(obj.category_name == ""){
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: "les données incomplète",
+            showConfirmButton: false,
+            timer: 1500
+          })
+    }else{
+
+        await axios.put('http://localhost/projet_fil_rouge/Category/update_catego', obj)
+        getAll_catego()
+        $('#updateModal').modal('hide');
+    }
 }
 
 async function delete_catego(id) {
@@ -110,7 +133,7 @@ async function Confirm_deletion_catego(id){
     getAll_catego()
 }
 
-/* -------------------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------------------------- */
 /* new product */
 
 

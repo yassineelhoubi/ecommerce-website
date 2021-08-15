@@ -18,12 +18,12 @@
 <script src="/node_modules/axios/dist/axios.min.js"></script>
 
 <script>
-  if (sessionStorage.getItem("token") == null || sessionStorage.getItem("role") !='admin' ) {
+  if (sessionStorage.getItem("token") == null || sessionStorage.getItem("role") != 'admin') {
     document.location.href = './login.html'
   }
 </script>
 
-<body onload="getAll_catego()" >
+<body onload="getAll_catego()">
   <!-- header -->
   <div id="sidebar"></div>
   <!--  -->
@@ -56,7 +56,7 @@
               <!-- getAll_catego function -->
             </tbody>
           </table>
-          
+
         </div>
       </div>
 
@@ -67,23 +67,27 @@
         aria-hidden="false">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Ajouter une Catégorie</h5>
-              <button type="button" class="mybtn-icon secondary-raduis secondary-border" data-bs-dismiss="modal"
+            <form action="" id="form_new_catego">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter une Catégorie</h5>
+                <button type="button" class="mybtn-icon secondary-raduis secondary-border" data-bs-dismiss="modal"
                 aria-label="Close"><img src="../../resources/img/icons/cancel.png" style="width: 20px;" alt=""></button>
-            </div>
-            <div class="modal-body">
-              <div class="container">
-                <label class="mb-2" for="">
-                  <h5>Nom de catégorie : </h5>
-                </label>
-                <input autocomplete="off" id="catego_name_add" class="secondary-border secondary-raduis w-100" type="text" placeholder="Nom de catégorie...">
               </div>
-            </div>
-            <div class="modal-footer">
-
-              <button onclick="create_catego()"  class="mybtn size-btn secondary-raduis secondary-border">Ajouter</button>
-            </div>
+              <div class="modal-body">
+                <div class="container">
+                  <label class="mb-2" for="">
+                    <h5>Nom de catégorie : </h5>
+                  </label>
+                  <input autocomplete="off" id="catego_name_add" class="secondary-border secondary-raduis w-100"
+                  type="text" placeholder="Nom de catégorie...">
+                </div>
+              </div>
+              <div class="modal-footer">
+                
+                <button onclick="create_catego()"
+                class="mybtn size-btn secondary-raduis secondary-border">Ajouter</button>
+              </div>
+            </form>
 
           </div>
         </div>
@@ -106,12 +110,14 @@
                   <h5>Nom de catégorie : </h5>
                 </label>
                 <input type="hidden" value="" id="idCategory_update">
-                <input autocomplete="off" id="category_name_update" class="secondary-border  secondary-raduis w-100" type="text" value="">
+                <input autocomplete="off" id="category_name_update" class="secondary-border  secondary-raduis w-100"
+                  type="text" value="">
               </div>
             </div>
             <div class="modal-footer">
 
-              <button onclick="update_catego()" type="submit" class="mybtn size-btn secondary-raduis secondary-border">Modifier</button>
+              <button onclick="update_catego()" type="submit"
+                class="mybtn size-btn secondary-raduis secondary-border">Modifier</button>
             </div>
 
           </div>
@@ -123,8 +129,8 @@
   </div>
   <!-- end main -->
 
-  
-  
+
+
   <script src="../../resources/js/main.js"></script>
   <script src="../../resources/includes/bootstrap/js/bootstrap.min.js"></script>
 </body>
