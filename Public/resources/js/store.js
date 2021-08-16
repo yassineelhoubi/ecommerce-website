@@ -1,8 +1,9 @@
 /* const { default: axios } = require("axios"); */
 
 function initialize() {
+    ChangeUrl(1)
     getAll_catego();
-    getAll_product()
+    getAll_product(0,20)
 }
 
 async function getAll_catego() {
@@ -16,34 +17,78 @@ async function getAll_catego() {
     document.getElementById('select_catego').innerHTML += output
     output = ""
 }
+/* ------------------------------- */
+/* for pagination */
+const ChangeUrl = (n) =>{
+    window.history.pushState({},'',`?page=${n}` );
+} 
 
-async function getAll_product() {
+var numberOfPage  ;
+
+BackPagination = () =>{
+    var item = location.search.substr(1).split('=')
+    pagenumber = item[1]-1;
+    if(pagenumber != 0){
+        const start =pagenumber*20-20;
+        const end = pagenumber*20;
+
+        getAll_product(start,end)
+        ChangeUrl(pagenumber)
+    }
+}
+NextPagination = () =>{
+    var item = location.search.substr(1).split('=')
+    pagenumber = parseInt(item[1])+1;
+    if(pagenumber <= numberOfPage){
+        const start =pagenumber*20-20;
+        const end = pagenumber*20;
+
+        getAll_product(start,end)
+        ChangeUrl(pagenumber)
+    }
+}
+/*--------------------------------------  */
+
+
+async function getAll_product(start,end) {
     output = "";
     await axios.get('http://localhost/projet_fil_rouge/Product/getAll_product_store')
         .then((res) => {
+            /* -------------- */
+            /* for pagination */
+
+            let lengthProductBy20 = Math.ceil(res.data.message.length/20)
+            numberOfPage = lengthProductBy20 ;
+            btn = "";
+            for(i=1 ; i <= lengthProductBy20 ; i++){
+                btn += `<a href="#"><button class="mybtn secondary-border" onclick="getAll_product(${(i*20)-20},${i*20}),ChangeUrl(${i})">${i}</button></a>`
+            }
+            document.getElementById('pagination').innerHTML= '<a href="#"><button  onclick="BackPagination()"  class="mybtn secondary-border">&laquo;</button></a>'+ btn + '<a href="#"><button onclick="NextPagination()" class="mybtn secondary-border">&raquo;</button></a>'
+            let the20FirstPeoduct = (res.data.message).slice(start,end)
+            /*  ----------*/
             const txtvalue = document.getElementById('txt_search').value
             if(txtvalue === ''){
 
-                for (i in res.data.message) {
+                for (i in the20FirstPeoduct) {
 
                     output +=
                     '<div name="card" class="col">' +
-                    '<input name="category_name" type="hidden" value="'+res.data.message[i].idCategory+'">'+                 
+                    '<input name="category_name" type="hidden" value="'+the20FirstPeoduct[i].idCategory+'">'+                 
                     '<div class="card  product shadow_card">' +
                     '  <div class="border border-bottom img-card d-flex justify-content-center align-items-center card">' +
-                    '<a href="produit.html?=' + res.data.message[i].idProduct + '">' +
-                    '<img src="../../resources/img/product/' + res.data.message[i].img + '" class="img-fluid" alt="" />' +
+                    '<a href="produit.html?=' + the20FirstPeoduct[i].idProduct + '">' +
+                    '<img src="../../resources/img/product/' + the20FirstPeoduct[i].img + '" class="img-fluid" alt="" />' +
                     '</a>' +
                     '</div>' +
                     '<div class="card-body">' +
                     '<h6 class="card-title fw-bold mt-2">' +
-                    res.data.message[i].name +
+                    the20FirstPeoduct[i].name +
                     '</h6>' +
                     '<div class="d-flex justify-content-between mt-3">' +
-                    '<button onclick="create_order(' + res.data.message[i].idProduct + ')" class="mybtn size-btn-card secondary-raduis secondary-border">' +
+                    '<button onclick="create_order(' + the20FirstPeoduct[i].idProduct + ')" class="mybtn size-btn-card secondary-raduis secondary-border">' +
                     'Ajouter' +
                     '</button>' +
-                    '<h6  class="pt-1"><span name="price">' + res.data.message[i].price + '</span> DH</h6>' +
+                    '<h6  class="pt-1"><span name="price">' + the20FirstPeoduct[i].price + '</span> DH</h6>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
@@ -54,6 +99,7 @@ async function getAll_product() {
                 
                 
             }else{
+                document.getElementById('pagination').innerHTML= ""
                 var regex  = new RegExp(txtvalue , "i");
                 // console.log(res.data.message)
                 for(i in res.data.message){
