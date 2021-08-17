@@ -89,10 +89,12 @@
   for (let i=0 ; i<=4 ; i++){
     if( location_account=== curentLocation || location_auth=== curentLocation  ){
       underline[3].className = "underline active"
-    }else if(location_store === curentLocation){
+    }else if(location_store === curentLocation || location_store+"#" === curentLocation){
+
       underline[1].className = "underline active"
     }else if(menuItem[i].href === curentLocation){
           underline[i].className = "underline active"
       }
   }
+
   </script>
