@@ -81,15 +81,17 @@
   const underline = document.querySelectorAll('.underline');
   const menuItem = document.querySelectorAll('.nav-link');
   const location_account    = "http://localhost:3000/Public/view/store/mon_compte.html"
-  const location_auth = "http://localhost:3000/Public/view/store/login_reg.html"
+  const location_auth       = "http://localhost:3000/Public/view/store/login_reg.html"
   var item = location.search.substr(1).split('=')
-  pageNumber = item[1];
+  item = item[1];
   
-  const location_store      = "http://localhost:3000/Public/view/store/magasin.html?page="+pageNumber
+  const location_product    = "http://localhost:3000/Public/view/store/produit.html?="+item
+  const location_store      = "http://localhost:3000/Public/view/store/magasin.html?page="+item
+
   for (let i=0 ; i<=4 ; i++){
     if( location_account=== curentLocation || location_auth=== curentLocation  ){
       underline[3].className = "underline active"
-    }else if(location_store === curentLocation || location_store+"#" === curentLocation){
+    }else if(location_store === curentLocation || location_store+"#" === curentLocation || location_product === curentLocation){
 
       underline[1].className = "underline active"
     }else if(menuItem[i].href === curentLocation){
