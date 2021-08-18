@@ -62,6 +62,8 @@ class Order{
                         if($this->line_cmd->create()){
                             echo json_encode(array('message'=> 'The Order was created And The product has been added to your cart',
                             'state'=> true));
+                            $this->product->quantity = $resultProduct['quantity'] - $quantity;
+                            $this->product->update_quantity();
                         }else{
                             echo json_encode(array('message'=> 'The Order was created And The product has not been added to your cart',
                             'state'=> false));
