@@ -302,7 +302,7 @@ async function get_all_cart() {
                     ' <div class="container p-0">' +
                     '<div class="row justify-content-between mb-1">' +
                     '<div class="col-6">' +
-                    '<h6>Quantity : </h6>' +
+                    '<h6>Quantité : </h6>' +
                     '</div>' +
                     '<div class="col-3 secondary-border  secondary-raduis d-flex p-0">'+
                     '<input type="number" class="col-12 border-0 text-center secondary-raduis"onchange="update_quantity('+res.data.product[i].id_line_cmd+')"  id="'+res.data.product[i].id_line_cmd+'" value="'+res.data.product[i].quantity+'" min="1">'+
