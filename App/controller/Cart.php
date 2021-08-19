@@ -43,13 +43,15 @@ class Cart {
 
 
                 $countAll = $this->line_cmd->count_line_cmd(); 
-                $quantity_All = $this->line_cmd->calc_quantity_cmd_product_All();
+                if($countAll !=0){
 
-                $getAll = $this->line_cmd->getAll_line_cmd();
-                /* Delivery cost calculator */
-                /*  */
-                if($quantity_All != 0){
-                    if($quantity_All <= 3){
+                    $quantity_All = $this->line_cmd->calc_quantity_cmd_product_All();
+                    
+                    $getAll = $this->line_cmd->getAll_line_cmd();
+                    /* Delivery cost calculator */
+                    /*  */
+                    if($quantity_All != 0){
+                        if($quantity_All <= 3){
                         $delivery = 10;
                     }elseif($quantity_All <= 5){
                         $delivery = 5;
@@ -65,13 +67,17 @@ class Cart {
                     $calcPrice += $get['totalPrice'];
                 }
                 $totalPrice = $calcPrice + $delivery ;
-
+                
                 $this->order->totalPrice = $totalPrice;
                 $this->order->idOrder    = $getAll[0]['idOrder'];
                 $this->order->update_price();
                 /* */
-
+                
                 echo json_encode(array('message'=> 'votre pnaier ','countAll'=>$countAll, 'quantity_All' =>$quantity_All,'calcPrice'=>$calcPrice,'totalPrice'=>$totalPrice,'delivery'=>$delivery,'product'=>$getAll,'state'=> true));
+                }else{
+                    echo json_encode(array('message'=> 'votre pnaier est null','countAll'=>$countAll,
+                    'state'=> false));
+                }   
             } else {
                 echo json_encode(array('message'=> 'votre pnaier est null','countAll'=>$countAll,
                 'state'=> false));

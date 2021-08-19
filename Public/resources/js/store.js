@@ -284,57 +284,61 @@ async function get_all_cart() {
     output = "";
    await axios.post('http://localhost/projet_fil_rouge/Cart/index', obj)
         .then((res) => {
+            if(res.data.state == false){
+                document.getElementById('calcPrice').innerHTML = '00:00 <span>MAD</span>'; 
+                document.getElementById('delivery').innerHTML = '00:00 <span>MAD</span>'; 
+                document.getElementById('totalPrice').innerHTML = '00:00 <span>MAD</span>'; 
+                document.getElementById('btn_validate').removeAttribute("onclick");
+            }else{
 
-            for (i in res.data.product) {
+                
+                for (i in res.data.product) {
                 output +=
-                    ' <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3 shadow_card">' +
-                    '<div class="row ">' +
-                    '<div class="col-lg-4 col-md-4  col-12 m-auto">' +
-                    '<div ' +
-                    'class="container container-img-product d-flex align-items-center justify-content-center secondary-border primary-raduis p-0">' +
-                    '<img class="img-product img-fluid  primary-raduis" src="../../resources/img/product/'+res.data.product[i].img+'" '+
-                    'alt="">' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="col-lg-7 col-md-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">' +
-                    '<h5>'+res.data.product[i].name+'</h5 >' +
-                    '<h6>prix : <span>'+res.data.product[i].price+'</span> MAD</h6>' +
-                    ' <div class="container p-0">' +
-                    '<div class="row justify-content-between mb-1">' +
-                    '<div class="col-6">' +
-                    '<h6>Quantité : </h6>' +
-                    '</div>' +
-                    '<div class="col-3 secondary-border  secondary-raduis d-flex p-0">'+
-                    '<input type="number" class="col-12 border-0 text-center secondary-raduis"onchange="update_quantity('+res.data.product[i].id_line_cmd+')"  id="'+res.data.product[i].id_line_cmd+'" value="'+res.data.product[i].quantity+'" min="1">'+
-
-                  '</div>'+
-                    '</div>' +
-                    '</div>' +
-                    '<div class="row ms-1 justify-content-end ">' +
-
+                ' <div class="container secondary-border pt-2 pb-2 primary-raduis m-0 mb-3 shadow_card">' +
+                '<div class="row ">' +
+                '<div class="col-lg-4 col-md-4  col-12 m-auto">' +
+                '<div ' +
+                'class="container container-img-product d-flex align-items-center justify-content-center secondary-border primary-raduis p-0">' +
+                '<img class="img-product img-fluid  primary-raduis" src="../../resources/img/product/'+res.data.product[i].img+'" '+
+                'alt="">' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-lg-7 col-md-7 col-12 d-flex flex-column justify-content-between mt-lg-0 mt-2">' +
+                '<h5>'+res.data.product[i].name+'</h5 >' +
+                '<h6>prix : <span>'+res.data.product[i].price+'</span> MAD</h6>' +
+                ' <div class="container p-0">' +
+                '<div class="row justify-content-between mb-1">' +
+                '<div class="col-6">' +
+                '<h6>Quantité : </h6>' +
+                '</div>' +
+                '<div class="col-3 secondary-border  secondary-raduis d-flex p-0">'+
+                '<input type="number" class="col-12 border-0 text-center secondary-raduis"onchange="update_quantity('+res.data.product[i].id_line_cmd+')"  id="'+res.data.product[i].id_line_cmd+'" value="'+res.data.product[i].quantity+'" min="1">'+
+                
+                '</div>'+
+                '</div>' +
+                '</div>' +
+                '<div class="row ms-1 justify-content-end ">' +
+                
                     '<button onclick="drop('+res.data.product[i].id_line_cmd+')" class="mybtn-icon col-2 p-0 secondary-border secondary-raduis"><img class="btn-img img-fluid"' +
                     'src="../../resources/img/icons/supprimer.png" alt=""></button>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
                     '</div>'
+                }
+                calcPrice   = res.data.calcPrice;
+                delivery    = res.data.delivery;
+                totalPrice  = res.data.totalPrice;
+                idOrder     = res.data.product[0].idOrder; 
+                document.getElementById('calcPrice').innerHTML = calcPrice + '.00 <span>MAD</span>'; 
+                document.getElementById('delivery').innerHTML = delivery + '.00 <span>MAD</span>'; 
+                document.getElementById('totalPrice').innerHTML = totalPrice + '.00 <span>MAD</span>'; 
+                document.getElementById('btn_validate').setAttribute('onclick','validate('+idOrder+')');
+                
             }
-            calcPrice   = res.data.calcPrice;
-            delivery    = res.data.delivery;
-            totalPrice  = res.data.totalPrice;
-            idOrder     = res.data.product[0].idOrder; 
-
         })
         document.getElementById('cart').innerHTML = output;
 
-        if(totalPrice != undefined ){
-
-            document.getElementById('calcPrice').innerHTML = calcPrice + '.00 <span>MAD</span>'; 
-            document.getElementById('delivery').innerHTML = delivery + '.00 <span>MAD</span>'; 
-            document.getElementById('totalPrice').innerHTML = totalPrice + '.00 <span>MAD</span>'; 
-            document.getElementById('btn_validate').setAttribute('onclick','validate('+idOrder+')');
-
-        }
 
 }
 function drop(id){
@@ -368,8 +372,8 @@ function drop(id){
         })
 }
 
-function connfirm_drop_product(id){
-    axios.delete('http://localhost/projet_fil_rouge/Cart/drop/' + id)
+async function connfirm_drop_product(id){
+    await axios.delete('http://localhost/projet_fil_rouge/Cart/drop/' + id)
 
     get_all_cart()
 }
