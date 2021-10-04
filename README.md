@@ -3,7 +3,7 @@
 ## Step 1 
 ```
 1 . Put this project in xampp/htdocs
-2 . Create a database
+2 . Create a database called ecommerce-website
 3 . Go to App/config/db_sql.sql and run All tables
 ```
 ## Step 2
@@ -17,8 +17,7 @@ If you have already installed node.js go to step 3
 ## Step 3
 
 ```
-Use these commands to install the necessary dependencies
+Use this command to install the necessary dependencies
 
-1 . npm install axios
-2 . npm install sweetalert2
+1 . npm install
 ```
