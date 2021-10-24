@@ -4,7 +4,7 @@
 ```
 1 . Put this project in xampp/htdocs
 2 . Create a database called ecommerce-website
-3 . Go to App/config/db_sql.sql and run All tables
+3 . Go to App/config/ and import ecommerce-website.sql to your database
 ```
 ## Step 2
 ```
@@ -20,4 +20,22 @@ If you have already installed node.js go to step 3
 Use this command to install the necessary dependencies
 
 1 . npm install
+```
+
+## Admin account
+
+```
+**Use this account to access the admin dashboard**
+
+Email : admin@gmail.com
+Password : password
+```
+## Contact Us
+
+```
+**Feel free to contact me if you encounter any problem**
+
+Email : elhoubiyassine@gmail.com
+Linkedin : YASSINE EL HOUBI
+
 ```
