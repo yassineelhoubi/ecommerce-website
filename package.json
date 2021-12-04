@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@sweetalert2/themes": "^5.0.2",
+    "axios": "^0.21.1"
+  }
+}
